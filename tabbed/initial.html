@@ -84,8 +84,8 @@
                     <option value="other">Other</option>
                 </select>
             </label>
-            <label for="medical-institution">Institution
-                <input type="text" id="medical-institution" name="medical-institution">
+            <label for="health-facility">Health Facility
+                <input type="text" id="health-facility" name="health-facility">
             </label>
             <label for="NID">NID
                 <input type="text" id="NID" name="NID" autocomplete="off">
@@ -401,16 +401,16 @@
             <fieldset id="symptom-assessment" class="tab-pane fade" role="tabpanel">
                 <legend>Symptom Assessment</legend>
                 <label for="symptom-assessment-phq-9">PHQ-9 (Depression)
-                    <input type="number" name="symptom-assessment-phq-9" id="symptom-assessment-phq-9" min="0">
+                    <input type="number" name="symptom-assessment-phq-9" id="symptom-assessment-phq-9" min="0" max="27">
                 </label>
                 <label for="symptom-assessment-gad-7">GAD-7 (Anxiety)
-                    <input type="number" name="symptom-assessment-gad-7" id="symptom-assessment-gad-7" min="0">
+                    <input type="number" name="symptom-assessment-gad-7" id="symptom-assessment-gad-7" min="0" max="21">
                 </label>
                 <label for="symptom-assessment-audit">AUDIT (Alcohol)
-                    <input type="number" name="symptom-assessment-audit" id="symptom-assessment-audit" min="0">
+                    <input type="number" name="symptom-assessment-audit" id="symptom-assessment-audit" min="0" max="40">
                 </label>
                 <label for="symptom-assessment-whodas">WHODAS (Disability)
-                    <input type="number" name="symptom-assessment-whodas" id="symptom-assessment-whodas" min="0">
+                    <input type="number" name="symptom-assessment-whodas" id="symptom-assessment-whodas" min="0" max="48">
                 </label>
             </fieldset>
             <fieldset id="patient-overview" class="tab-pane fade" role="tabpanel">

@@ -20,9 +20,19 @@ table tr td:first {
     width: 20%;
 }
 
+fieldset fieldset fieldset{
+    display: inline;
+};
 
 fieldset fieldset input[type=date] {
     display: block;
+}
+
+fieldset {
+    margin: 0.5em;
+}
+fieldset input{
+    margin: 0.5em;
 }
 
 fieldset fieldset legend {

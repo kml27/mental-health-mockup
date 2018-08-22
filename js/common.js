@@ -1,6 +1,7 @@
 function setDependentDisabledState(clickedElement, specificRadio, specificTarget, stateOverride=false, disabledOverrideValue){
 
-    if(specificRadio){
+    if(specificRadio) {
+        //console.log("setting clickedElement to ", specificRadio);
         clickedElement = document.querySelector(specificRadio);
     }
 
@@ -55,7 +56,7 @@ function loadLocalStorage(attach=false){
 
         if(DOMSelect && localStorage["mhf-"+selectID]){
             
-            DOMSelect.selectedIndex=0;
+            //DOMSelect.selectedIndex=0;
 
             var option = DOMSelect.namedItem(localStorage["mhf-"+selectID]);
 
@@ -118,7 +119,7 @@ function loadLocalStorage(attach=false){
 
 function setAllDisabledStates(){
     //onclick*='setDependentDisabledState'
-    for(inputSetsDisabled of $("input[onclick*='setDependentDisabledState']")){
+    /*for(inputSetsDisabled of )){
         //console.log(inputSetsDisabled, inputSetsDisabled.checked, inputSetsDisabled.onclick);
         
         var onclick=String(inputSetsDisabled.onclick);
@@ -129,58 +130,71 @@ function setAllDisabledStates(){
         param = argsStr.split(",");
         
         setDependentDisabledState(param[0]=="this"?clickedElement=inputSetsDisabled:param[0],specificRadio=param[1], specificTarget=param[2], stateOverride=true, disabledOverrideValue=true);
-    }
+    }*/
 
-    //onchange*='setDependentDisabledState'
-    for(inputSetsDisabled of $("fieldset[onchange*='setDependentDisabledState']")){
-        //console.log(inputSetsDisabled, inputSetsDisabled.checked, inputSetsDisabled.onchange);
-        
-        var onchange=String(inputSetsDisabled.onchange);
-        
-        var allParams = [];
-        var argsStr = onchange.slice(onchange.indexOf("setDependentDisabledState(")+"setDependentDisabledState(".length, onchange.lastIndexOf(");"));
+    var disableDependencies = [
+            {
+                set: $("input[onclick*='setDependentDisabledState']"),
+                handler: "onclick"
+            },
+            {
+                set: $("fieldset[onchange*='setDependentDisabledState']"),
+                handler: "onchange"
+            }
+    ];
 
-        //also splits arrays of targets which need to be rebuilt too
-        allParams = argsStr.split(",");
+    for(ontype of disableDependencies) {
+        //onchange*='setDependentDisabledState'
+        for(inputSetsDisabled of ontype.set){
+            //console.log(inputSetsDisabled, inputSetsDisabled.checked, inputSetsDisabled.onchange);
+            
+            var onchange=String(inputSetsDisabled[ontype.handler]);
+            
+            var allParams = [];
+            var argsStr = onchange.slice(onchange.indexOf("setDependentDisabledState(")+"setDependentDisabledState(".length, onchange.lastIndexOf(");"));
 
-        allParams = allParams.map(param => param.replace(/'/g, " ").trim());
-        
-        //console.log("allParams", allParams)
+            //also splits arrays of targets which need to be rebuilt too
+            allParams = argsStr.split(",");
 
-        if(allParams.length>2){
-            var beginArrayIndex=-1;
-            var foundArray=false;
-            var endArrayIndex=-1;
+            allParams = allParams.map(param => param.replace(/'/g, " ").trim());
+            
+            //console.log("allParams", allParams)
 
-            for(i=0; i<allParams.length; i++){
-                //selector like '[id=example]' also begins
-                if(allParams[i][0]=="[" && allParams[i].split("[").length>1){
-                    beginArrayIndex = i;
-                    foundArray = true;
-                    allParams[i] = allParams[i].replace("[", " ").trim();
+            if(allParams.length>2){
+                var beginArrayIndex=-1;
+                var foundArray=false;
+                var endArrayIndex=-1;
+
+                for(i=0; i<allParams.length; i++){
+                    //selector like '[id=example]' also begins
+                    if(allParams[i][0]=="[" && allParams[i].split("[").length>1){
+                        beginArrayIndex = i;
+                        foundArray = true;
+                        allParams[i] = allParams[i].replace("[", " ").trim();
+                    }
+                    //don't count an closing square bracket as an array if we havent found an open bracket
+                    //selector like '[id=example]' also ends
+                    //in case someone decides to write (this, input[independent], [ input[id=dependent] ])
+                    if(foundArray && allParams[i][0]=="]" && allParams[i].split("]").length > 1){
+                        endArrayIndex = i;
+
+                        allParams[i] = allParams[i].replace("]", " ").trim();
+                    }
                 }
-                //don't count an closing square bracket as an array if we havent found an open bracket
-                //selector like '[id=example]' also ends
-                //in case someone decides to write (this, input[independent], [ input[id=dependent] ])
-                if(foundArray && allParams[i][0]=="]" && allParams[i].split("]").length > 1){
-                    endArrayIndex = i;
 
-                    allParams[i] = allParams[i].replace("]", " ").trim();
+                if( foundArray ) {
+                    //console.log("target array found");
+                    allParams[2] = allParams.slice(beginArrayIndex, endArrayIndex);
+
+                    allParams = allParams.slice(0, 3);
                 }
             }
 
-            if( foundArray ) {
-                //console.log("target array found");
-                allParams[2] = allParams.slice(beginArrayIndex, endArrayIndex);
+            //console.log(argsStr, allParams, allParams[0]=="this");
 
-                allParams = allParams.slice(0, 3);
-            }
+
+            setDependentDisabledState(allParams[0]=="this"?clickedElement=inputSetsDisabled:allParams[0],allParams[1]=="undefined"?undefined:specificRadio=allParams[1], specificTarget=allParams[2], stateOverride=true, disabledOverrideValue=true);
         }
-
-        //console.log(argsStr, allParams, allParams[0]=="this");
-
-
-        setDependentDisabledState(allParams[0]=="this"?clickedElement=inputSetsDisabled:allParams[0],specificRadio=allParams[1], specificTarget=allParams[2], stateOverride=true, disabledOverrideValue=true);
     }
 }
 
@@ -257,5 +271,62 @@ $(document).ready(
     function () {
             loadLocalStorage(true);
             //setMaxDateToToday();
+
+            var settings = {};
+
+            window.location.search.substr(1).split("&").map( (param) => {
+                var settingValue = param.split("=");
+                settings[settingValue[0]] = settingValue[1];
+
+            }, settings );
+
+            //console.log(settings);
+
+            if(settings.tabbed=="true"){
+                //console.log("tabbed version");
+                
+                var tabs = $("#section-tabs");
+
+                //remove hidden attribute from tabs
+                tabs.removeAttr("hidden");4
+
+                console.log(sessionStorage["visibleTab"]);
+                $("#"+sessionStorage["visibleTab"]).tab('show');
+                
+            }else{
+                //console.log("monolithic");
+                
+                var tabContent = $("#tab-content-sections");
+                
+                //console.log(tabContent);
+                tabContent.removeClass("tab-content");
+
+                var panes = $(".tab-pane");
+
+                //console.log(panes);
+
+                for(pane of panes) { 
+                    //console.log(pane);
+                    $(pane).addClass("show");
+                }
+            }
+
+            $('#section-tabs a').on('click', 
+            function (e) {
+
+                e.preventDefault();
+                $(this).tab('show');
+
+                sessionStorage["visibleTab"]=this.id;
+
+            });
+
+            //this is supposed to be handled for us already... but doesnt seem to work
+            $('a[data-toggle="tab"]').on('shown.bs.tab', function (e) {
+                //e.target // newly activated tab
+                $(e.relatedTarget).removeClass("active");
+            });
+
+            
         }
 );

@@ -409,30 +409,38 @@
                     <input type="number" name="symptom-assessment-whodas" id="symptom-assessment-whodas" min="0" max="48">
                 </label>
             </fieldset>
-            <fieldset id="patient-overview" class="form-group tab-pane fade" role="tabpanel">
-                <legend>Patient Overview</legend>
-                <label for="appearance-and-posture" class="col-12 form-row">Appearance and Posture
-                    <input type="text" name="appearance-and-posture" id="appearance-and-posture" autocomplete="off">
-                </label>
-                <label for="synthesis-functions" class="col-12 form-row">Synthesis Functions
-                    <input type="text" name="synthesis-functions" id="synthesis-functions" autocomplete="off">
-                </label>
-                <label for="perceptual-sense" class="col-12 form-row">Sense of Perception
-                    <input type="text" name="perceptual-sense" id="perceptual-sense" autocomplete="off">
-                </label>
-                <label for="critical-thinking-judgement" class="col-12 form-row">Critical Thinking/Judgement
-                    <input type="text" name="critical-thinking-judgement" id="critical-thinking-judgement" autocomplete="off">
-                </label>
-                <label for="humor" class="col-12 form-row">Humor
-                    <input type="text" name="humor" id="humor" autocomplete="off">
-                </label>
-                <label for="conduct" class="col-12 form-row">Conduct
-                    <input type="text" name="conduct" id="conduct" autocomplete="off">
-                </label>
-                <div class="form-row">
-                <label for="relational-functions" class="">Relational Functions</label>
-                    <input type="text" name="relational-functions" id="relational-functions" autocomplete="off" class="">
-                </div>
+            <fieldset id="patient-overview" class="form-group tab-pane fade d-flex" role="tabpanel">
+                <legend class="ml-5">Patient Overview</legend>
+                <table class="ml-5 mr-5" style="width: 90%;">
+                <tr>
+                    <td><label for="appearance-and-posture" class="">Appearance and Posture</label></td>
+                    <td><input type="text" name="appearance-and-posture" id="appearance-and-posture" autocomplete="off" class=""></td>
+                </tr>
+                <tr>
+                    <td class=""><label for="synthesis-functions" class="">Synthesis Functions</label></td>
+                    <td class=""><input type="text" name="synthesis-functions" id="synthesis-functions" autocomplete="off" class=""></td>
+                </tr>
+                <tr>
+                    <td class=""><label for="perceptual-sense" class="">Sense of Perception</label></td>
+                    <td class=""><input type="text" name="perceptual-sense" id="perceptual-sense" autocomplete="off" class=""></td>
+                </tr>
+                <tr>
+                    <td class=""><label for="critical-thinking-judgement" class="">Critical Thinking/Judgement</label></td>
+                    <td class=""><input type="text" name="critical-thinking-judgement" id="critical-thinking-judgement" autocomplete="off" class=""></td>
+                </tr>
+                <tr>
+                    <td class=""><label for="humor" class="">Humor</label></td>
+                    <td class=""><input type="text" name="humor" id="humor" autocomplete="off" class=""></td>
+                </tr>
+                <tr>
+                    <td class=""><label for="conduct" class="">Conduct</label></td>
+                    <td class=""><input type="text" name="conduct" id="conduct" autocomplete="off" class=""></td>
+                </tr>
+                <tr>
+                    <td class=""><label for="relational-functions" class="">Relational Functions</label></td>
+                    <td class=""><input type="text" name="relational-functions" id="relational-functions" autocomplete="off" class=""></td>
+                </tr>
+            </table>
             </fieldset>
             <!--
             fieldset>legend+(fieldset>legend+((label>input:checkbox)*8+input:text)+label>input:date)*21

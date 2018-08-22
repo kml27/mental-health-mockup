@@ -8,6 +8,19 @@ label {
     padding-right: 1em;
 }
 
+table tr td:nth-of-type(2){
+    width: 80%;
+}
+
+table tr td input {
+    width: 90%;
+}
+
+table tr td:first {
+    width: 20%;
+}
+
+
 fieldset fieldset input[type=date] {
     display: block;
 }

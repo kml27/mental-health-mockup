@@ -1,3 +1,33 @@
+const initializeDefaultSrc = {
+    //emulate a HTMLInputElement, type "checkbox", "radio"
+    "checked": false,
+    //emulate a HTMLInputElement type "date", "number", "tel", "text", "textarea"
+    "value": "",
+    //emulate a HTMLSelectElement
+    0: { "id": "not-selected"},
+    selectedIndex: 0,
+};
+
+function fnForFieldsetRadios(control, fn=function(radio){}){
+    var childRadios = $(`fieldset[id=${control.id}] input[type=radio]`);
+
+    for(radio of childRadios){
+        fn(radio);
+    }
+}
+
+function clearDisabledInputByType(control, alwaysClear=false){
+
+    if(control.disabled || alwaysClear){
+        setMemberByType(initializeDefaultSrc, control, control);
+    }
+
+    var inputEvent = new Event("input");
+
+    control.dispatchEvent(inputEvent);
+
+}
+
 function setDependentDisabledState(clickedElement, specificRadio, specificTarget, stateOverride=false, disabledOverrideValue){
 
     if(specificRadio) {
@@ -13,13 +43,17 @@ function setDependentDisabledState(clickedElement, specificRadio, specificTarget
         targetState = disabledOverrideValue;
     }
 
+    
     if(!specificTarget){
         //console.log('toggling state', clickedElement);
         while(el.nextElementSibling) {
 
             el = el.nextElementSibling;
+            var targetEl = el.children[0];
             //console.log(el, el.children[0]);
-            el.children[0].disabled = targetState;
+            targetEl.disabled = targetState;
+
+            clearDisabledInputByType(targetEl);
             //console.log('toggled disavbled on element with id', el.children[0].id);
 
         }
@@ -28,11 +62,22 @@ function setDependentDisabledState(clickedElement, specificRadio, specificTarget
         if(Array.isArray(specificTarget)) {
             
             for(target of specificTarget) {
-                document.querySelector(target).disabled = targetState;
+                var targetEl = document.querySelector(target);
+                targetEl.disabled = targetState;
+                
+                if($(`fieldset[id=${targetEl.id}] input[type=radio]`).length){
+                    fnForFieldsetRadios(targetEl, function(radio){clearDisabledInputByType(radio, true)});
+                }
+                else{
+                    clearDisabledInputByType(targetEl);
+                }
             }
 
         } else {
-            document.querySelector(specificTarget).disabled = targetState;
+            var targetEl = document.querySelector(specificTarget)
+            targetEl.disabled = targetState;
+            
+            clearDisabledInputByType(targetEl);
         }
     }
 };
@@ -316,13 +361,13 @@ function setMemberByType(src, dest, control)
     } else if (control instanceof HTMLSelectElement) {
         //localStorage["dataStore"][control.id].id = control[control.selectedIndex].id;
 
-        if(load) {
+        if(dest instanceof HTMLSelectElement) {
             var optionIndex = getIndexFromOptionID(control, src.id);
 
             dest.selectedIndex= optionIndex;
         }
         else {
-            dest.id= src[control.selectedIndex].id;
+            dest.id= src[src.selectedIndex].id;
         }
     }
 }
@@ -373,11 +418,7 @@ function localDataStore(control, load){
 
             dest = dataStore[control.id] = {"class": control.constructor.name};
 
-            src = {
-                "checked": false,
-                "value": "",
-                "id": "not-selected",
-            }
+            src = initializeDefaultSrc;
 
         } else {
             return;
@@ -412,6 +453,10 @@ function initializeInputValuePersistence(reset=false){
     inputs = jQuery.makeArray($('input'));
     inputs = inputs.concat(jQuery.makeArray($('select')));
     
+    var textAreas = jQuery.makeArray($('textarea'));
+    inputs = inputs.concat(textAreas);
+
+
     var fieldsets = jQuery.makeArray($('fieldset'));
 
     var fieldsetsWithRadios = fieldsets.filter( (fieldset) => {
@@ -431,9 +476,6 @@ function initializeInputValuePersistence(reset=false){
 
         });
 
-    var textAreas = jQuery.makeArray($('textarea'));
-
-    inputs = inputs.concat(textAreas);
 
     //if just re-initializing, clear the local datastore
     initializeLocalStore(clear=(false||reset));
@@ -446,7 +488,7 @@ function initializeInputValuePersistence(reset=false){
             //if not resetting, attach event listeners (this only need to be done on document.ready())
             //if resetting local data store, don't re-attach input event listeners
             if(!reset){
-                input.addEventListener("input", function(event){localDataStore(this, load=false)});
+                input.addEventListener("input", function oninputInputStore(event){localDataStore(this, load=false)});
             }
     
             //load locally stored data, if it exists, otherwise initialize data storage object
@@ -462,20 +504,23 @@ function initializeInputValuePersistence(reset=false){
         //if resetting local data store, don't re-attach input event listeners
         if(!reset){
             //attach event listener to the radios parent fieldset
-            fieldset.addEventListener("input", function(event){
-                var childRadios = $(`fieldset[id=${this.id}] input[type=radio]`);
+            fieldset.addEventListener("input", function oninputFieldsetStore(event){
+                /*var childRadios = $(`fieldset[id=${this.id}] input[type=radio]`);
 
                 for(radio of childRadios){
                     localDataStore(radio, load=false);
-                }
+                }*/
+                fnForFieldsetRadios(this, function(radio){ localDataStore(radio, load=false);})
             });
         }
         //load stored data to child radios
-        var childRadios = $(`fieldset[id=${fieldset.id}] input[type=radio]`);
+/*        var childRadios = $(`fieldset[id=${fieldset.id}] input[type=radio]`);
 
         for(radio of childRadios){
             localDataStore(radio, load=true);
-        }
+        }*/
+
+        fnForFieldsetRadios(fieldset, function(radio){localDataStore(radio, load=true);})
     }
 
 }

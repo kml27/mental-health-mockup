@@ -61,8 +61,8 @@
                                 <option value="other" id="other">Other</option>
                             </select>
                             <span class="d-flex flex-fill mt-2">
-                                <input type="submit" value="Create record" class="btn btn-primary mr-2">
-                                <input type="reset" value="Reset All" class="btn btn-warning" onclick="confirmReset(event);">
+                                <input type="submit" value="Create record" id="submit-form-btn" class="btn btn-primary mr-2">
+                                <input type="reset" value="Reset All" id="reset-form-btn" class="btn btn-warning" onclick="confirmReset(event);">
                             </span>
                         </span>
                     </div>
@@ -233,9 +233,12 @@
                 <legend>Family History</legend>
                 <fieldset id="family-history-epilepsy">
                     <legend>Epilepsy</legend>
-                    <label for="">Yes
-                        <input type="radio" name="epilepsy" id="family-history-epilepsy-yes" value="y">
-                    </label>
+                    <label for="">Not Provided</label>
+                    <input type="radio" name="epilepsy" id="family-history-epilepsy-np" value="np" checked>
+                    
+                    <label for="">Yes</label>
+                    <input type="radio" name="epilepsy" id="family-history-epilepsy-yes" value="y">
+                    
                     <label for="">No
                         <input type="radio" name="epilepsy" id="family-history-epilepsy-no">
                     </label>
@@ -703,10 +706,10 @@
                     <input type="date" name="conduct-disorder-diagnosis-date" id="conduct-disorder-diagnosis-date" disabled="true">
                 </fieldset>
                 <fieldset>
-                    <input type="checkbox" name="attention-deficity-hyperactity-disorder" id="attention-deficity-hyperactity-disorder" value="y" onClick="setDependentDisabledState(this, undefined, 'input[id=attention-deficity-hyperactity-disorder-diagnosis-date]', true, !this.checked);">
-                    <label for="attention-deficity-hyperactity-disorder">Attention Deficit/Hyperactivity Disorder</label>
-                    <label for="attention-deficity-hyperactity-disorder-diagnosis-date">Date</label>
-                    <input type="date" name="attention-deficity-hyperactity-disorder-diagnosis-date" id="attention-deficity-hyperactity-disorder-diagnosis-date" disabled="true">
+                    <input type="checkbox" name="attention-deficity-hyperactivity-disorder" id="attention-deficity-hyperactivity-disorder" value="y" onClick="setDependentDisabledState(this, undefined, 'input[id=attention-deficity-hyperactivity-disorder-diagnosis-date]', true, !this.checked);">
+                    <label for="attention-deficity-hyperactivity-disorder">Attention Deficit/Hyperactivity Disorder</label>
+                    <label for="attention-deficity-hyperactivity-disorder-diagnosis-date">Date</label>
+                    <input type="date" name="attention-deficity-hyperactivity-disorder-diagnosis-date" id="attention-deficity-hyperactivity-disorder-diagnosis-date" disabled="true">
                 </fieldset>
                 <fieldset>
                     <input type="checkbox" name="nocturnal-enuresis" id="nocturnal-enuresis" value="y" onClick="setDependentDisabledState(this, undefined, 'input[id=nocturnal-enuresis-diagnosis-date]', true, !this.checked);">

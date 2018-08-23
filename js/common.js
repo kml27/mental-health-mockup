@@ -158,7 +158,6 @@ function setAllDisabledStates(){
             //also splits arrays of targets which need to be rebuilt too
             allParams = argsStr.split(",");
 
-            allParams = allParams.map(param => param.replace(/'/g, " ").trim());
             
             //console.log("allParams", allParams)
 
@@ -168,21 +167,27 @@ function setAllDisabledStates(){
                 var endArrayIndex=-1;
 
                 for(i=0; i<allParams.length; i++){
-                    //selector like '[id=example]' also begins
-                    if(allParams[i][0]=="[" && allParams[i].split("[").length>1){
+                    var param = allParams[i];
+                    //selector like '[id=example]' also begins with '[', make sure there is more than one '[' in this param
+                    //var segmentsAfterOpenBracket = param.split("[").length;
+
+                    if(param.search(/\[ *('|"|`)/) != -1 /*&& param.split("[").length > 2*/){
                         beginArrayIndex = i;
                         foundArray = true;
-                        allParams[i] = allParams[i].replace("[", " ").trim();
+                        allParams[i] = param.replace(/\[ */, "");
                     }
-                    //don't count an closing square bracket as an array if we havent found an open bracket
-                    //selector like '[id=example]' also ends
+                    //don't count a closing square bracket as an array if we havent found an open bracket
+                    //a selector like '[id=example]' also ends with ']', there should be more than ']', (n+1 if n)
                     //in case someone decides to write (this, input[independent], [ input[id=dependent] ])
-                    if(foundArray && allParams[i][0]=="]" && allParams[i].split("]").length > 1){
+                    //var segmentsAfterCloseBracket = param.split("]").length;
+                    if(foundArray && param.search(/('|"|`) *\]/) != -1 /*&& param.split("]").length > 2*/){
                         endArrayIndex = i;
 
-                        allParams[i] = allParams[i].replace("]", " ").trim();
+                        allParams[i] = param.replace(/\] *('|"|`) *\]/, "]'");
                     }
                 }
+
+                allParams = allParams.map(param => param.replace(/'/g, " ").trim());
 
                 if( foundArray ) {
                     //console.log("target array found");
@@ -205,9 +210,14 @@ function confirmReset(evt){
     
     if(result==false)
     {
+        //the user cancelled the reset, prevent the default form reset behavior
         evt.preventDefault();
+
     }else{
-        initializeLocalStore(clear=true);
+        //go through clearing and re-initilization of localdatastore without re-attaching inputs' event listeners
+        initializeInputValuePersistence(reset=true);
+
+        //the default behavior of form input type="reset" will be applied after this handler returns
     }
 
 }
@@ -380,6 +390,96 @@ function localDataStore(control, load){
     localStorage["dataStore"]=JSON.stringify(dataStore);
 }
 
+function applyScrollPositionPersistence(){
+
+    //console.log(localStorage["currentScroll"]);
+    document.body.scrollTop = document.documentElement.scrollTop = localStorage["currentScroll"];
+
+    window.addEventListener('scroll', function(event){
+        //"pick up where you left off"
+        //store current page scroll (though it is set to 0 when selecting a new tab)
+        //when reloading the page to view changes, this value will be used to scroll back to scroll position before page refresh
+        
+        //console.log(document.documentElement.scrollTop);
+        //document.body.scrollTop remains 0 with sticky position on common header
+        localStorage["currentScroll"]=document.documentElement.scrollTop;
+    });
+}
+
+function initializeInputValuePersistence(reset=false){
+    
+    var inputs = [];
+    inputs = jQuery.makeArray($('input'));
+    inputs = inputs.concat(jQuery.makeArray($('select')));
+    
+    var fieldsets = jQuery.makeArray($('fieldset'));
+
+    var fieldsetsWithRadios = fieldsets.filter( (fieldset) => {
+        if(fieldset.id=="") {
+            //console.log("Skipping", fieldset);
+            return false;
+        }
+
+        //see if there are any child radios for the given fieldset
+        var fieldsetHasRadios = $(`fieldset[id=${fieldset.id}] input[type=radio]`).length>0;
+        
+        //check if this fieldset has any children fieldsets (which may account for the radios we see)
+        var isImmediateParent = $(`fieldset[id=${fieldset.id}] fieldset`).length==0;
+
+        //if this is not a parent of fieldset and it has radio children, keep it
+        return fieldsetHasRadios && isImmediateParent; 
+
+        });
+
+    var textAreas = jQuery.makeArray($('textarea'));
+
+    inputs = inputs.concat(textAreas);
+
+    //if just re-initializing, clear the local datastore
+    initializeLocalStore(clear=(false||reset));
+
+    //attach listener to locally store all data to all inputs
+    for(input of inputs){
+        
+        if(input.type!="radio"){
+
+            //if not resetting, attach event listeners (this only need to be done on document.ready())
+            //if resetting local data store, don't re-attach input event listeners
+            if(!reset){
+                input.addEventListener("input", function(event){localDataStore(this, load=false)});
+            }
+    
+            //load locally stored data, if it exists, otherwise initialize data storage object
+            localDataStore(input, load=true);
+        }
+    }
+
+    for(fieldset of fieldsetsWithRadios){
+
+        //console.log(fieldset)
+        
+        //if not resetting, attach event listeners (this only need to be done on document.ready())
+        //if resetting local data store, don't re-attach input event listeners
+        if(!reset){
+            //attach event listener to the radios parent fieldset
+            fieldset.addEventListener("input", function(event){
+                var childRadios = $(`fieldset[id=${this.id}] input[type=radio]`);
+
+                for(radio of childRadios){
+                    localDataStore(radio, load=false);
+                }
+            });
+        }
+        //load stored data to child radios
+        var childRadios = $(`fieldset[id=${fieldset.id}] input[type=radio]`);
+
+        for(radio of childRadios){
+            localDataStore(radio, load=true);
+        }
+    }
+
+}
+
 $(document).ready( 
     function () {
 
@@ -401,16 +501,38 @@ $(document).ready(
                 var tabs = $("#section-tabs");
 
                 //remove hidden attribute from tabs
-                tabs.removeAttr("hidden");4
+                tabs.removeAttr("hidden");
 
-                //console.log(sessionStorage["visibleTab"]);
                 $("#"+sessionStorage["visibleTab"]).tab('show');
-                
+
+                $('#section-tabs a').on('click', 
+                    
+                    function (event) {
+
+                        event.preventDefault();
+
+                        $(this).tab('show');
+
+                        sessionStorage["visibleTab"]=this.id;
+
+                        document.body.scrollTop = document.documentElement.scrollTop = 0;
+
+                    });
+
+                //this is supposed to be handled for us already... but doesnt seem to be (previously selected tabs continue to show selected state without manually removing active)
+                $('a[data-toggle="tab"]').on('shown.bs.tab', 
+                    function (e) {
+                        //e.target // newly activated tab
+                        $(e.relatedTarget).removeClass("active");
+                    });
+
             }else{
                 //console.log("monolithic");
                 
+                //todo: make this default in html and apply these in tabbed, rather than remove, so browser w/o js will still see a usable form
+
                 var tabContent = $("#tab-content-sections");
-                
+
                 //console.log(tabContent);
                 tabContent.removeClass("tab-content");
 
@@ -424,93 +546,10 @@ $(document).ready(
                 }
             }
 
-            $('#section-tabs a').on('click', 
-            function (e) {
 
-                e.preventDefault();
-                $(this).tab('show');
+            applyScrollPositionPersistence();
 
-                sessionStorage["visibleTab"]=this.id;
-                
-
-                document.body.scrollTop = document.documentElement.scrollTop = 0;
-
-                //window.scrollTo({top:0, left:0, behavior: "instant"});
-
-            });
-
-            /*$('body').on('scroll', function(event){
-                console.log("scrollTop is now", document.body.scrollTop);
-                sessionStorage["currentScroll"]=document.body.scrollTop;
-            });*/
-
-            //this is supposed to be handled for us already... but doesnt seem to work
-            $('a[data-toggle="tab"]').on('shown.bs.tab', function (e) {
-                //e.target // newly activated tab
-                $(e.relatedTarget).removeClass("active");
-            });
-
-            var inputs = [];
-            inputs = jQuery.makeArray($('input'));
-            inputs = inputs.concat(jQuery.makeArray($('select')));
-            
-            var fieldsets = jQuery.makeArray($('fieldset'));
-
-            var fieldsetsWithRadios = fieldsets.filter( (fieldset) => {
-                if(fieldset.id=="") {
-                    //console.log("Skipping", fieldset);
-                    return false;
-                }
-
-                //see if there are any child radios for the given fieldset
-                var fieldsetHasRadios = $(`fieldset[id=${fieldset.id}] input[type=radio]`).length>0;
-                
-                //check if this fieldset has any children fieldsets (which may account for the radios we see)
-                var isImmediateParent = $(`fieldset[id=${fieldset.id}] fieldset`).length==0;
-
-                //if this is not a parent of fieldset and it has radio children, keep it
-                return fieldsetHasRadios && isImmediateParent; 
-        
-                });
-
-            var textAreas = jQuery.makeArray($('textarea'));
-
-            inputs = inputs.concat(textAreas);
-
-            initializeLocalStore(clear=false);
-
-            //attach listener to locally store all data to all inputs
-            for(input of inputs){
-                
-                if(input.type!="radio"){
-                    input.addEventListener("input", function(event){localDataStore(this, load=false)});
-            
-                    //load locally stored data, if it exists, otherwise initialize data storage object
-                    localDataStore(input, load=true);
-                }
-            }
-
-            for(fieldset of fieldsetsWithRadios){
-
-                //console.log(fieldset)
-                
-                //attach event listener to the radios parent fieldset
-                fieldset.addEventListener("input", function(event){
-                    var childRadios = $(`fieldset[id=${this.id}] input[type=radio]`);
-
-                    for(radio of childRadios){
-                        localDataStore(radio, load=false);
-                    }
-                });
-
-                //load stored data to child radios
-                var childRadios = $(`fieldset[id=${fieldset.id}] input[type=radio]`);
-
-                for(radio of childRadios){
-                    localDataStore(radio, load=true);
-                }
-            }
-
+            initializeInputValuePersistence(reset=false);
 /*
             for(textarea of textAreas){
                 textarea.addEventListener("input", function(event){localDataStore(this, load=false)});

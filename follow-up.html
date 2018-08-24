@@ -1,0 +1,392 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>Patient Process - Mental Health - Page 2</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+    <link rel="stylesheet" type="text/css" media="screen" href="../css/common.css" />
+
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>
+    <script src="../js/common.js"></script>
+</head>
+<body>
+    
+    <form autocomplete="off" onReset="setAllDisabledStates();" class="">
+        <div class="sticky-top bg-white d-flex flex-column">
+            <h1 class="bg-primary d-flex justify-content-center">Patient's Process - Mental Health - Page 2</h1>
+            <div class="d-flex flex-row justify-content-around m-2">
+                <div class="flex-column flex-grow-1 align-content-center">
+                    <div id="blue-card-header-common" class="d-flex">
+                        <span class="d-flex flex-fill justify-content-start flex-column">
+                            <label for="province-select" class="d-flex flex-fill justify-content-center">Province</label>
+                            <label for="transfer-or-consult-date" class="d-flex flex-fill justify-content-center" >Date of Consulation</label>
+                        </span>
+                        <span class="d-flex flex-fill flex-column">
+                            <select name="province-select" id="province-select" autocomplete="off" class="mb-2" tabindex="1">
+                                <option value="" id="not-selected">--Not Selected--</option>
+                                <option value="other" id="other">Other</option>
+                            </select>
+                            <span class="">
+                                <input tabindex="4" type="date" id="transfer-or-consult-date" class="" onchange="warnMaxDateToday(this, 'span[id=transfer-or-consult-date-alert]');">
+                                <span class="" role="alert" id="transfer-or-consult-date-alert"></span>
+                            </span>
+                        </span>
+                        <span class="d-flex flex-fill flex-column">
+                            <label for="district-select" class="d-flex flex-fill justify-content-center">District</label>
+                            <label for="NID" class="d-flex flex-fill justify-content-center">Patient's NID</label>
+                        </span>
+                        <span class="d-flex flex-fill flex-column">
+                            <select name="district-select" id="district-select" class="mb-2" tabindex="2">
+                                    <option value="" id="not-selected">--Not Selected--</option>
+                                    <option value="other" id="other">Other</option>
+                                </select>
+                            <input type="text" id="NID" name="NID" autocomplete="off" class="" tabindex="5">
+                        </span>
+                        <span class="d-flex flex-fill">
+                            <label for="health-facility" class="flex-fill d-flex justify-content-center">Health Facility</label>
+                        </span>
+                        <span class="d-flex flex-column">
+                                <!--<input type="text" id="health-facility" name="health-facility">-->
+                            <select name="health-facility-select" id="health-facility-select" class="flex-fill" tabindex="3">
+                                <option value="" id="not-selected">--Not-Selected--</option>
+                                <option value="other" id="other">Other</option>
+                            </select>
+                            <span class="d-flex flex-fill mt-2">
+                                <input type="submit" value="Create record" class="btn btn-primary mr-2">
+                                <input type="reset" value="Reset All" class="btn btn-warning" onclick="confirmReset(event);">
+                            </span>
+                        </span>
+                    </div>
+                </div>
+
+            </div>
+
+            <div class="nav nav-tabs nav-fill" id="section-tabs" hidden>
+                <div class="nav-item">
+                    <a class="nav-link active" id="clinical-diagnosis-tab" role="tab" data-toggle="tab" href="#clinical-diagnosis" aria-controls="clinical diagnosis tab" aria-selected="true">Clinical Diagnosis</a> 
+                </div>
+                <div class="nav-item">
+                    <a class="nav-link" id="symptom-assessment-tab" role="tab" data-toggle="tab" href="#symptom-assessment" aria-controls="symptom assessment tab" aria-selected="false">Symptom Assessment</a> 
+                </div>
+                <div class="nav-item">
+                        <a class="nav-link" id="other-obs-tab" role="tab" data-toggle="tab" href="#other-obs" aria-controls="other observations tab" aria-selected="false">Other Observations</a> 
+                </div>
+                <div class="nav-item">
+                        <a class="nav-link" id="treatment-details-tab" role="tab" data-toggle="tab" href="#treatment-details" aria-controls="treatment details tab" aria-selected="false">Treatment Details</a> 
+                </div>
+                <div class="nav-item">
+                    <a class="nav-link" id="vital-signs-tab" role="tab" data-toggle="tab" href="#vital-signs" aria-controls="vital signs/anthropometrics tab" aria-selected="false">Vital Signs</a> 
+                </div>
+                <div class="nav-item">
+                    <a class="nav-link" id="side-effects-tab" role="tab" data-toggle="tab" href="#side-effects" aria-controls="medication side effects tab" aria-selected="false">Medication Side Effects</a> 
+                </div>
+                <div class="nav-item">
+                    <a class="nav-link" id="comments-tab" role="tab" data-toggle="tab" href="#comments" aria-controls="comments/next visit tab" aria-selected="false">Comments/Next Visit</a> 
+                </div>
+            </div>
+        </div>
+        <div class="tab-content" id="tab-content-sections">
+            <fieldset id="clinical-diagnosis" class="form-group tab-pane show active fade" role="tabpanel">
+                <legend>Clinical Diagnosis</legend>
+                <div>
+                    <label for="primary-dx" class="">Primary Diagnosis (ICD10)</label>
+                    <select id="primary-dx" name="primary-dx" onchange="setDependentDisabledState(this, undefined, 'input[id=primary-dx-other]', true, this[this.selectedIndex].id!='other');">
+                        <option value="" id="not-selected">--Not-Selected--</option>
+                        <option value="other" id="other">Other</option>
+                    </select>
+                    <label for="primary-dx-other">If other, please specify</label>
+                    <input type="text" name="primary-dx-other" id="primary-dx-other" disabled="true">
+                </div>
+                <div>
+                    <label for="secondary-dx" class="">Secondary Diagnosis (ICD10)</label>
+                    <select id="secondary-dx" name="secondary-dx" onchange="setDependentDisabledState(this, undefined, 'input[id=secondary-dx-other]', true, this[this.selectedIndex].id!='other');">
+                        <option value="" id="not-selected">--Not-Selected--</option>
+                        <option value="other" id="other">Other</option>
+                    </select>
+                    <label for="secondary-dx-other">If other, please specify</label>
+                    <input type="text" name="secondary-dx-other" id="secondary-dx-other" disabled="true">
+                </div>
+            </fieldset>
+
+            <fieldset id="symptom-assessment" class="tab-pane fade" role="tabpanel">
+                <legend>Symptom Assessment</legend>
+                <label for="symptom-assessment-whodas" class="">WHODAS (Disability)
+                    <input type="number" name="symptom-assessment-whodas" id="symptom-assessment-whodas" min="0" max="48">
+                </label>
+                <label for="symptom-assessment-phq-9" class="">PHQ-9 (Depression)
+                    <input type="number" name="symptom-assessment-phq-9" id="symptom-assessment-phq-9" min="0" max="27">
+                </label>
+                <label for="symptom-assessment-gad-7" class="">GAD-7 (Anxiety)
+                    <input type="number" name="symptom-assessment-gad-7" id="symptom-assessment-gad-7" min="0" max="21">
+                </label>
+                <label for="symptom-assessment-audit" class="">AUDIT (Alcohol)
+                    <input type="number" name="symptom-assessment-audit" id="symptom-assessment-audit" min="0" max="40">
+                </label>
+                <label for="symptom-assessment-gravity" class="">General Gravity (1=Light; 2=Moderate; 3=Serious; 4=Deep)
+                    <input type="number" name="symptom-assessment-gravity" id="symptom-assessment-gravity" min="1" max="4">
+                </label>
+            </fieldset>
+
+            <fieldset id="other-obs" class="tab-pane fade" role="tabpanel">
+                <legend>Other Observations</legend>
+                <fieldset id="other-obs-suicide">
+                    <legend>Is the patient having suicidal thoughts?</legend>
+                    <label for="">Yes
+                        <input type="radio" name="suicide" id="other-obs-suicide-yes" value="y">
+                    </label>
+                    <label for="">No
+                        <input type="radio" name="suicide" id="other-obs-suicide-no">
+                    </label>
+                </fieldset>
+                <fieldset id="other-obs-other-concerns" onChange="setDependentDisabledState(this, 'fieldset[id=other-obs-other-concerns] input[id=other-obs-other-concerns-yes]', 'fieldset[id=other-obs-other-concerns] input[id=other-obs-other-concerns-specific]');">
+                    <legend>Are there other concerns?</legend>
+                    <label for="">Yes
+                        <input type="radio" name="other-concerns" id="other-obs-other-concerns-yes" value="y">
+                    </label>
+                    <label for="">No
+                        <input type="radio" name="other-concerns" id="other-obs-other-concerns-no">
+                    </label>
+                    <label for="other-obs-other-concerns-specific d-block">If yes, specify
+                        <input type="text" name="other-obs-other-concerns-specific" id="other-obs-other-concerns-specific" disabled="true">
+                    </label>
+                </fieldset>
+                <fieldset id="other-obs-drugs" onChange="setDependentDisabledState(this, 'fieldset[id=other-obs-drugs] input[id=other-obs-drugs-yes]', 'fieldset[id=other-obs-drugs] input[id=other-obs-drugs-specific]');">
+                    <legend>Concerns with alcohol or drugs?</legend>
+                    <label for="">Yes
+                        <input type="radio" name="drugs" id="other-obs-drugs-yes" value="y">
+                    </label>
+                    <label for="">No
+                        <input type="radio" name="drugs" id="other-obs-drugs-no">
+                    </label>
+                    <label for="other-obs-drugs-specific d-block">If yes, specify
+                        <input type="text" name="other-obs-drugs-specific" id="other-obs-drugs-specific" disabled="true">
+                    </label>
+                </fieldset>
+                <fieldset id="other-obs-pregnant">
+                    <legend>Is the patient pregnant?</legend>
+                    <label for="">Yes
+                        <input type="radio" name="pregnant" id="other-obs-pregnant-yes" value="y">
+                    </label>
+                    <label for="">No
+                        <input type="radio" name="pregnant" id="other-obs-pregnant-no">
+                    </label>
+                </fieldset>
+                <fieldset id="other-obs-family-planning">
+                    <legend>Is the patient using family planning?</legend>
+                    <label for="">Yes
+                        <input type="radio" name="family-planning" id="other-obs-family-planning-yes" value="y">
+                    </label>
+                    <label for="">No
+                        <input type="radio" name="family-planning" id="other-obs-family-planning-no">
+                    </label>
+                </fieldset>
+            </fieldset>
+
+            <fieldset id="treatment-details" class="tab-pane fade" role="tabpanel">
+                <legend>Treatment Details</legend>
+                <fieldset id="medication-1-fieldset">
+                    <input type="checkbox" name="medication-1" id="medication-1" value="y" onClick="setDependentDisabledState(this, undefined, ['fieldset[id=medication-1-name-quantity-set]', 'fieldset[id=medication-1-dosage-frequency-set]'], true, !this.checked);">
+                    <label for="medication-1" aria-label="medication #1">Medication #1 (FNM)</label>
+                    <fieldset disabled="true" id="medication-1-name-quantity-set">
+                        <label for="medication-1-name" aria-label="name">Name
+                            <input type="text" id="medication-1-name" name="medication-1-name" class="form-control">
+                        </label>
+                        <label for="medication-1-quantity" aria-label="quantity">Quantity
+                            <input type="text" id="medication-1-quantity" name="medication-1-quantity" class="form-control">
+                        </label>
+                    </fieldset>
+                    <fieldset disabled="true" id="medication-1-dosage-frequency-set">
+                        <label for="medication-1-dosage" aria-label="dosage">Dosage
+                            <input type="text" id="medication-1-dosage" name="medication-1-dosage" class="form-control">
+                        </label>
+                        <label for="medication-1-frequency" aria-label="frequency">Frequency
+                            <input type="text" id="medication-1-frequency" name="medication-1-frequency" class="form-control">
+                        </label>
+                    </fieldset>
+                </fieldset>
+                <fieldset id="medication-2-fieldset">
+                    <input type="checkbox" name="medication-2" id="medication-2" value="y" onClick="setDependentDisabledState(this, undefined, ['fieldset[id=medication-2-name-quantity-set]', 'fieldset[id=medication-2-dosage-frequency-set]'], true, !this.checked);">
+                    <label for="medication-2" aria-label="medication #2">Medication #2 (FNM)</label>
+                    <fieldset disabled="true" id="medication-2-name-quantity-set">
+                        <label for="medication-2-name" aria-label="name">Name
+                            <input type="text" id="medication-2-name" name="medication-2-name" class="form-control">
+                        </label>
+                        <label for="medication-2-quantity" aria-label="quantity">Quantity
+                            <input type="text" id="medication-2-quantity" name="medication-2-quantity" class="form-control">
+                        </label>
+                    </fieldset>
+                    <fieldset disabled="true" id="medication-2-dosage-frequency-set">
+                        <label for="medication-2-dosage" aria-label="dosage">Dosage
+                            <input type="text" id="medication-2-dosage" name="medication-2-dosage" class="form-control">
+                        </label>
+                        <label for="medication-2-frequency" aria-label="frequency">Frequency
+                            <input type="text" id="medication-2-frequency" name="medication-2-frequency" class="form-control">
+                        </label>
+                    </fieldset>
+                </fieldset>
+                <fieldset id="medication-3-fieldset">
+                    <input type="checkbox" name="medication-3" id="medication-3" value="y" onClick="setDependentDisabledState(this, undefined, ['fieldset[id=medication-3-name-quantity-set]', 'fieldset[id=medication-3-dosage-frequency-set]'], true, !this.checked);">
+                    <label for="medication-3" aria-label="medication #3">Medication #3 (FNM)</label>
+                    <fieldset disabled="true" id="medication-3-name-quantity-set">
+                        <label for="medication-3-name" aria-label="name">Name
+                            <input type="text" id="medication-3-name" name="medication-3-name" class="form-control">
+                        </label>
+                        <label for="medication-3-quantity" aria-label="quantity">Quantity
+                            <input type="text" id="medication-3-quantity" name="medication-3-quantity" class="form-control">
+                        </label>
+                    </fieldset>
+                    <fieldset disabled="true" id="medication-3-dosage-frequency-set">
+                        <label for="medication-3-dosage" aria-label="dosage">Dosage
+                            <input type="text" id="medication-3-dosage" name="medication-3-dosage" class="form-control">
+                        </label>
+                        <label for="medication-3-frequency" aria-label="frequency">Frequency
+                            <input type="text" id="medication-3-frequency" name="medication-3-frequency" class="form-control">
+                        </label>
+                    </fieldset>
+                </fieldset>
+                <fieldset id="medication-4-fieldset">
+                    <input type="checkbox" name="medication-4" id="medication-4" value="y" onClick="setDependentDisabledState(this, undefined, ['fieldset[id=medication-4-name-quantity-set]', 'fieldset[id=medication-4-dosage-frequency-set]'], true, !this.checked);">
+                    <label for="medication-4" aria-label="medication #4">Medication #4 (FNM)</label>
+                    <fieldset disabled="true" id="medication-4-name-quantity-set">
+                        <label for="medication-4-name" aria-label="name">Name
+                            <input type="text" id="medication-4-name" name="medication-4-name" class="form-control">
+                        </label>
+                        <label for="medication-4-quantity" aria-label="quantity">Quantity
+                            <input type="text" id="medication-4-quantity" name="medication-4-quantity" class="form-control">
+                        </label>
+                    </fieldset>
+                    <fieldset disabled="true" id="medication-4-dosage-frequency-set">
+                        <label for="medication-4-dosage" aria-label="dosage">Dosage
+                            <input type="text" id="medication-4-dosage" name="medication-4-dosage" class="form-control">
+                        </label>
+                        <label for="medication-4-frequency" aria-label="frequency">Frequency
+                            <input type="text" id="medication-4-frequency" name="medication-4-frequency" class="form-control">
+                        </label>
+                    </fieldset>
+                </fieldset>
+                <fieldset id="medication-5-fieldset">
+                    <input type="checkbox" name="medication-5" id="medication-5" value="y" onClick="setDependentDisabledState(this, undefined, ['fieldset[id=medication-5-name-quantity-set]', 'fieldset[id=medication-5-dosage-frequency-set]'], true, !this.checked);">
+                    <label for="medication-5" aria-label="medication #5">Medication #5 (FNM)</label>
+                    <fieldset disabled="true" id="medication-5-name-quantity-set">
+                        <label for="medication-5-name" aria-label="name">Name
+                            <input type="text" id="medication-5-name" name="medication-5-name" class="form-control">
+                        </label>
+                        <label for="medication-5-quantity" aria-label="quantity">Quantity
+                            <input type="text" id="medication-5-quantity" name="medication-5-quantity" class="form-control">
+                        </label>
+                    </fieldset>
+                    <fieldset disabled="true" id="medication-5-dosage-frequency-set">
+                        <label for="medication-5-dosage" aria-label="dosage">Dosage
+                            <input type="text" id="medication-5-dosage" name="medication-5-dosage" class="form-control">
+                        </label>
+                        <label for="medication-5-frequency" aria-label="frequency">Frequency
+                            <input type="text" id="medication-5-frequency" name="medication-5-frequency" class="form-control">
+                        </label>
+                    </fieldset>
+                </fieldset>
+                <label for="number-of-days" class="">Period for medications (days)
+                    <input type="number" name="number-of-days" id="number-of-days" min="1" max="1000">
+                </label>
+                <fieldset id="same-drug-delivered" onChange="setDependentDisabledState(this, 'fieldset[id=same-drug-delivered] input[id=same-drug-delivered-no]', 'fieldset[id=same-drug-delivered] input[id=same-drug-not-delivered]');">
+                    <legend>Was the same drug delivered / administered?</legend>
+                    <label for="">Yes
+                        <input type="radio" name="same-drug-delivered" id="same-drug-delivered-yes" value="y">
+                    </label>
+                    <label for="">No
+                        <input type="radio" name="same-drug-delivered" id="same-drug-delivered-no">
+                    </label>
+                    <label for="same-drug-not-delivered" class="">If no, why was it not the same? (1=none in the pharmacy; 2=none in the system)
+                        <input type="number" name="same-drug-not-delivered" id="same-drug-not-delivered" min="1" max="2" disabled="true">
+                    </label>
+                </fieldset>
+            </fieldset>
+
+            <fieldset id="vital-signs" class="tab-pane fade" role="tabpanel">
+                <legend>Vital Signs/Anthropometrics</legend>
+                <div>
+                    <label for="vital-signs-temperature" class="">Temperature (in C)
+                        <input type="number" name="vital-signs-temperature" id="vital-signs-temperature" min="0" max="100">
+                    </label>
+                </div>
+                <div>
+                   <label for="vital-signs-bp-systolic" class="">Blood Pressure (S=Systolic; D=Diastolic)
+                       S: <input type="number" name="vital-signs-bp-systolic" id="vital-signs-bp-systolic" min="0" max="1000">
+                       D: <input type="number" name="vital-signs-bp-diastolic" id="vital-signs-bp-diastolic" min="0" max="500">
+                   </label>
+                </div>
+                <div>
+                    <label for="vital-signs-weight" class="">Weight (in kg)
+                        <input type="number" name="vital-signs-weight" id="vital-signs-weight" min="0" max="1000">
+                    </label>
+                </div>
+                <div>
+                    <label for="vital-signs-height" class="">Height (in cm)
+                        <input type="number" name="vital-signs-height" id="vital-signs-height" min="0" max="500">
+                    </label>
+                </div>
+                <div>
+                    <label for="vital-signs-bmi" class="">BMI (Body Mass Index)
+                        <input type="number" name="vital-signs-bmi" id="vital-signs-bmi" min="0" max="100">
+                    </label>
+                </div>
+            </fieldset>
+
+            <fieldset id="side-effects" class="tab-pane fade" role="tabpanel">
+                <legend>Medication Side Effects</legend>
+                <p>(Specify severity: 0=None; 1=Light; 2=Moderate; 3=Severe; 4=Deep)</p>
+                <div>
+                    <label for="side-effects-sep" class="">SEP (Acute Dystonia / Parkinsonism / Acathysia / Late Dyskinesia)
+                        <input type="number" name="side-effects-sep" id="side-effects-sep" min="0" max="4">
+                    </label>
+                </div>
+                <div>
+                    <label for="side-effects-orthostatic-hypotension" class="">Orthostatic Hypotension
+                        <input type="number" name="side-effects-orthostatic-hypotension" id="side-effects-orthostatic-hypotension" min="0" max="4">
+                    </label>
+                </div>
+                <div>
+                    <label for="side-effects-metabolic-syndrome" class="">Metabolic syndrome
+                        <input type="number" name="side-effects-metabolic-syndrome" id="side-effects-metabolic-syndrome" min="0" max="4">
+                    </label>
+                </div>
+                <div>
+                    <label for="side-effects-gingival-hypertrophy" class="">Gingival hypertrophy
+                        <input type="number" name="side-effects-gingival-hypertrophy" id="side-effects-gingival-hypertrophy" min="0" max="4">
+                    </label>
+                </div>
+                <div>
+                    <label for="side-effects-rash" class="">Rash
+                        <input type="number" name="side-effects-rash" id="side-effects-rash" min="0" max="4">
+                    </label>
+                </div>
+                <div>
+                    <label for="side-effects-steven-johnson-syndrome" class="">Steven Johnson syndrome
+                        <input type="number" name="side-effects-steven-johnson-syndrome" id="side-effects-steven-johnson-syndrome" min="0" max="4">
+                    </label>
+                </div>
+                <div>
+                    <label for="side-effects-diabetes" class="">Diabetes
+                        <input type="number" name="side-effects-diabetes" id="side-effects-diabetes" min="0" max="4">
+                    </label>
+                </div>
+            </fieldset>
+
+            <fieldset id="comments" class="tab-pane fade" role="tabpanel">
+                <legend>Comments/Next Visit</legend>
+                <fieldset id="comments-comments" class="">
+                    <legend>Other Comments</legend>
+                    <textarea name="comments-comments-text" id="comments-comments-text" cols="30" rows="10" class=""></textarea>
+                </fieldset>
+                <label for="next-consult-date" class="" >Date of Next Consulation
+                    <input type="date" id="next-consult-date" class="">
+                </label>
+            </fieldset>
+        </div>
+    </form>
+</body>
+</html>

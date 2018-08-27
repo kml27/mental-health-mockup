@@ -1,3 +1,6 @@
+//namespace datastore by page path, internally localStorage uses only host (dns:port)
+var dataStoreNS = window.location.pathname;
+
 const initializeDefaultSrc = {
     //emulate a HTMLInputElement, type "checkbox", "radio"
     "checked": false,
@@ -126,9 +129,9 @@ function loadLocalSiteInfo(attach=false){
             DOMSelect = jQuerySelect[0];
         }
 
-        if(DOMSelect && localStorage["mhf-"+selectID]){
+        if(DOMSelect && localStorage[dataStoreNS+"mhf-"+selectID]){
             
-            var optionIndex = getIndexFromOptionID(DOMSelect, localStorage["mhf-"+selectID]);
+            var optionIndex = getIndexFromOptionID(DOMSelect, localStorage[dataStoreNS+"mhf-"+selectID]);
             
             if(optionIndex) {
                 DOMSelect.selectedIndex = optionIndex;
@@ -141,7 +144,7 @@ function loadLocalSiteInfo(attach=false){
             jQuerySelect.on("change", function(event){
                 //console.log(this[this.selectedIndex].value);
 
-                let storageName="mhf-"+this.id.slice(0, this.id.lastIndexOf("-select"));
+                let storageName=dataStoreNS+"mhf-"+this.id.slice(0, this.id.lastIndexOf("-select"));
                 //console.log("storage name", storageName);
 
                 var prevOptionID = localStorage[storageName];
@@ -331,11 +334,11 @@ const dataStoreProto = JSON.stringify({"storageVersion": "0.1"})
 function initializeLocalStore(clear){
 
     if(clear){
-        delete localStorage["dataStore"];
+        delete localStorage[dataStoreNS];
     }
 
-    if(!localStorage["dataStore"]){
-        localStorage["dataStore"] = dataStoreProto;
+    if(!localStorage[dataStoreNS]){
+        localStorage[dataStoreNS] = dataStoreProto;
     }
 }
 
@@ -345,7 +348,6 @@ function setMemberByType(src, dest, control)
         switch(control.type){
             case "checkbox":
             case "radio":
-                //localStorage["dataStore"][control.id].checked = control.checked;
                 dest.checked= src.checked;
                 break;
 
@@ -354,13 +356,11 @@ function setMemberByType(src, dest, control)
             case "number":
             case "tel":
             case "textarea":
-                //localStorage["dataStore"][control.id].value = control.value;
                 dest.value= src.value;
                 break;
         }
     } else if (control instanceof HTMLSelectElement) {
-        //localStorage["dataStore"][control.id].id = control[control.selectedIndex].id;
-
+        
         if(dest instanceof HTMLSelectElement) {
             var optionIndex = getIndexFromOptionID(control, src.id);
 
@@ -393,7 +393,7 @@ function localDataStore(control, load){
 
     try{
         
-        dataStore = JSON.parse(localStorage["dataStore"]);
+        dataStore = JSON.parse(localStorage[dataStoreNS]);
         
         dest = versionedDataStore(dataStore, control);
 
@@ -401,7 +401,7 @@ function localDataStore(control, load){
 
         initializeLocalStore(clear=true);
 
-        dataStore = JSON.parse(localStorage["dataStore"]);
+        dataStore = JSON.parse(localStorage[dataStoreNS]);
         dest = versionedDataStore(dataStore, control);
     }
 
@@ -414,7 +414,6 @@ function localDataStore(control, load){
 
         //if the local data store is uninitialized for this input during load, initialize it
         if(load){
-            //dataStore = JSON.parse(localStorage["dataStore"])
 
             dest = dataStore[control.id] = {"class": control.constructor.name};
 
@@ -428,13 +427,12 @@ function localDataStore(control, load){
     setMemberByType(src, dest, control);
     
     //store entire JSON object back into localStorage
-    localStorage["dataStore"]=JSON.stringify(dataStore);
+    localStorage[dataStoreNS]=JSON.stringify(dataStore);
 }
 
 function applyScrollPositionPersistence(){
 
-    //console.log(localStorage["currentScroll"]);
-    document.body.scrollTop = document.documentElement.scrollTop = localStorage["currentScroll"];
+    document.body.scrollTop = document.documentElement.scrollTop = localStorage[dataStoreNS+"currentScroll"];
 
     window.addEventListener('scroll', function(event){
         //"pick up where you left off"
@@ -443,7 +441,7 @@ function applyScrollPositionPersistence(){
         
         //console.log(document.documentElement.scrollTop);
         //document.body.scrollTop remains 0 with sticky position on common header
-        localStorage["currentScroll"]=document.documentElement.scrollTop;
+        localStorage[dataStoreNS+"currentScroll"]=document.documentElement.scrollTop;
     });
 }
 
@@ -536,7 +534,14 @@ $(document).ready(
                 var settingValue = param.split("=");
                 settings[settingValue[0]] = settingValue[1];
 
-            }, settings );
+            } );
+
+            //if in an HFE form, pathname will be the same, but GET param formId will differ when creating a form for a patient, id will differ when accessing the form from the HFE module pages
+            if(settings.formId){
+                dataStoreNS+="-id-"+settings.formId;
+            } else if(settings.id) {
+                dataStoreNS+="-id-"+settings.id;
+            }
 
             //console.log(settings);
 
@@ -548,7 +553,7 @@ $(document).ready(
                 //remove hidden attribute from tabs
                 tabs.removeAttr("hidden");
 
-                $("#"+sessionStorage["visibleTab"]).tab('show');
+                $("#"+sessionStorage[dataStoreNS+"visibleTab"]).tab('show');
 
                 $('#section-tabs a').on('click', 
                     
@@ -558,7 +563,7 @@ $(document).ready(
 
                         $(this).tab('show');
 
-                        sessionStorage["visibleTab"]=this.id;
+                        sessionStorage[dataStoreNS+"visibleTab"]=this.id;
 
                         document.body.scrollTop = document.documentElement.scrollTop = 0;
 

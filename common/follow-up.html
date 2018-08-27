@@ -136,22 +136,22 @@
                 <legend>Other Observations</legend>
                 <fieldset id="other-obs-suicide">
                     <legend>Is the patient having suicidal thoughts?</legend>
-                    <label for="">Yes
-                        <input type="radio" name="suicide" id="other-obs-suicide-yes" value="y">
-                    </label>
-                    <label for="">No
-                        <input type="radio" name="suicide" id="other-obs-suicide-no">
-                    </label>
+                    <label for="other-obs-suicide-yes">Yes</label>
+                    <input type="radio" name="suicide" id="other-obs-suicide-yes" value="y">
+                    
+                    <label for="other-obs-suicide-no">No</label>
+                    <input type="radio" name="suicide" id="other-obs-suicide-no">
+                    
                 </fieldset>
                 <fieldset id="other-obs-other-concerns" onChange="setDependentDisabledState(this, 'fieldset[id=other-obs-other-concerns] input[id=other-obs-other-concerns-yes]', 'fieldset[id=other-obs-other-concerns] input[id=other-obs-other-concerns-specific]');">
                     <legend>Are there other concerns?</legend>
-                    <label for="">Yes
+                    <label for="other-obs-other-concerns-yes">Yes
                         <input type="radio" name="other-concerns" id="other-obs-other-concerns-yes" value="y">
                     </label>
-                    <label for="">No
+                    <label for="other-obs-other-concerns-no">No
                         <input type="radio" name="other-concerns" id="other-obs-other-concerns-no">
                     </label>
-                    <label for="other-obs-other-concerns-specific d-block">If yes, specify
+                    <label for="other-obs-other-concerns-specific">If yes, specify
                         <input type="text" name="other-obs-other-concerns-specific" id="other-obs-other-concerns-specific" disabled="true">
                     </label>
                 </fieldset>

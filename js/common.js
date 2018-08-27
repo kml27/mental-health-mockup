@@ -450,14 +450,14 @@ function applyScrollPositionPersistence(){
 function initializeInputValuePersistence(reset=false){
     
     var inputs = [];
-    inputs = jQuery.makeArray($('input'));
-    inputs = inputs.concat(jQuery.makeArray($('select')));
+    inputs = jQuery.makeArray($('form#mh-form input'));
+    inputs = inputs.concat(jQuery.makeArray($('form#mh-form select')));
     
-    var textAreas = jQuery.makeArray($('textarea'));
+    var textAreas = jQuery.makeArray($('form#mh-form textarea'));
     inputs = inputs.concat(textAreas);
 
 
-    var fieldsets = jQuery.makeArray($('fieldset'));
+    var fieldsets = jQuery.makeArray($('form#mh-form fieldset'));
 
     var fieldsetsWithRadios = fieldsets.filter( (fieldset) => {
         if(fieldset.id=="") {

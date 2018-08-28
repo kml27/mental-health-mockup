@@ -545,7 +545,27 @@ $(document).ready(
 
             //console.log(settings);
 
-            if(settings.tabbed=="true"){
+            if(settings.tabbed=="false"){
+                
+                //console.log("monolithic");
+                
+                //todo: make this default in html and apply these in tabbed, rather than remove, so browser w/o js will still see a usable form
+
+                var tabContent = $("#tab-content-sections");
+
+                //console.log(tabContent);
+                tabContent.removeClass("tab-content");
+
+                var panes = $(".tab-pane");
+
+                //console.log(panes);
+
+                for(pane of panes) { 
+                    //console.log(pane);
+                    $(pane).addClass("show");
+                }
+
+            }else{
                 //console.log("tabbed version");
                 
                 var tabs = $("#section-tabs");
@@ -575,25 +595,6 @@ $(document).ready(
                         //e.target // newly activated tab
                         $(e.relatedTarget).removeClass("active");
                     });
-
-            }else{
-                //console.log("monolithic");
-                
-                //todo: make this default in html and apply these in tabbed, rather than remove, so browser w/o js will still see a usable form
-
-                var tabContent = $("#tab-content-sections");
-
-                //console.log(tabContent);
-                tabContent.removeClass("tab-content");
-
-                var panes = $(".tab-pane");
-
-                //console.log(panes);
-
-                for(pane of panes) { 
-                    //console.log(pane);
-                    $(pane).addClass("show");
-                }
             }
 
 

@@ -73,25 +73,25 @@
             </div>
             <div class="nav nav-tabs nav-fill" id="section-tabs" hidden="true" role="tablist">
                 <div class="nav-item">
-                    <a class="nav-link active" id="patient-details-tab" role="tab" data-toggle="tab" href="#patient-details" aria-controls="patient-details" aria-selected="true">Patient/Companion Details</a> 
+                    <a class="nav-link active" id="patient-details-tab" role="tab" data-toggle="tab" href="#patient-details" aria-controls="patient-details" aria-selected="true">1. Patient/Companion Details</a> 
                 </div>
                 <div class="nav-item">
-                    <a class="nav-link" id="anamnesis-tab" role="tab" data-toggle="tab" href="#anamnesis" aria-controls="anamnesis" aria-selected="false">Anamnesis</a> 
+                    <a class="nav-link" id="anamnesis-tab" role="tab" data-toggle="tab" href="#anamnesis" aria-controls="anamnesis" aria-selected="false">2. Anamnesis</a> 
                 </div>
                 <div class="nav-item">
-                        <a class="nav-link" id="family-history-tab" role="tab" data-toggle="tab" href="#family-history" aria-controls="family-history" aria-selected="false">Family History</a> 
+                        <a class="nav-link" id="family-history-tab" role="tab" data-toggle="tab" href="#family-history" aria-controls="family-history" aria-selected="false">3. Family History</a> 
                 </div>
                 <div class="nav-item">
-                        <a class="nav-link" id="patient-history-tab" role="tab" data-toggle="tab" href="#patient-history" aria-controls="patient-history" aria-selected="false">Patient History</a> 
+                        <a class="nav-link" id="patient-history-tab" role="tab" data-toggle="tab" href="#patient-history" aria-controls="patient-history" aria-selected="false">4. Patient History</a> 
                 </div>
                 <div class="nav-item">
-                    <a class="nav-link" id="symptom-assessment-tab" role="tab" data-toggle="tab" href="#symptom-assessment" aria-controls="symptom-assessment" aria-selected="false">Symptom Assessment</a> 
+                    <a class="nav-link" id="symptom-assessment-tab" role="tab" data-toggle="tab" href="#symptom-assessment" aria-controls="symptom-assessment" aria-selected="false">5. Symptom Assessment</a> 
                 </div>
                 <div class="nav-item">
-                        <a class="nav-link" id="patient-overview-tab" role="tab" data-toggle="tab" href="#patient-overview" aria-controls="patient-overview" aria-selected="false">Patient Overview</a> 
+                        <a class="nav-link" id="patient-overview-tab" role="tab" data-toggle="tab" href="#patient-overview" aria-controls="patient-overview" aria-selected="false">6. Patient Overview</a> 
                 </div>
                 <div class="nav-item">
-                        <a class="nav-link" id="mental-health-disorders-tab" role="tab" data-toggle="tab" href="#mental-health-disorders" aria-controls="mental-health-disorders" aria-selected="false">Mental Health Disorders</a> 
+                        <a class="nav-link" id="mental-health-disorders-tab" role="tab" data-toggle="tab" href="#mental-health-disorders" aria-controls="mental-health-disorders" aria-selected="false">7.Mental Health Disorders</a> 
                 </div>
             </div>
         </div>
@@ -149,33 +149,34 @@
                     </label>
                     <fieldset id="homeless-status">
                         
-                            <label for="homeless-yes" aria-label="homeless">Yes</label>
+                            
                             <input type="radio" name="homeless" value="homeless-yes" id="homeless-yes"/>
-                            <label for="homeless-no" aria-label="has home">No</label>
+                            <label for="homeless-yes" aria-label="homeless">Yes</label>
+                            
                             <input type="radio" name="homeless" value="homeless-no" id="homeless-no"/>
-                        
+                            <label for="homeless-no" aria-label="has home">No</label>
                     </fieldset>
                 
                 <label for="martial-status" aria-label="marital status" class="d-block">Marital Status</label>
                     <fieldset id="marital-status">
-                        <label for="marital-status-single">Single</label>
+                        
                         <input type="radio" name="marital-status" value="single" id="marital-status-single"/>
-                        
-                        <label for="marital-status-married">Married</label>
+                        <label for="marital-status-single">Single</label>
+
                         <input type="radio" name="marital-status" value="married" id="marital-status-married"/>
-                        
-                        <label for="martial-status-union-de-facto">Union de Facto</label>
+                        <label for="marital-status-married">Married</label>
+
                         <input type="radio" name="marital-status" value="union-de-facto" id="martial-status-union-de-facto"/>
-                        
-                        <label for="marital-status-divorced">Divorced</label>
+                        <label for="martial-status-union-de-facto">Union de Facto</label>
+
                         <input type="radio" name="marital-status" value="divorced" id="marital-status-divorced"/>
-                        
-                        <label for="marital-status-widowed">Widowed</label>
+                        <label for="marital-status-divorced">Divorced</label>
+
                         <input type="radio" name="marital-status" value="widowed" id="marital-status-widowed"/>
-                        
-                        <label for="marital-status-separated">Separated</label>
+                        <label for="marital-status-widowed">Widowed</label>
+
                         <input type="radio" name="marital-status" value="separated" id="marital-status-separated"/>
-                        
+                        <label for="marital-status-separated">Separated</label>
                     </fieldset>
                 
                 <label for="number-of-children" class="d-block">Number of Children</label>
@@ -184,12 +185,12 @@
                 <label for="community-agreement" aria-label="agrees with community suggestion" class="d-block">Agrees with community process</label>
                 <fieldset id="community-agreement">
                     
-                    <label for="community-agreement-yes" aria-label="community agreement yes">Yes
-                        <input type="radio" name="community-agreement" id="community-agreement-yes" value="y"/>
-                    </label>
-                    <label for="community-agreement-no" aria-label="community agreement no">No
-                        <input type="radio" name="community-agreement" id="community-agreement-no" value="n"/>
-                    </label>
+                    
+                    <input type="radio" name="community-agreement" id="community-agreement-yes" value="y"/>
+                    <label for="community-agreement-yes" aria-label="community agreement yes">Yes</label>
+                    
+                    <input type="radio" name="community-agreement" id="community-agreement-no" value="n"/>
+                    <label for="community-agreement-no" aria-label="community agreement no">No</label>
                 </fieldset>
                 <fieldset id="companion-information" class="d-block ">
                     <legend class="">Companion Information</legend>
@@ -208,23 +209,18 @@
                     <legend>Principal Complaint</legend>
                     <textarea name="anamnesis-principal-complaint-text" id="anamnesis-principal-complaint-text" cols="30" rows="10" class=""></textarea>
                 </fieldset>
-                <!--<label for="anamnesis-principal-complaint">Principal Complaint
-                    <textarea name="anamnesis-principal-complaint" id="anamnesis-principal-complaint" cols="30" rows="10"></textarea>
-                </label>-->
                 <fieldset class="" id="anamnesis-reason-for-consult">
                     <legend>Reason for Consultation</legend>
                     <textarea name="anamnesis-reason-for-consult-text" id="anamnesis-reason-for-consult-text" cols="30" rows="10" class=""></textarea>
                 </fieldset>
-                <!--<label for="anamnesis-reason-for-consult">Reason for Consultation
-                    <textarea name="anamnesis-reason-for-consult" id="anamnesis-reason-for-consult" cols="30" rows="10"></textarea>
-                </label>-->
                 <fieldset class="" id="anamnesis-disease-history">
-                    <legend>History of Disease</legend>
+                    <legend>History of the Current Disease</legend>
                     <textarea name="anamnesis-disease-history-text" id="anamnesis-disease-history-text" cols="30" rows="10" class=""></textarea>
                 </fieldset>
-                <!--<label for="anamnesis-disease-history">History of Disease
-                    <textarea name="anamnesis-disease-history" id="anamnesis-disease-history" cols="30" rows="10"></textarea>
-                </label>-->
+                <fieldset class="" id="anamnesis-previous-personal-history">
+                    <legend>Previous Personal History</legend>
+                    <textarea name="anamnesis-previous-personal-history-text" id="anamnesis-previous-personal-history-text" cols="30" rows="10" class=""></textarea>
+                </fieldset>
             </fieldset>
             <fieldset id="family-history" class="tab-pane fade" role="tabpanel">
                 <!--div>(fieldset>legend+(label>input)*3+label>input:text+(label>input:date)*2)*6 -->
@@ -232,20 +228,23 @@
                 <fieldset id="family-history-epilepsy">
                     <legend>Epilepsy</legend>
                     <label for="family-history-epilepsy-np">Not Provided</label>
-                    <input type="radio" name="epilepsy" id="family-history-epilepsy-np" value="np" checked="true"/>
+                    <input type="radio" name="family-history-epilepsy" id="family-history-epilepsy-np" value="np" checked="true"/>
                     
                     <label for="family-history-epilepsy-yes">Yes</label>
-                    <input type="radio" name="epilepsy" id="family-history-epilepsy-yes" value="y"/>
+                    <input type="radio" name="family-history-epilepsy" id="family-history-epilepsy-yes" value="y"/>
                     
                     <label for="family-history-epilepsy-no">No</label>
-                        <input type="radio" name="epilepsy" id="family-history-epilepsy-no"/>
+                    <input type="radio" name="family-history-epilepsy" id="family-history-epilepsy-no" value="n"/>
                     
                     <label for="family-history-epilepsy-unknown">Unknown</label>
-                    <input type="radio" name="epilepsy" id="family-history-epilepsy-unknown"/>
+                    <input type="radio" name="family-history-epilepsy" id="family-history-epilepsy-unknown" value="u"/>
                     
                 </fieldset>
                 <fieldset id="family-history-mental-disease" onChange="setDependentDisabledState(this, 'fieldset[id=family-history-mental-disease] input[id=family-history-mental-disease-yes]', 'fieldset[id=family-history-mental-disease] input[id=family-history-mental-disease-specific]');">
                     <legend>Mental Disease</legend>
+                    <label for="family-history-mental-disease-np">Not Provided</label>
+                    <input type="radio" name="family-history-mental-disease" id="family-history-mental-disease-np" value="np" checked="true"/>
+                    
                     <label for="family-history-mental-disease-yes">Yes</label>
                     <input type="radio" name="family-history-mental-disease" id="family-history-mental-disease-yes" value="y"/>
                     
@@ -262,28 +261,42 @@
                 
                 <fieldset id="family-history-suicide">
                     <legend>Suicide</legend>
+
+                    <label for="family-history-suicide-np">Not Provided</label>
+                    <input type="radio" name="family-history-suicide" id="family-history-suicide-np" value="np" checked="true"/>
+                    
                     <label for="family-history-suicide-yes">Yes</label>
-                        <input type="radio" name="suicide" id="family-history-suicide-yes" value="y"/>
+                    <input type="radio" name="family-history-suicide" id="family-history-suicide-yes" value="y"/>
+
                     <label for="family-history-suicide-no">No</label>
-                        <input type="radio" name="suicide" id="family-history-suicide-no" value="n"/>
+                    <input type="radio" name="family-history-suicide" id="family-history-suicide-no" value="n"/>
+
                     <label for="family-history-suicide-unknown">Unknown</label>
-                        <input type="radio" name="suicide" id="family-history-suicide-unknown" value="u"/>
+                    <input type="radio" name="family-history-suicide" id="family-history-suicide-unknown" value="u"/>
                     
                 </fieldset>
                 <fieldset id="family-history-alcoholism">
                     <legend>Alcoholism</legend>
+
+                    <label for="family-history-alcoholism-np">Not Provided</label>
+                    <input type="radio" name="family-history-alcoholism" id="family-history-alcoholism-np" value="np" checked="true"/>
+                    
                     <label for="family-history-alcoholism-yes">Yes</label>
-                    <input type="radio" name="alcoholism" id="family-history-alcoholism-yes" value="y"/>
+                    <input type="radio" name="family-history-alcoholism" id="family-history-alcoholism-yes" value="y"/>
                     
                     <label for="family-history-alcoholism-no">No</label>
-                    <input type="radio" name="alcoholism" id="family-history-alcoholism-no" value="n"/>
+                    <input type="radio" name="family-history-alcoholism" id="family-history-alcoholism-no" value="n"/>
                     
                     <label for="family-history-alcoholism-unknown">Unknown</label>
-                    <input type="radio" name="alcoholism" id="family-history-alcoholism-unknown" value="u"/>
+                    <input type="radio" name="family-history-alcoholism" id="family-history-alcoholism-unknown" value="u"/>
                     
                 </fieldset>
                 <fieldset id="family-history-other-substances" onChange="setDependentDisabledState(this, 'fieldset[id=family-history-other-substances] input[id=family-history-other-substances-yes]', 'fieldset[id=family-history-other-substances] input[id=family-history-other-substances-specific]');">
                     <legend>Other Substances</legend>
+                    
+                    <label for="family-history-other-substances-np">Not Provided</label>
+                    <input type="radio" name="family-history-other-substances" id="family-history-other-substances-np" value="np" checked="true"/>
+
                     <label for="family-history-other-substances-yes">Yes</label>
                         <input type="radio" name="family-history-other-substances" id="family-history-other-substances-yes" value="y"/>
                     
@@ -302,6 +315,10 @@
                 <legend>Patient History</legend>
                 <fieldset id="patient-history-other-chronic-diseases" onChange="setDependentDisabledState(this, 'fieldset[id=patient-history-other-chronic-diseases] input[id=patient-history-other-chronic-diseases-yes]', 'fieldset[id=patient-history-other-chronic-diseases] input[id=patient-history-other-chronic-diseases-specific]');">
                     <legend>Other Chronic Diseases (Comorbid)</legend>
+
+                    <label for="patient-history-other-chronic-diseases-np">Not Provided</label>
+                    <input type="radio" name="patient-history-other-chronic-diseases" id="patient-history-other-chronic-diseases-np" value="np" checked="true"/>
+
                     <label for="patient-history-other-chronic-diseases-yes">Yes</label>
                     <input type="radio" name="other-chronic-diseases" id="patient-history-other-chronic-diseases-yes" value="y"/>
                     
@@ -311,12 +328,17 @@
                     <label for="patient-history-other-chronic-diseases-unknown">Unknown</label>
                     <input type="radio" name="other-chronic-diseases" id="patient-history-other-chronic-diseases-unknown" value="u"/>
                     
-                    <label for="patient-history-other-chronic-diseases-specific">If yes, specify</label>
-                    <input type="text" name="patient-history-other-chronic-diseases-specific" id="patient-history-other-chronic-diseases-specific" disabled="true"/>
-                    
+                    <div>
+                        <label for="patient-history-other-chronic-diseases-specific">If yes, specify</label>
+                        <input type="text" name="patient-history-other-chronic-diseases-specific" id="patient-history-other-chronic-diseases-specific" disabled="true"/>
+                    </div>
                 </fieldset>
                 <fieldset id="patient-history-tuberculosis" onChange="setDependentDisabledState(this, 'fieldset[id=patient-history-tuberculosis] input[id=patient-history-tuberculosis-yes]', 'fieldset[id=patient-history-tuberculosis] input[id=patient-history-tuberculosis-diagnosis-date]');" class="d-block">
-                    <legend>Tuberculosis</legend>
+                    <legend>Tested Tuberculosis+</legend>
+
+                    <label for="patient-history-tuberculosis-np">Not Provided</label>
+                    <input type="radio" name="patient-history-tuberculosis" id="patient-history-tuberculosis-np" value="np" checked="true"/>
+
                     <label for="patient-history-tuberculosis-yes">Yes</label>
                     <input type="radio" name="patient-history-tuberculosis" id="patient-history-tuberculosis-yes" value="y"/>
                     
@@ -326,12 +348,18 @@
                     <label for="patient-history-tuberculosis-untested">Untested</label>
                     <input type="radio" name="patient-history-tuberculosis" id="patient-history-tuberculosis-untested" value="u"/>
                     
-                    <label for="patient-history-tuberculosis-diagnosis-date" class="d-block">If yes, date diagnosed</label>
-                    <input type="date" name="patient-history-tuberculosis-diagnosis-date" id="patient-history-tuberculosis-diagnosis-date" disabled="true"/>
-                    
+                    <div>
+                        <label for="patient-history-tuberculosis-diagnosis-date" class="">If yes, date diagnosed</label>
+                        <input type="date" name="patient-history-tuberculosis-diagnosis-date" id="patient-history-tuberculosis-diagnosis-date" disabled="true"/>
+                    </div>
+
                 </fieldset>
                 <fieldset id="patient-history-hiv" onChange="setDependentDisabledState(this, 'fieldset[id=patient-history-hiv] input[id=patient-history-hiv-yes]', ['fieldset[id=patient-history-hiv] input[id=patient-history-hiv-diagnosis-date]', 'fieldset[id=patient-history-hiv] input[id=patient-history-hiv-tarv-started-date]']);" class="d-block">
-                    <legend>HIV</legend>
+                    <legend>Tested HIV+</legend>
+                    
+                    <label for="patient-history-hiv-np">Not Provided</label>
+                    <input type="radio" name="patient-history-hiv" id="patient-history-hiv-np" value="np" checked="true"/>
+
                     <label for="patient-history-hiv-yes">Yes</label>
                         <input type="radio" name="patient-history-hiv" id="patient-history-hiv-yes" value="y"/>
                     
@@ -340,16 +368,21 @@
                     
                     <label for="patient-history-hiv-untested">Untested</label>
                         <input type="radio" name="patient-history-hiv" id="patient-history-hiv-untested" value="u"/>
-                    
-                    <label for="patient-history-hiv-diagnosis-date" class="d-block">Date Diagnosed</label>
+                    <div>
+                    <label for="patient-history-hiv-diagnosis-date" class="">If yes, date diagnosed</label>
                         <input type="date" name="patient-history-hiv-diagnosis-date" id="patient-history-hiv-diagnosis-date" disabled="true"/>
-                    
-                    <label for="patient-history-hiv-tarv-started-date" class="d-block">Date TARV started
+                    </div>
+                    <div>
+                    <label for="patient-history-hiv-tarv-started-date" class="">If yes, Date TARV started</label>
                         <input type="date" name="patient-history-hiv-tarv-started-date" id="patient-history-hiv-tarv-started-date" disabled="true"/>
-                    </label>
+                    </div>
                 </fieldset>
-                <fieldset id="patient-history-alcohol-use" onChange="setDependentDisabledState(this, 'fieldset[id=patient-history-alcohol-use] input[id=patient-history-alcohol-use-current]', 'fieldset[id=patient-history-alcohol-use] input[id=patient-history-alcohol-use-specific]');" class="d-block">
+                <fieldset id="patient-history-alcohol-use" onChange="setDependentDisabledState(this, [ 'fieldset[id=patient-history-alcohol-use] input[id=patient-history-alcohol-use-current]', 'fieldset[id=patient-history-alcohol-use] input[id=patient-history-alcohol-use-past]' ], 'fieldset[id=patient-history-alcohol-use] input[id=patient-history-alcohol-use-specific]');" class="d-block">
                     <legend>Alcohol Use</legend>
+
+                    <label for="patient-history-alcohol-use-np">Not Provided</label>
+                    <input type="radio" name="patient-history-alcohol-use" id="patient-history-alcohol-use-np" value="np" checked="true"/>
+
                     <label for="patient-history-alcohol-use-current">Current
                         <input type="radio" name="patient-history-alcohol-use" id="patient-history-alcohol-use-current" value="c"/>
                     </label>
@@ -363,8 +396,12 @@
                         <input type="text" name="patient-history-alcohol-use-specific" id="patient-history-alcohol-use-specific" disabled="true" autocomplete="off"/>
                     </label>
                 </fieldset>
-                <fieldset id="patient-history-other-drug-use" onChange="setDependentDisabledState(this, 'fieldset[id=patient-history-other-drug-use] input[id=patient-history-other-drug-use-current]', 'fieldset[id=patient-history-other-drug-use] input[id=patient-history-other-drug-use-specific]');" class="d-block">
+                <fieldset id="patient-history-other-drug-use" onChange="setDependentDisabledState(this, [ 'fieldset[id=patient-history-other-drug-use] input[id=patient-history-other-drug-use-current]', 'fieldset[id=patient-history-other-drug-use] input[id=patient-history-other-drug-use-past]' ], 'fieldset[id=patient-history-other-drug-use] input[id=patient-history-other-drug-use-specific]');" class="d-block">
                     <legend>Other Drug Use</legend>
+
+                    <label for="patient-history-other-drug-use-np">Not Provided</label>
+                    <input type="radio" name="patient-history-other-drug-use" id="patient-history-other-drug-use-np" value="np" checked="true"/>
+
                     <label for="patient-history-other-drug-use-current">Current
                         <input type="radio" name="patient-history-other-drug-use" id="patient-history-other-drug-use-current" value="c"/>
                     </label>
@@ -378,16 +415,20 @@
                         <input type="text" name="patient-history-other-drug-use-specific" id="patient-history-other-drug-use-specific" disabled="true" autocomplete="off"/>
                     </label>
                 </fieldset>
-                <fieldset id="patient-history-traditional-medicine-use" onChange="setDependentDisabledState(this, 'fieldset[id=patient-history-traditional-medicine-use] input[id=patient-history-traditional-medicine-use-current]', 'fieldset[id=patient-history-traditional-medicine-use] input[id=patient-history-traditional-medicine-use-specific]');" class="d-block">
+                <fieldset id="patient-history-traditional-medicine-use" onChange="setDependentDisabledState(this, [ 'fieldset[id=patient-history-traditional-medicine-use] input[id=patient-history-traditional-medicine-use-current]', 'fieldset[id=patient-history-traditional-medicine-use] input[id=patient-history-traditional-medicine-use-past]' ], 'fieldset[id=patient-history-traditional-medicine-use] input[id=patient-history-traditional-medicine-use-specific]');" class="d-block">
                     <legend>Traditional Medicine Use</legend>
+                    
+                    <label for="patient-history-traditional-medicine-use-np">Not Provided</label>
+                    <input type="radio" name="patient-history-traditional-medicine-use" id="patient-history-traditional-medicine-use-np" value="np" checked="true"/>
+
                     <label for="patient-history-traditional-medicine-use-current">Current
-                        <input type="radio" name="traditional-medicine-use" id="patient-history-traditional-medicine-use-current" value="c"/>
+                        <input type="radio" name="patient-history-traditional-medicine-use" id="patient-history-traditional-medicine-use-current" value="c"/>
                     </label>
                     <label for="patient-history-traditional-medicine-use-past">Past
-                        <input type="radio" name="traditional-medicine-use" id="patient-history-traditional-medicine-use-past" value="p"/>
+                        <input type="radio" name="patient-history-traditional-medicine-use" id="patient-history-traditional-medicine-use-past" value="p"/>
                     </label>
                     <label for="patient-history-traditional-medicine-use-never">Never
-                        <input type="radio" name="traditional-medicine-use" id="patient-history-traditional-medicine-use-never" value="n"/>
+                        <input type="radio" name="patient-history-traditional-medicine-use" id="patient-history-traditional-medicine-use-never" value="n"/>
                     </label>
                     <label for="patient-history-traditional-medicine-use-specific" class="d-block">If current, type and description
                         <input type="text" name="traditional-medicine-use-specific" id="patient-history-traditional-medicine-use-specific" disabled="true" autocomplete="off"/>
@@ -396,50 +437,64 @@
             </fieldset>
             <fieldset id="symptom-assessment" class="tab-pane fade" role="tabpanel">
                 <legend>Symptom Assessment</legend>
-                <label for="symptom-assessment-phq-9" class="">PHQ-9 (Depression)
-                    <input type="number" name="symptom-assessment-phq-9" id="symptom-assessment-phq-9" min="0" max="27"/>
-                </label>
-                <label for="symptom-assessment-gad-7" class="">GAD-7 (Anxiety)
-                    <input type="number" name="symptom-assessment-gad-7" id="symptom-assessment-gad-7" min="0" max="21"/>
-                </label>
-                <label for="symptom-assessment-audit" class="">AUDIT (Alcohol)
-                    <input type="number" name="symptom-assessment-audit" id="symptom-assessment-audit" min="0" max="40"/>
-                </label>
-                <label for="symptom-assessment-whodas" class="">WHODAS (Disability)
-                    <input type="number" name="symptom-assessment-whodas" id="symptom-assessment-whodas" min="0" max="48"/>
-                </label>
+
+                <table>
+                <tr>
+                    <td>
+                        <label for="symptom-assessment-phq-9" class="">PHQ-9 (Depression)</label>
+                    </td>
+                    <td>
+                        <input type="number" name="symptom-assessment-phq-9" id="symptom-assessment-phq-9" min="0" max="27" oninput="watchRange(this, 'span[id=phq-range-alert]');"/>
+                    </td>
+                    <td><span id="phq-range-alert" class="p-2 alert bg-warning" hidden="true"></span></td>
+                </tr>
+                <tr>
+                    <td><label for="symptom-assessment-gad-7" class="">GAD-7 (Anxiety)</label></td>
+                    <td><input type="number" name="symptom-assessment-gad-7" id="symptom-assessment-gad-7" min="0" max="21" oninput="watchRange(this, 'span[id=gad-range-alert]');"/></td>
+                    <td><span id="gad-range-alert" class="p-2 alert bg-warning" hidden="true"></span></td>
+                </tr>
+                <tr>
+                    <td><label for="symptom-assessment-audit" class="">AUDIT (Alcohol)</label></td>
+                    <td><input type="number" name="symptom-assessment-audit" id="symptom-assessment-audit" min="0" max="40" oninput="watchRange(this, 'span[id=audit-range-alert]');"/></td>
+                    <td><span id="audit-range-alert"  class="p-2 alert bg-warning" hidden="true"></span></td>
+                </tr>
+                <tr>
+                    <td><label for="symptom-assessment-whodas" class="">WHODAS (Disability)</label></td>
+                    <td><input type="number" name="symptom-assessment-whodas" id="symptom-assessment-whodas" min="0" max="48" oninput="watchRange(this, 'span[id=whodas-range-alert]');"/></td>
+                    <td><span id="whodas-range-alert" class="p-2 alert bg-warning" hidden="true"></span></td>
+                </tr>
+                </table>
             </fieldset>
             <fieldset id="patient-overview" class="form-group tab-pane fade" role="tabpanel">
                 <legend class="ml-5">Patient Overview</legend>
                 
-                    
-                    <table class="ml-5 mr-5" style="width: 90%;">
+                    <table id="patient-overview-table" class="ml-5 mr-5">
                         <tr>
-                            <td><label for="appearance-and-posture" class="">Appearance and Posture</label></td>
+                            <td><label for="appearance-and-posture" class="">A. Appearance and Posture</label></td>
                             <td><input type="text" name="appearance-and-posture" id="appearance-and-posture" autocomplete="off" class=""/></td>
                         </tr>
                         <tr>
-                            <td class=""><label for="synthesis-functions" class="">Synthesis Functions</label></td>
+                            <td class=""><label for="synthesis-functions" class="">B1. Synthesis Functions</label></td>
                             <td class=""><input type="text" name="synthesis-functions" id="synthesis-functions" autocomplete="off" class=""/></td>
                         </tr>
                         <tr>
-                            <td class=""><label for="perceptual-sense" class="">Sense of Perception</label></td>
+                            <td class=""><label for="perceptual-sense" class="">B2. Sense of Perception</label></td>
                             <td class=""><input type="text" name="perceptual-sense" id="perceptual-sense" autocomplete="off" class=""/></td>
                         </tr>
                         <tr>
-                            <td class=""><label for="critical-thinking-judgement" class="">Critical Thinking/Judgement</label></td>
+                            <td class=""><label for="critical-thinking-judgement" class="">B3. Critical Thinking/Judgement</label></td>
                             <td class=""><input type="text" name="critical-thinking-judgement" id="critical-thinking-judgement" autocomplete="off" class=""/></td>
                         </tr>
                         <tr>
-                            <td class=""><label for="humor" class="">Humor</label></td>
+                            <td class=""><label for="humor" class="">C. Humor</label></td>
                             <td class=""><input type="text" name="humor" id="humor" autocomplete="off" class=""/></td>
                         </tr>
                         <tr>
-                            <td class=""><label for="conduct" class="">Conduct</label></td>
+                            <td class=""><label for="conduct" class="">D. Conduct</label></td>
                             <td class=""><input type="text" name="conduct" id="conduct" autocomplete="off" class=""/></td>
                         </tr>
                         <tr>
-                            <td class=""><label for="relational-functions" class="">Relational Functions</label></td>
+                            <td class=""><label for="relational-functions" class="">F. Relational Functions</label></td>
                             <td class=""><input type="text" name="relational-functions" id="relational-functions" autocomplete="off" class=""/></td>
                         </tr>
                     </table>
@@ -480,241 +535,596 @@
                         </div>
                     </div>
                 </div>-->
-                <fieldset class="" id="depressive-disorder-fieldset">
-                    <!--<legend>Depressive Disorder</legend>-->
-                    <input type="checkbox" name="depressive-disorder" id="depressive-disorder" value="y" onClick="setDependentDisabledState(this, undefined, 'input[id=depressive-disorder-diagnosis-date]');" class=""/>
-                    <label for="depressive-disorder" aria-label="depressive disorder" class="">Depressive Disorder</label>
-                    <label for="depressive-disorder-diagnosis-date" class="">Date
-                        <input type="date" name="depressive-disorder-diagnosis-date" id="depressive-disorder-diagnosis-date" disabled="true"/>
-                    </label>
-                </fieldset>
-                <fieldset id="anxiety-disorder-fieldset">
-                    <!--<legend>Anxiety Disorder</legend>-->
+                <table>
+                    <tr>
                     
-                    <input type="checkbox" name="anxiety-disorder" id="anxiety-disorder" value="y" onClick="setDependentDisabledState(this, undefined, [ 'fieldset[id=anxiety-disorder-radio-fieldset]', 'input[id=anxiety-disorder-diagnosis-date]' ], true, !this.checked);"/>
-                    <label for="anxiety-disorder" aria-label="anxiety disorder">Anxiety Disorder</label>
-                    <fieldset disabled="true" id="anxiety-disorder-radio-fieldset">
-                        <label for="anxiety-disorder-ptsd" aria-label="ptsd">PTSD
-                            <input type="radio" name="anxiety-disorder-type" id="anxiety-disorder-ptsd" value="ptsd"/>
-                        </label>
-                        <label for="anxiety-disorder-panic" aria-label="panic">Panic
-                            <input type="radio" name="anxiety-disorder-type" id="anxiety-disorder-panic" value="panic"/>
-                        </label>
-                        <label for="anxiety-disorder-gad" aria-label="generalized anxiety disorder G A D">Generalized (GAD)
-                            <input type="radio" name="anxiety-disorder-type" id="anxiety-disorder-gad" value="gad"/>
-                        </label>
-                    </fieldset>
-                    <label for="anxiety-disorder-diagnosis-date" aria-label="anxiety disorder diagnosis date">Date
-                        <input type="date" name="anxiety-disorder-diagnosis-date" id="anxiety-disorder-diagnosis-date"  disabled="true"/>
-                    </label>
-                </fieldset>
-                <fieldset id="mental-health-disorders-adjustment-disorder-fieldset">
-                    <input type="checkbox" name="mental-health-disorders-adjustment-disorder" id="mental-health-disorders-adjustment-disorder-comorbidity" value="y" onClick="setDependentDisabledState(this, undefined, ['fieldset[id=mental-health-disorders-adjustment-disorder-radio-fieldset]','input[id=mental-health-disorders-adjustment-disorder-diagnosis-date]'], true, !this.checked);"/>
-                    <label for="mental-health-disorders-adjustment-disorder-comorbidity">Adjustment Disorder Comorbidity</label>
-                    <fieldset disabled="true" id="mental-health-disorders-adjustment-disorder-radio-fieldset">
-                        <label for="mental-health-disorders-adjustment-disorder-comorbid-anxiety">Anxiety
-                            <input type="radio" name="mental-health-disorders-adjustment-disorder-comorbid-type" id="mental-health-disorders-adjustment-disorder-comorbid-anxiety" value="anxiety"/>
-                        </label>
-                        <label for="mental-health-disorders-adjustment-disorder-comorbid-depression">Depression
-                            <input type="radio" name="mental-health-disorders-adjustment-disorder-comorbid-type" id="mental-health-disorders-adjustment-disorder-comorbid-depression" value="depression"/>
-                        </label>
-                        <label for="mental-health-disorders-adjustment-disorder-comorbid-agitation">Agitation
-                            <input type="radio" name="mental-health-disorders-adjustment-disorder-comorbid-type" id="mental-health-disorders-adjustment-disorder-comorbid-agitation" value="agitation"/>
-                        </label>
-                    </fieldset>
-                    <label for="mental-health-disorders-adjustment-disorder-diagnosis-date">Date
-                        <input type="date" name="mental-health-disorders-adjustment-disorder-diagnosis-date" id="mental-health-disorders-adjustment-disorder-diagnosis-date" disabled="true"/>
-                    </label>
-                </fieldset>
-                <fieldset id="bipolar-affective-disorder-fieldset">
-                    <input type="checkbox" name="bipolar-affective-disorder" id="bipolar-affective-disorder" value="y" onClick="setDependentDisabledState(this, undefined, 'input[id=bipolar-affective-disorder-diagnosis-date]', true, !this.checked);"/>
-                    <label for="bipolar-affective-disorder">Bipolar Affective Disorder</label>
-                    <label for="bipolar-affective-disorder-diagnosis-date">Date</label>
-                        <input type="date" name="bipolar-affective-disorder-diagnosis-date" id="bipolar-affective-disorder-diagnosis-date" disabled="true"/>
+                        <!--<legend>Depressive Disorder</legend>-->
+                        <td>
+                            <input type="checkbox" name="depressive-disorder" id="depressive-disorder" value="y" onClick="setDependentDisabledState(this, undefined, 'input[id=depressive-disorder-diagnosis-date]');" class=""/>
+                        </td>
+                        <td>
+                            <label for="depressive-disorder" aria-label="depressive disorder" class="">Depressive Disorder</label>
+                        </td>
+                        <td>
+
+                        </td>
+                        <td>
+                            <label for="depressive-disorder-diagnosis-date" class="">Date</label>
+                        </td>
+                        <td>
+                            <input type="date" name="depressive-disorder-diagnosis-date" id="depressive-disorder-diagnosis-date" disabled="true"/></td>
+                        
                     
-                </fieldset>
-                <fieldset id="transient-acute-psychotic-disorder-fieldset">
-                    <input type="checkbox" name="transient-acute-psychotic-disorder" id="transient-acute-psychotic-disorder" value="y" onClick="setDependentDisabledState(this, undefined, 'input[id=transient-acute-psychotic-disorder-diagnosis-date]', true, !this.checked);"/>
-                    <label for="transient-acute-psychotic-disorder">Transient Acute Psychotic Disorder</label>
-                    <label for="transient-acute-psychotic-disorder-diagnosis-date">Date</label>
+                </tr>
+                <tr>
+                    
+                        <!--<legend>Anxiety Disorder</legend>-->
+                        <td>
+                            <input type="checkbox" name="anxiety-disorder" id="anxiety-disorder" value="y" onClick="setDependentDisabledState(this, undefined, [ 'fieldset[id=anxiety-disorder-radio-fieldset]', 'input[id=anxiety-disorder-diagnosis-date]' ], true, !this.checked);"/>
+                        </td>
+                        <td>
+                            <label for="anxiety-disorder" aria-label="anxiety disorder">Anxiety Disorder</label>
+                        </td>
+                        <td>
+                            <fieldset disabled="true" id="anxiety-disorder-radio-fieldset">
+                                <table class="mental-health-radio-fieldset-table">
+                                    <tr>
+                                        <td>
+                                            <input type="radio" name="anxiety-disorder-type" id="anxiety-disorder-ptsd" value="ptsd"/>
+                                        </td>
+                                        <td>
+                                            <label for="anxiety-disorder-ptsd" aria-label="ptsd">PTSD</label>
+                                        </td>
+
+                                        <td>
+                                            <input type="radio" name="anxiety-disorder-type" id="anxiety-disorder-panic" value="panic"/>
+                                        </td>
+                                        <td>
+                                            <label for="anxiety-disorder-panic" aria-label="panic">Panic</label>
+                                        </td>
+                                            
+                                        <td>
+                                            <input type="radio" name="anxiety-disorder-type" id="anxiety-disorder-gad"  value="gad"/>
+                                        </td>
+                                        <td>
+                                            <label for="anxiety-disorder-gad" aria-label="generalized anxiety disorder G A D">Generalized (GAD)</label>
+                                        </td>
+                                    </tr>
+                                </table>
+                            </fieldset>
+                        </td>
+                        <td>
+                            <label for="anxiety-disorder-diagnosis-date" aria-label="anxiety disorder diagnosis date">Date</label>
+                        </td>
+                        <td>
+                            <input type="date" name="anxiety-disorder-diagnosis-date" id="anxiety-disorder-diagnosis-date"  disabled="true"/>
+                        </td>
+                    
+                </tr>
+                <tr>
+                    
+
+                        <td>
+                            <input type="checkbox" name="mental-health-disorders-adjustment-disorder" id="mental-health-disorders-adjustment-disorder-comorbidity" value="y" onClick="setDependentDisabledState(this, undefined, ['fieldset[id=mental-health-disorders-adjustment-disorder-radio-fieldset]','input[id=mental-health-disorders-adjustment-disorder-diagnosis-date]'], true, !this.checked);"/>
+                        </td>
+                        <td>
+                            <label for="mental-health-disorders-adjustment-disorder-comorbidity">Adjustment Disorder Comorbidity</label>
+                        </td>
+                        <td>
+                        <fieldset disabled="true" id="mental-health-disorders-adjustment-disorder-radio-fieldset">
+                            <table class="mental-health-radio-fieldset-table">
+                                <tr>
+                                    <td>
+                                        <input type="radio" name="mental-health-disorders-adjustment-disorder-comorbid-type" id="mental-health-disorders-adjustment-disorder-comorbid-anxiety" value="anxiety"/>
+                                    </td>
+                                    <td>
+                                        <label for="mental-health-disorders-adjustment-disorder-comorbid-anxiety">Anxiety</label>
+                                    </td>
+                                    <td>
+                                        <input type="radio" name="mental-health-disorders-adjustment-disorder-comorbid-type" id="mental-health-disorders-adjustment-disorder-comorbid-depression" value="depression"/>
+                                    </td>
+                                    <td>
+                                            <label for="mental-health-disorders-adjustment-disorder-comorbid-depression">Depression</label>
+                                    </td>
+                                    <td>
+                                        <input type="radio" name="mental-health-disorders-adjustment-disorder-comorbid-type" id="mental-health-disorders-adjustment-disorder-comorbid-agitation" value="agitation"/>
+                                    </td>
+                                    <td>
+                                        <label for="mental-health-disorders-adjustment-disorder-comorbid-agitation">Agitation</label>
+                                    </td>
+                                </tr>
+                            </table>
+                        </fieldset>
+                        </td>
+                        <td>
+                            <label for="mental-health-disorders-adjustment-disorder-diagnosis-date">Date</label>
+                        </td>
+                        <td>
+                            <input type="date" name="mental-health-disorders-adjustment-disorder-diagnosis-date" id="mental-health-disorders-adjustment-disorder-diagnosis-date" disabled="true"/>
+                        </td>
+                </tr>
+                <tr>
+                    
+
+                        <td>
+                            <input type="checkbox" name="bipolar-affective-disorder" id="bipolar-affective-disorder" value="y" onClick="setDependentDisabledState(this, undefined, 'input[id=bipolar-affective-disorder-diagnosis-date]', true, !this.checked);"/>
+                        </td>
+                        <td>
+                            <label for="bipolar-affective-disorder">Bipolar Affective Disorder</label>
+                        </td>
+                        <td>
+                            
+                        </td>
+                        <td>
+                            <label for="bipolar-affective-disorder-diagnosis-date">Date</label>
+                        </td>
+                        <td>
+                            <input type="date" name="bipolar-affective-disorder-diagnosis-date" id="bipolar-affective-disorder-diagnosis-date" disabled="true"/>
+                        </td>
+
+                </tr>
+                <tr>
+
+                    <td>
+                        <input type="checkbox" name="transient-acute-psychotic-disorder" id="transient-acute-psychotic-disorder" value="y" onClick="setDependentDisabledState(this, undefined, 'input[id=transient-acute-psychotic-disorder-diagnosis-date]', true, !this.checked);"/>
+                    </td>
+                    <td>
+                        <label for="transient-acute-psychotic-disorder">Transient Acute Psychotic Disorder</label>
+                    </td>
+                    <td>
+
+                    </td>
+                    <td>
+                        <label for="transient-acute-psychotic-disorder-diagnosis-date">Date</label>
+                    </td>
+                    <td>
                         <input type="date" name="transient-acute-psychotic-disorder-diagnosis-date" id="transient-acute-psychotic-disorder-diagnosis-date" disabled="true"/>
-                    
-                </fieldset>
-                <fieldset id="schizophreniform-disorder-fieldset">
-                        
-                        <input type="checkbox" name="schizophreniform-disorder" id="schizophreniform-disorder" value="y" onClick="setDependentDisabledState(this, undefined, 'input[id=schizophreniform-disorder-diagnosis-date]', true, !this.checked);"/>
-                        <label for="schizophreniform-disorder">Schizophreniform Disorder</label>
-                        
-                        <label for="schizophreniform-disorder-diagnosis-date">Date</label>
-                            <input type="date" name="schizophreniform-disorder-diagnosis-date" id="schizophreniform-disorder-diagnosis-date" disabled="true"/>
-                        
-                    </fieldset>
-                <fieldset id="persistent-delusional-disorder-fieldset">
-                    
-                    <input type="checkbox" name="persistent-delusional-disorder" id="persistent-delusional-disorder" value="y" onClick="setDependentDisabledState(this, undefined, 'input[id=persistent-delusional-disorder-diagnosis-date]', true, !this.checked);"/>
-                    <label for="persistent-delusional-disorder">Persistent Delusional Disorder</label>
-                    <label for="persistent-delusional-disorder-diagnosis-date">Date</label>
-                        <input type="date" name="persistent-delusional-disorder-diagnosis-date" id="persistent-delusional-disorder-diagnosis-date" disabled="true"/>
-                    
-                </fieldset>
-                <fieldset id="personality-disorder-fieldset">
-                    <input type="checkbox" name="personality-disorder" id="personality-disorder" value="y" onClick="setDependentDisabledState(this, undefined, 'input[id=personality-disorder-diagnosis-date]', true, !this.checked);"/>
-                    <label for="personality-disorder">Personality Disorder</label>
-                    <label for="personality-disorder-diagnosis-date">Date</label>
+                    </td>
+
+                </tr>
+                <tr>
+
+                        <td>
+                            <input type="checkbox" name="schizophreniform-disorder" id="schizophreniform-disorder" value="y" onClick="setDependentDisabledState(this, undefined, 'input[id=schizophreniform-disorder-diagnosis-date]', true, !this.checked);"/>
+                        </td>
+                        <td>
+                            <label for="schizophreniform-disorder">Schizophreniform Disorder</label>
+                        </td>
+                        <td>
+
+                        </td>
+                        <td>
+                            <label for="schizophreniform-disorder-diagnosis-date">Date</label>
+                        </td>
+                        <td>
+                                <input type="date" name="schizophreniform-disorder-diagnosis-date" id="schizophreniform-disorder-diagnosis-date" disabled="true"/>
+                        </td>
+
+                </tr>
+                <tr>
+
+                        <td>
+                            <input type="checkbox" name="persistent-delusional-disorder" id="persistent-delusional-disorder" value="y" onClick="setDependentDisabledState(this, undefined, 'input[id=persistent-delusional-disorder-diagnosis-date]', true, !this.checked);"/>
+                        </td>
+                        <td>
+                            <label for="persistent-delusional-disorder">Persistent Delusional Disorder</label>
+                        </td>
+                        <td>
+
+                        </td>
+                        <td>
+                            <label for="persistent-delusional-disorder-diagnosis-date">Date</label>
+                        </td>
+                        <td>
+                            <input type="date" name="persistent-delusional-disorder-diagnosis-date" id="persistent-delusional-disorder-diagnosis-date" disabled="true"/>
+                        </td>
+
+                </tr>
+                <tr>
+
+                    <td>
+                        <input type="checkbox" name="personality-disorder" id="personality-disorder" value="y" onClick="setDependentDisabledState(this, undefined, 'input[id=personality-disorder-diagnosis-date]', true, !this.checked);"/>
+                    </td>
+                    <td>
+                        <label for="personality-disorder">Personality Disorder</label>
+                    </td>
+                    <td>
+
+                    </td>
+                    <td>
+                        <label for="personality-disorder-diagnosis-date">Date</label>
+                    </td>
+                    <td>
                         <input type="date" name="personality-disorder-diagnosis-date" id="personality-disorder-diagnosis-date" disabled="true"/>
-                    
-                </fieldset>
-                <fieldset id="schizophrenia-fieldset">
-                    <input type="checkbox" name="schizophrenia" id="schizophrenia" value="y" onClick="setDependentDisabledState(this, undefined, 'input[id=schizophrenia-diagnosis-date]', true, !this.checked);"/>
-                    <label for="schizophrenia">Schizophrenia</label>
-                    <label for="schizophrenia-diagnosis-date">Date</label>
-                    <input type="date" name="schizophrenia-diagnosis-date" id="schizophrenia-diagnosis-date" disabled="true"/>
-                    
-                </fieldset>
-                <fieldset id="puerperal-psychosis-fieldset">
-                    <input type="checkbox" name="puerperal-psychosis" id="puerperal-psychosis" value="y" onClick="setDependentDisabledState(this, undefined, 'input[id=puerperal-psychosis-diagnosis-date]', true, !this.checked);"/>
-                    <label for="puerperal-psychosis">Postpartum Psychosis (Puerperal Psychosis)</label>
-                    <label for="puerperal-psychosis-diagnosis-date">Date</label>
-                    <input type="date" name="puerperal-psychosis-diagnosis-date" id="puerperal-psychosis-diagnosis-date" disabled="true"/>
-                    
-                </fieldset>
-                <fieldset>
-                    <input type="checkbox" name="nonorganic-psychosis" id="nonorganic-psychosis" value="y" onClick="setDependentDisabledState(this, undefined, 'input[id=nonorganic-psychosis-diagnosis-date]', true, !this.checked);"/>
-                    <label for="nonorganic-psychosis">Non-organic Psychosis (SOE)</label>
-                    <label for="nonorganic-psychosis-diagnosis-date">Date</label>
-                    <input type="date" name="nonorganic-psychosis-diagnosis-date" id="nonorganic-psychosis-diagnosis-date" disabled="true"/>
-                </fieldset>
-                <fieldset>
-                    <input type="checkbox" name="epilepsy" id="epilepsy" value="y" onClick="setDependentDisabledState(this, undefined, ['fieldset[id=mental-health-disorders-epilepsy-radio-fieldset]', 'input[id=epilepsy-diagnosis-date]'], true, !this.checked );"/>
-                    <label for="epilepsy">Epilepsy</label>
-                    <fieldset disabled="true" id="mental-health-disorders-epilepsy-radio-fieldset">
-                        <input type="radio" name="epilepsy-type" id="epilepsy-type-focal" value="focal"/>
-                        <label for="epilepsy-type-focal">Focal (Partial)</label>
-                        <input type="radio" name="epilepsy-type" id="epilepsy-type-generalized" value="generalized"/>
-                        <label for="epilepsy-type-generalized">Generalized</label>
-                        <input type="radio" name="epilepsy-type" id="epilepsy-type-absense" value="absence"/>
-                        <label for="epilepsy-type-absense">Absence (Petit mal)</label>
-                        <input type="radio" name="epilepsy-type" id="epilepsy-type-myoclonic" value="myoclonic"/>
-                        <label for="epilepsy-type-myoclonic">Myoclonic</label>
-                    </fieldset>
-                    <label for="epilepsy-diagnosis-date">Date</label>
-                    <input type="date" name="epilepsy-diagnosis-date" id="epilepsy-diagnosis-date" disabled="true"/>
-                </fieldset>
-                <fieldset>
-                    <input type="checkbox" name="acute-organic-psychosis" id="acute-organic-psychosis" value="y" onClick="setDependentDisabledState(this, undefined, [ 'fieldset[id=mental-health-disorders-acute-organic-psychosis-radio-fieldset]', 'input[id=acute-organic-psychosis-diagnosis-date]' ], true, !this.checked );"/>
-                    <label for="acute-organic-psychosis">Acute Organic Psychosis</label>
-                    <fieldset disabled="true" id="mental-health-disorders-acute-organic-psychosis-radio-fieldset">
-                        <input type="radio" name="acute-organic-psychosis-type" id="acute-organic-psychosis-type-malaria" value="malaria"/>
-                        <label for="acute-organic-psychosis-type-malaria">Malaria</label>
+                    </td>
+
+                </tr>
+                <tr>
+
+                    <td>
+                        <input type="checkbox" name="schizophrenia" id="schizophrenia" value="y" onClick="setDependentDisabledState(this, undefined, 'input[id=schizophrenia-diagnosis-date]', true, !this.checked);"/>
+                    </td>
+                    <td>
+                        <label for="schizophrenia">Schizophrenia</label>
+                    </td>
+                    <td>
                         
-                        <input type="radio" name="acute-organic-psychosis-type" id="acute-organic-psychosis-type-hiv-aids" value="hiv-aids"/>
-                        <label for="acute-organic-psychosis-type-hiv-aids">HIV/AIDS</label>
-                        
-                        <input type="radio" name="acute-organic-psychosis-type" id="acute-organic-psychosis-type-hta" value="hta"/>
-                        <label for="acute-organic-psychosis-type-hta">HTA</label>
-                        
-                        <input type="radio" name="acute-organic-psychosis-type" id="acute-organic-psychosis-type-tce" value="tce"/>
-                        <label for="acute-organic-psychosis-type-tce">TCE</label>
-                    </fieldset>
-                    <label for="acute-organic-psychosis-diagnosis-date">Date</label>
-                    <input type="date" name="acute-organic-psychosis-diagnosis-date" id="acute-organic-psychosis-diagnosis-date" disabled="true"/>
-                    
-                </fieldset>
-                <fieldset>
-                    <input type="checkbox" name="drug-use" id="drug-use" value="y" onClick="setDependentDisabledState(this, undefined, [ 'fieldset[id=drug-use-type-radio-fieldset]', 'input[id=drug-use-diagnosis-date]' ], true, !this.checked );"/>
-                    <label for="drug-use">Drug Use</label>
-                    <fieldset id="drug-use-type-radio-fieldset" onChange="setDependentDisabledState(this, 'fieldset[id=drug-use-type-radio-fieldset] input[id=drug-use-other-drug]', 'input[id=drug-use-other-drug-specific]');" disabled="true">
-                        
-                        <input type="radio" name="drug-use-type" id="drug-use-alcohol" value="alcohol"/>
-                        <label for="drug-use-alcohol">Alcohol</label>
-                    
-                        <input type="radio" name="drug-use-type" id="drug-use-intoxication" value="intoxication"/>
-                        <label for="drug-use-intoxication">Intoxication</label>
-                    
-                        <input type="radio" name="drug-use-type" id="drug-use-abuse" value="abuse"/>
-                        <label for="drug-use-abuse">Abuse</label>
-                    
-                        <input type="radio" name="drug-use-type" id="drug-use-abstinence" value="abstinence"/>
-                        <label for="drug-use-abstinence">Abstinence</label>
-                    
-                        <input type="radio" name="drug-use-type" id="drug-use-dependence" value="dependence"/>
-                        <label for="drug-use-dependence">Dependence</label>
-                    
-                        <input type="radio" name="drug-use-type" id="drug-use-other-drug" value="other-drug"/>
-                        <label for="drug-use-other-drug">Other Drug</label>
-                    
-                        <label for="drug-use-other-drug-specific">If other drug, specify</label>
-                        <input type="text" name="drug-use-other-drug-specific" id="drug-use-other-drug-specific" disabled="true" autocomplete="off"/>
-                        
-                    </fieldset>
-                    <label for="drug-use-diagnosis-date">Date</label>
+                    </td>
+                    <td>
+                        <label for="schizophrenia-diagnosis-date">Date</label>
+                    </td>
+                    <td>
+                        <input type="date" name="schizophrenia-diagnosis-date" id="schizophrenia-diagnosis-date" disabled="true"/>
+                    </td>
+
+                </tr>
+                <tr>
+
+                    <td>
+                        <input type="checkbox" name="puerperal-psychosis" id="puerperal-psychosis" value="y" onClick="setDependentDisabledState(this, undefined, 'input[id=puerperal-psychosis-diagnosis-date]', true, !this.checked);"/>
+                    </td>
+                    <td>
+                        <label for="puerperal-psychosis">Postpartum Psychosis (Puerperal Psychosis)</label>
+                    </td>
+                    <td>
+
+                    </td>
+                    <td>
+                        <label for="puerperal-psychosis-diagnosis-date">Date</label>
+                    </td>
+                    <td>
+                        <input type="date" name="puerperal-psychosis-diagnosis-date" id="puerperal-psychosis-diagnosis-date" disabled="true"/>
+                    </td>
+
+                </tr>
+                <tr>
+
+                        <td>
+                            <input type="checkbox" name="nonorganic-psychosis" id="nonorganic-psychosis" value="y" onClick="setDependentDisabledState(this, undefined, 'input[id=nonorganic-psychosis-diagnosis-date]', true, !this.checked);"/>
+                        </td>
+                        <td>
+                            <label for="nonorganic-psychosis">Non-organic Psychosis (SOE)</label>
+                        </td>
+                        <td>
+
+                        </td>
+                        <td>
+                            <label for="nonorganic-psychosis-diagnosis-date">Date</label>
+                        </td>
+                        <td>
+                            <input type="date" name="nonorganic-psychosis-diagnosis-date" id="nonorganic-psychosis-diagnosis-date" disabled="true"/>
+                        </td>
+
+                </tr>
+                <tr>
+
+                    <td>
+                        <input type="checkbox" name="epilepsy" id="epilepsy" value="y" onClick="setDependentDisabledState(this, undefined, ['fieldset[id=mental-health-disorders-epilepsy-radio-fieldset]', 'input[id=epilepsy-diagnosis-date]'], true, !this.checked );"/></td>
+                    <td>
+                        <label for="epilepsy">Epilepsy</label>
+                    </td>
+                    <td>
+                        <fieldset disabled="true" id="mental-health-disorders-epilepsy-radio-fieldset">
+                            <table class="mental-health-radio-fieldset-table">
+                                    <tr>
+                                        <td>
+                                            <input type="radio" name="epilepsy-type" id="epilepsy-type-focal" value="focal"/>
+                                        </td>
+                                        <td>
+                                            <label for="epilepsy-type-focal">Focal (Partial)</label>
+                                        </td>
+                                        <td>
+                                            <input type="radio" name="epilepsy-type" id="epilepsy-type-generalized" value="generalized"/>
+                                        </td>
+                                        <td>
+                                            <label for="epilepsy-type-generalized">Generalized</label>
+                                        </td>
+                                        <td>
+                                            <input type="radio" name="epilepsy-type" id="epilepsy-type-absense" value="absence"/>
+                                        </td>
+                                        <td>
+                                            <label for="epilepsy-type-absense">Absence (Petit mal)</label>
+                                        <td>
+                                            <input type="radio" name="epilepsy-type" id="epilepsy-type-myoclonic" value="myoclonic"/>
+                                        </td>
+                                        <td>
+                                            <label for="epilepsy-type-myoclonic">Myoclonic</label>
+                                        </td>
+                                    </tr>
+                                </table>
+                        </fieldset>
+                    </td>
+                    <td>
+                        <label for="epilepsy-diagnosis-date">Date</label>
+                    </td>
+                    <td>
+                        <input type="date" name="epilepsy-diagnosis-date" id="epilepsy-diagnosis-date" disabled="true"/>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <input type="checkbox" name="acute-organic-psychosis" id="acute-organic-psychosis" value="y" onClick="setDependentDisabledState(this, undefined, [ 'fieldset[id=mental-health-disorders-acute-organic-psychosis-radio-fieldset]', 'input[id=acute-organic-psychosis-diagnosis-date]' ], true, !this.checked );"/>
+                    </td>
+                    <td>
+                        <label for="acute-organic-psychosis">Acute Organic Psychosis</label>
+                    </td>
+                    <td>
+                        <fieldset disabled="true" id="mental-health-disorders-acute-organic-psychosis-radio-fieldset">
+                            
+                            <table class="mental-health-radio-fieldset-table">
+                                    <tr>
+                                        <td>
+                                            <input type="radio" name="acute-organic-psychosis-type" id="acute-organic-psychosis-type-malaria" value="malaria"/>
+                                        </td>
+                                        <td>
+                                            <label for="acute-organic-psychosis-type-malaria">Malaria</label>
+                                        </td>
+                                        <td>
+                                            <input type="radio" name="acute-organic-psychosis-type" id="acute-organic-psychosis-type-hiv-aids" value="hiv-aids"/>
+                                        </td>
+                                        <td>
+                                            <label for="acute-organic-psychosis-type-hiv-aids">HIV/AIDS</label>
+                                        </td>
+                                        <td>
+                                            <input type="radio" name="acute-organic-psychosis-type" id="acute-organic-psychosis-type-hta" value="hta"/>
+                                        </td>
+                                        <td>
+                                            <label for="acute-organic-psychosis-type-hta">HTA</label>
+                                        </td>
+                                        <td>
+                                            <input type="radio" name="acute-organic-psychosis-type" id="acute-organic-psychosis-type-tce" value="tce"/>
+                                        </td>
+                                        <td>
+                                            <label for="acute-organic-psychosis-type-tce">TCE</label>
+                                    </td>
+                                </tr>
+                            </table>
+                        </fieldset>
+                    </td>
+                    <td>
+                        <label for="acute-organic-psychosis-diagnosis-date">Date</label>
+                    </td>
+                    <td>
+                        <input type="date" name="acute-organic-psychosis-diagnosis-date" id="acute-organic-psychosis-diagnosis-date" disabled="true"/>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <input type="checkbox" name="drug-use" id="drug-use" value="y" onClick="setDependentDisabledState(this, undefined, [ 'fieldset[id=drug-use-type-radio-fieldset]', 'input[id=drug-use-diagnosis-date]' ], true, !this.checked );"/>
+                    </td>
+                    <td>
+                        <label for="drug-use">Drug Use</label>
+                    </td>
+                    <td>
+                        <fieldset id="drug-use-type-radio-fieldset" onChange="setDependentDisabledState(this, 'fieldset[id=drug-use-type-radio-fieldset] input[id=drug-use-other-drug]', 'input[id=drug-use-other-drug-specific]');" disabled="true">
+                            <table class="mental-health-radio-fieldset-table">
+                                <tr>
+                                    <td>
+                                        <input type="radio" name="drug-use-type" id="drug-use-alcohol" value="alcohol"/>
+                                    </td>
+                                    <td>
+                                        <label for="drug-use-alcohol">Alcohol</label>
+                                    </td>
+                                    <td>
+                                        <input type="radio" name="drug-use-type" id="drug-use-intoxication" value="intoxication"/>
+                                    </td>
+                                    <td>
+                                        <label for="drug-use-intoxication">Intoxication</label>
+                                    </td>
+                                    <td>
+                                        <input type="radio" name="drug-use-type" id="drug-use-abuse" value="abuse"/>
+                                    </td>
+                                    <td>
+                                        <label for="drug-use-abuse">Abuse</label>
+                                    </td>
+                                    <td>
+                                        <input type="radio" name="drug-use-type" id="drug-use-abstinence" value="abstinence"/>
+                                    </td>
+                                    <td>
+                                        <label for="drug-use-abstinence">Abstinence</label>
+                                    </td>
+                                    <td>
+                                        <input type="radio" name="drug-use-type" id="drug-use-dependence" value="dependence"/>
+                                    </td>
+                                    <td>
+                                        <label for="drug-use-dependence">Dependence</label>
+                                    </td>
+                                    <td>
+                                        <input type="radio" name="drug-use-type" id="drug-use-other-drug" value="other-drug"/>
+                                    </td>
+                                    <td>
+                                        <label for="drug-use-other-drug">Other Drug</label>
+                                    </td>
+                                    <td>
+                                        <label for="drug-use-other-drug-specific">If other drug, specify</label>
+                                        <input type="text" name="drug-use-other-drug-specific" id="drug-use-other-drug-specific" disabled="true" autocomplete="off"/>
+                                    </td>
+                                </tr>
+                            </table>
+                        </fieldset>
+                    </td>
+                    <td>
+                        <label for="drug-use-diagnosis-date">Date</label>
+                    </td>
+                    <td>
                         <input type="date" name="drug-use-diagnosis-date" id="drug-use-diagnosis-date" disabled="true"/>
-                    
-                </fieldset>
-                <fieldset>
-                    <input type="checkbox" name="multiple-drug-use" id="multiple-drug-use" value="y" onClick="setDependentDisabledState(this, undefined, [ 'fieldset[id=multiple-drug-use-type-radio-fieldset]', 'input[id=multiple-drug-use-diagnosis-date]' ], true, !this.checked );"/>
-                    <label for="multiple-drug-use">Multiple Drug Use</label>
-                    <fieldset id="multiple-drug-use-type-radio-fieldset" onChange="setDependentDisabledState(this, 'fieldset[id=multiple-drug-use-type-radio-fieldset] input[id=multiple-drug-use-other-drug]', 'input[id=multiple-drug-use-other-drug-specific]');" disabled="true">
-                        
-                            <input type="radio" name="multiple-drug-use-type" id="multiple-drug-use-alcohol" value="alcohol"/>
-                        <label for="multiple-drug-use-alcohol">Alcohol</label>
-                        
-                            <input type="radio" name="multiple-drug-use-type" id="multiple-drug-use-intoxication" value="intoxication"/>
-                        <label for="multiple-drug-use-intoxication">Intoxication</label>
-                        
-                            <input type="radio" name="multiple-drug-use-type" id="multiple-drug-use-abuse" value="abuse"/>
-                        <label for="multiple-drug-use-abuse">Abuse</label>
-                        
-                            <input type="radio" name="multiple-drug-use-type" id="multiple-drug-use-abstinence" value="abstinence"/>
-                        <label for="multiple-drug-use-abstinence">Abstinence</label>
-                        
-                            <input type="radio" name="multiple-drug-use-type" id="multiple-drug-use-dependence" value="dependence"/>
-                        <label for="multiple-drug-use-dependence">Dependence</label>
-                        
-                            <input type="radio" name="multiple-drug-use-type" id="multiple-drug-use-other-drug" value="other-drug"/>
-                        <label for="multiple-drug-use-other-drug">Other Drug</label>
-                        <label for="multiple-drug-use-other-drug-specific">If other drug, specify</label>
-                                <input type="text" name="multiple-drug-use-other-drug-specific" id="multiple-drug-use-other-drug-specific" disabled="true" autocomplete="off"/>
-                        
-                    </fieldset>
-                    <label for="multiple-drug-use-diagnosis-date">Date</label>
-                    <input type="date" name="multiple-drug-use-diagnosis-date" id="multiple-drug-use-diagnosis-date" disabled="true"/>
-                </fieldset>
-                <fieldset>
-                    <input type="checkbox" name="dementia" id="dementia" value="y" onClick="setDependentDisabledState(this, undefined, 'input[id=dementia-diagnosis-date]', true, !this.checked);"/>
-                    <label for="dementia">Dementia</label>
-                    <label for="dementia-diagnosis-date">Date</label>
-                    <input type="date" name="dementia-diagnosis-date" id="dementia-diagnosis-date" disabled="true"/>
-                </fieldset>
-                <fieldset>
-                
-                    <input type="checkbox" name="mental-retardation" id="mental-retardation" value="y" onClick="setDependentDisabledState(this, undefined, 'input[id=mental-retardation-diagnosis-date]', true, !this.checked);"/>
-                    <label for="mental-retardation">Mental Retardation</label>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <input type="checkbox" name="multiple-drug-use" id="multiple-drug-use" value="y" onClick="setDependentDisabledState(this, undefined, [ 'fieldset[id=multiple-drug-use-type-radio-fieldset]', 'input[id=multiple-drug-use-diagnosis-date]' ], true, !this.checked );"/>
+                    </td>
+                    <td>
+                        <label for="multiple-drug-use">Multiple Drug Use</label>
+                    </td>
+                    <td>
+                        <fieldset id="multiple-drug-use-type-radio-fieldset" onChange="setDependentDisabledState(this, 'fieldset[id=multiple-drug-use-type-radio-fieldset] input[id=multiple-drug-use-other-drug]', 'input[id=multiple-drug-use-other-drug-specific]');" disabled="true">
+                            <table class="mental-health-radio-fieldset-table">
+                                <tr>
+                                    <td>
+                                        <input type="radio" name="multiple-drug-use-type" id="multiple-drug-use-alcohol" value="alcohol"/>
+                                    </td>
+                                    <td>
+                                        <label for="multiple-drug-use-alcohol">Alcohol</label>
+                                    </td>
+                                    <td>
+                                        <input type="radio" name="multiple-drug-use-type" id="multiple-drug-use-intoxication" value="intoxication"/>
+                                    </td>
+                                    <td>
+                                        <label for="multiple-drug-use-intoxication">Intoxication</label>
+                                    </td>
+                                    <td>
+                                        <input type="radio" name="multiple-drug-use-type" id="multiple-drug-use-abuse" value="abuse"/>
+                                    </td>
+                                    <td>
+                                        <label for="multiple-drug-use-abuse">Abuse</label>
+                                    </td>
+                                    <td>
+                                        <input type="radio" name="multiple-drug-use-type" id="multiple-drug-use-abstinence" value="abstinence"/>
+                                    </td>
+                                    <td>
+                                        <label for="multiple-drug-use-abstinence">Abstinence</label>
+                                    </td>
+                                    <td>
+                                        <input type="radio" name="multiple-drug-use-type" id="multiple-drug-use-dependence" value="dependence"/>
+                                    </td>
+                                    <td>
+                                        <label for="multiple-drug-use-dependence">Dependence</label>
+                                    </td>
+                                    <td>
+                                        <input type="radio" name="multiple-drug-use-type" id="multiple-drug-use-other-drug" value="other-drug"/>
+                                    </td>
+                                    <td>
+                                        <label for="multiple-drug-use-other-drug">Other Drug</label>
+                                    </td>
+                                    <td>
+                                        <label for="multiple-drug-use-other-drug-specific">If other drug, specify</label>
+                                        <input type="text" name="multiple-drug-use-other-drug-specific" id="multiple-drug-use-other-drug-specific" disabled="true" autocomplete="off"/>
+                                    </td>
+                                </tr>
+                            </table>
+                        </fieldset>
+                    </td>
+                    <td>
+                        <label for="multiple-drug-use-diagnosis-date">Date</label>
+                    </td>
+                    <td>
+                        <input type="date" name="multiple-drug-use-diagnosis-date" id="multiple-drug-use-diagnosis-date" disabled="true"/>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <input type="checkbox" name="dementia" id="dementia" value="y" onClick="setDependentDisabledState(this, undefined, 'input[id=dementia-diagnosis-date]', true, !this.checked);"/>
+                    </td>
+                    <td>
+                        <label for="dementia">Dementia</label>
+                    </td>
+                    <td>
+
+                    </td>
+                    <td>
+                        <label for="dementia-diagnosis-date">Date</label>
+                    </td>
+                    <td>
+                        <input type="date" name="dementia-diagnosis-date" id="dementia-diagnosis-date" disabled="true"/>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <input type="checkbox" name="mental-retardation" id="mental-retardation" value="y" onClick="setDependentDisabledState(this, undefined, 'input[id=mental-retardation-diagnosis-date]', true, !this.checked);"/>
+                    </td>
+                    <td>
+                        <label for="mental-retardation">Mental Retardation</label>
+                    </td>
+                    <td>
+
+                    </td>
+                    <td>
                     <label for="mental-retardation-diagnosis-date">Date</label>
+                    </td>
+                    <td>
                         <input type="date" name="mental-retardation-diagnosis-date" id="mental-retardation-diagnosis-date" disabled="true"/>
-                    
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <input type="checkbox" name="conduct-disorder" id="conduct-disorder" value="y" onclick="setDependentDisabledState(this, undefined, 'input[id=conduct-disorder-diagnosis-date]', true, !this.checked);"/>
+                    </td>
+                    <td>
+                        <label for="conduct-disorder">Conduct Disorder</label>
+                    </td>
+                    <td>
+
+                    </td>
+                    <td>
+                        <label for="conduct-disorder-diagnosis-date">Date</label>
+                    </td>
+                    <td>
+                        <input type="date" name="conduct-disorder-diagnosis-date" id="conduct-disorder-diagnosis-date" disabled="true"/>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <input type="checkbox" name="attention-deficity-hyperactivity-disorder" id="attention-deficity-hyperactivity-disorder" value="y" onClick="setDependentDisabledState(this, undefined, 'input[id=attention-deficity-hyperactivity-disorder-diagnosis-date]', true, !this.checked);"/>
+                    </td>
+                    <td>
+                        <label for="attention-deficity-hyperactivity-disorder">Attention Deficit/Hyperactivity Disorder</label>
+                    </td>
+                    <td>
+
+                    </td>
+                    <td>
+                        <label for="attention-deficity-hyperactivity-disorder-diagnosis-date">Date</label>
+                    </td>
+                    <td>
+                        <input type="date" name="attention-deficity-hyperactivity-disorder-diagnosis-date" id="attention-deficity-hyperactivity-disorder-diagnosis-date" disabled="true"/>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <input type="checkbox" name="nocturnal-enuresis" id="nocturnal-enuresis" value="y" onClick="setDependentDisabledState(this, undefined, 'input[id=nocturnal-enuresis-diagnosis-date]', true, !this.checked);"/>
+                    </td>
+                    <td>
+                        <label for="nocturnal-enuresis">Nocturnal enuresis</label>
+                    </td>
+                    <td>
+
+                    </td>
+                    <td>
+                        <label for="nocturnal-enuresis-diagnosis-date">Date</label>
+                    </td>
+                    <td>
+                        <input type="date" name="nocturnal-enuresis-diagnosis-date" id="nocturnal-enuresis-diagnosis-date" disabled="true"/>
+                    </td>
+                </tr>
                 </fieldset>
-                <fieldset>
-                    
-                    <input type="checkbox" name="conduct-disorder" id="conduct-disorder" value="y" onclick="setDependentDisabledState(this, undefined, 'input[id=conduct-disorder-diagnosis-date]', true, !this.checked);"/>
-                    <label for="conduct-disorder">Conduct Disorder</label>
-                    <label for="conduct-disorder-diagnosis-date">Date</label>
-                    <input type="date" name="conduct-disorder-diagnosis-date" id="conduct-disorder-diagnosis-date" disabled="true"/>
-                </fieldset>
-                <fieldset>
-                    <input type="checkbox" name="attention-deficity-hyperactivity-disorder" id="attention-deficity-hyperactivity-disorder" value="y" onClick="setDependentDisabledState(this, undefined, 'input[id=attention-deficity-hyperactivity-disorder-diagnosis-date]', true, !this.checked);"/>
-                    <label for="attention-deficity-hyperactivity-disorder">Attention Deficit/Hyperactivity Disorder</label>
-                    <label for="attention-deficity-hyperactivity-disorder-diagnosis-date">Date</label>
-                    <input type="date" name="attention-deficity-hyperactivity-disorder-diagnosis-date" id="attention-deficity-hyperactivity-disorder-diagnosis-date" disabled="true"/>
-                </fieldset>
-                <fieldset>
-                    <input type="checkbox" name="nocturnal-enuresis" id="nocturnal-enuresis" value="y" onClick="setDependentDisabledState(this, undefined, 'input[id=nocturnal-enuresis-diagnosis-date]', true, !this.checked);"/>
-                    <label for="nocturnal-enuresis">Nocturnal enuresis</label>
-                    <label for="nocturnal-enuresis-diagnosis-date">Date</label>
-                    <input type="date" name="nocturnal-enuresis-diagnosis-date" id="nocturnal-enuresis-diagnosis-date" disabled="true"/>
-                </fieldset>
-            </fieldset>
+            </table>
         </div>
+        <!--if using a footer, this approach will require some work-->
+        <!--<div class="fixed-bottom">
+            <span>Result: </span>
+            <fieldset id="program-result">
+                <label for="result-discharged">Discharged</label>
+                <input type="radio" id="result-discharged" name="result-discharged"/>
+                
+                <label for="result-fact-only">Fact Only</label>
+                <input type="radio" id="result-fact-only" name="result-fact-only"/>
+                
+                <label for="result-stopped-treatment">Stopped Treatment</label>
+                <input type="radio" id="result-stopped-treatment" name="result-stopped-treatment"/>
+                
+                <label for="result-transferred-to">Transferred To</label>
+                <input type="radio" id="result-transferred-to" name="result-transferred-to"/>
+                
+                <input type="text" id="result-transferred-to-location" name="result-transferred-to-location"/>
+                
+                <label for="result-died">Died</label>
+                <input type="radio" id="result-died" name="result-died"/>
+
+                <label for="result-date">Date</label>
+                <input type="date" id="result-date" name="result-date"/>
+            </fieldset>
+        </div>-->
     </form>
 </body>
 </html>

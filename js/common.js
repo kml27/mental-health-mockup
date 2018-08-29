@@ -642,7 +642,11 @@ $(document).ready(
                 textarea.addEventListener("input", function(event){localDataStore(this, load=false)});
             }
 */
+            var templateProvidedValues = $("[id^=template-rendered]");
 
+            for(value of templateProvidedValues){
+                $(`[id=${value.dataset.targetId}`)[0].value = value.textContent;
+            }
             
             loadLocalSiteInfo(true);
         }

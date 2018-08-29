@@ -9,7 +9,7 @@ function initializeDefaultSrc(control) {
         //emulate a HTMLInputElement type "date", "number", "tel", "text", "textarea"
         "value": control.defaultValue,
         //emulate a HTMLSelectElement
-        0: { "id": "not-selected"},
+        0: { "value": ""},
         selectedIndex: 0,
     };
 
@@ -110,9 +110,7 @@ function setDependentDisabledState(clickedElement, specificRadio, specificTarget
     }
 };
 
-function getIndexFromOptionID(control, optionID){
-
-    var option = control.namedItem(optionID);
+function getIndexFromOptionValue(control, optionValue){
 
     var optionIndex = -1;
     
@@ -123,7 +121,7 @@ function getIndexFromOptionID(control, optionID){
         var curOption = control[iteratedOption];
         //console.log(iteratedOption, curOption);
 
-        if(curOption == option){
+        if(curOption.value == optionValue){
             //console.log(curOption);
             optionIndex = iteratedOption;
             
@@ -154,9 +152,11 @@ function loadLocalSiteInfo(attach=false){
             DOMSelect = jQuerySelect[0];
         }
 
-        if(DOMSelect && localStorage[dataStoreNS+"mhf-"+selectID]){
+        var storageName = dataStoreNS+"mhf-"+selectID;
+
+        if(DOMSelect && localStorage[storageName]){
             
-            var optionIndex = getIndexFromOptionID(DOMSelect, localStorage[dataStoreNS+"mhf-"+selectID]);
+            var optionIndex = getIndexFromOptionValue(DOMSelect, localStorage[storageName]);
             
             if(optionIndex) {
                 DOMSelect.selectedIndex = optionIndex;
@@ -169,12 +169,16 @@ function loadLocalSiteInfo(attach=false){
             jQuerySelect.on("change", function(event){
                 //console.log(this[this.selectedIndex].value);
 
-                let storageName=dataStoreNS+"mhf-"+this.id.slice(0, this.id.lastIndexOf("-select"));
+                //this is built during handling of change event
+                var storageName=dataStoreNS+"mhf-"+this.id.slice(0, this.id.lastIndexOf("-select"));
                 //console.log("storage name", storageName);
 
-                var prevOptionID = localStorage[storageName];
-                if(prevOptionID != undefined) {
-                    var prevOptionSelected = this.options[prevOptionID];
+                var prevOptionValue = localStorage[storageName];
+                if(prevOptionValue != undefined) {
+
+                    var prevOptionIndex = getIndexFromOptionValue(this, prevOptionValue);
+
+                    var prevOptionSelected = this.options[prevOptionIndex];
 
                     //console.log(prevOptionID, prevOptionSelected);
 
@@ -184,7 +188,7 @@ function loadLocalSiteInfo(attach=false){
                 
                 var newOptionSelected = this[this.selectedIndex];
                                         
-                localStorage[storageName] = newOptionSelected.id;
+                localStorage[storageName] = newOptionSelected.value;
                 //Set this as the new default to return to when resetting the form
                 newOptionSelected.defaultSelected = true;
             });
@@ -213,7 +217,7 @@ function setAllDisabledStates(){
                 handler: "onclick"
             },
             {
-                set: $("fieldset[onchange*='setDependentDisabledState']"),
+                set: $("[onchange*='setDependentDisabledState']"),
                 handler: "onchange"
             }
     ];
@@ -407,12 +411,12 @@ function setMemberByType(src, dest, control)
     } else if (control instanceof HTMLSelectElement) {
         
         if(dest instanceof HTMLSelectElement) {
-            var optionIndex = getIndexFromOptionID(control, src.id);
+            var optionIndex = getIndexFromOptionValue(control, src.value);
 
             dest.selectedIndex= optionIndex;
         }
         else {
-            dest.id= src[src.selectedIndex].id;
+            dest.value= src[src.selectedIndex].value;
         }
     }
 }

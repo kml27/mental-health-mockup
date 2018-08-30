@@ -364,6 +364,19 @@ function calculateAge(dobDateInput, targetSelector){
     $(targetSelector)[0].value=age;
 }
 
+function calculateDOB(ageInput, targetSelector){
+
+    var today = new Date();
+    var specifiedDay = new Date(Number(today.getFullYear())-Number(ageInput.value), today.getMonth(), today.getDate());
+
+    if(isNaN(specifiedDay)) {
+        return;
+    }
+
+    $(targetSelector)[0].value=specifiedDay.toISOString().split("T")[0];
+}
+
+
 function setHiddenCheckbox(checkboxSelector, value){
     $(checkboxSelector)[0].checked = value;
 }
@@ -649,9 +662,47 @@ $(document).ready(
             var templateProvidedValues = $("[id^=template-rendered]");
 
             for(value of templateProvidedValues){
-                $(`[id=${value.dataset.targetId}`)[0].value = value.textContent;
+
+                var targetControl = $(`[id=${value.dataset.targetId}`)[0];
+
+                var value = value.textContent;
+
+                if(targetControl.type == "date"){
+                    try {
+                        value = new Date(value).toISOString().split("T")[0];
+                    } catch {
+                        value = "";
+                    }
+                } else if( targetControl instanceof HTMLFieldSetElement) {
+                    var radios = $(`fieldset[id=${targetControl.id}] input[type=radio]`);
+                    for(radio of radios){
+                        if( radio.value == value)
+                        {
+                            radio.checked = true;
+                        }
+                    }
+                }
+
+
+
+                targetControl.value = value;
+
+                var inputEvent = new Event("input");
+
+                targetControl.dispatchEvent(inputEvent);
             }
             
+            $("[id=encounterDate] input[type=text]").on("focus",
+                function bringDatePickerToFrontAndFixPosition(){
+                    var datepicker = $("div[id=ui-datepicker-div]");
+                    datepicker.css("z-index", 1000000);
+                    datepicker.css("position", "fixed");
+                    var parentInput = $("input[id=w3-display]");
+                    var position = parentInput.position().top+/*parentInput.offset().top-$(window).scrollTop+*/parentInput.outerHeight(true);
+                    datepicker.css("top", position);
+            });
+
+
             loadLocalSiteInfo(true);
         }
 

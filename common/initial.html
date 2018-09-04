@@ -93,7 +93,7 @@
                     </tr>
                 </table>
             </div>
-            <div class="nav nav-tabs nav-fill" id="section-tabs" hidden="true" role="tablist">
+            <div class="nav nav-tabs" id="section-tabs" hidden="true" role="tablist">
                 <div class="nav-item">
                     <a class="nav-link active" id="patient-details-tab" role="tab" data-toggle="tab" href="#patient-details" aria-controls="patient-details" aria-selected="true">1. Patient/Companion Details</a> 
                 </div>
@@ -221,9 +221,9 @@
                 <fieldset id="companion-information" class="d-block ">
                     <legend class="">Companion Information</legend>
                     <!-- conceptId="23699" -->
-                    <obs conceptId="23699" labelText="Name"/>
+                    <!-- <obs conceptId="23699" labelText="Name"/> -->
                     <label for="companion-name" class="d-block">Name</label>
-                    <input type="text" name="companion-name" id="companion-name" autocomplete="off" class=""/>
+                    <input data-concept-id="23699" type="text" name="companion-name" id="companion-name" autocomplete="off" class=""/>
                     
                     <label for="companion-telephone-number" class="d-block">Telephone</label>
                     <input type="tel" name="companion-telephone-number" id="companion-telephone-number" pattern="[0-9]{2,3}-[0-9]{3}-[0-9]{3}-[0-9]{4}" autocomplete="off" class=""/>
@@ -476,7 +476,7 @@
                     </td>
                     <td>
                         <!-- conceptId="23732" -->
-                        <input type="number" name="symptom-assessment-phq-9" id="symptom-assessment-phq-9" min="0" max="27" oninput="watchRange(this, 'span[id=phq-range-alert]');"/>
+                        <input data-concept-id="23732" type="number" name="symptom-assessment-phq-9" id="symptom-assessment-phq-9" min="0" max="27" oninput="watchRange(this, 'span[id=phq-range-alert]');"/>
                     </td>
                     <td><span id="phq-range-alert" class="p-2 alert bg-warning" hidden="true"></span></td>
                 </tr>

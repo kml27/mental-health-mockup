@@ -567,12 +567,15 @@ function initializeInputValuePersistence(reset=false){
             //attach event listener to the radios parent fieldset
             fieldset.addEventListener("input", function oninputFieldsetStore(event){
                 
-                fnForFieldsetRadios(this, function storeRadioState(radio){ localDataStore(radio, load=false); })
+                fnForFieldsetRadios(this, function storeRadioState(radio){ localDataStore(radio, load=false); });
             });
         }
         
-        fnForFieldsetRadios(fieldset, function loadRadioState(radio){ localDataStore(radio, load=true); })
+        fnForFieldsetRadios(fieldset, function loadRadioState(radio){ localDataStore(radio, load=true); });
+
     }
+
+    fieldsetsWithRadios.forEach(function(elem){ $(elem).css("background-color", $(elem).attr("data-concept-id")?"green":"red")});
 
 }
 
@@ -701,6 +704,14 @@ $(document).ready(
                     var position = parentInput.position().top+/*parentInput.offset().top-$(window).scrollTop+*/parentInput.outerHeight(true);
                     datepicker.css("top", position);
             });
+
+            $("input").toArray().forEach(function(elem){ $(elem).css("background-color", $(elem).attr("data-concept-id")?"green":"red")});
+
+            $("textarea").toArray().forEach(function(elem){ $(elem).css("background-color", $(elem).attr("data-concept-id")?"green":"red")});
+
+            $("select").toArray().forEach(function(elem){ $(elem).css("background-color", $(elem).attr("data-concept-id")?"green":"red")});
+
+            $("option").toArray().forEach(function(elem){ $(elem).css("background-color", $(elem).attr("data-concept-id")?"green":"red")});
 
 
             loadLocalSiteInfo(true);

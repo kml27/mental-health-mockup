@@ -703,7 +703,7 @@ $(document).ready(
                     var datepicker = $("div[id=ui-datepicker-div]");
                     datepicker.css("z-index", 1000000);
                     datepicker.css("position", "fixed");
-                    var parentInput = $("input[id=w3-display]");
+                    var parentInput = $(this);
                     var position = parentInput.position().top+/*parentInput.offset().top-$(window).scrollTop+*/parentInput.outerHeight(true);
                     datepicker.css("top", position);
             });

@@ -28,6 +28,7 @@
                 
                 <div class="text-center align-self-center p-4 border bg-primary text-white">
                     Blue Card
+                    <encounterProvider/>
                 </div>
                 <table>
                     <tr id="blue-card-header-common">
@@ -145,9 +146,9 @@
                             <label for="age" class="">Age</label>
                         </span>
                         <span class="d-flex flex-column">
-                            <input type="date" name="dob" id="dob" oninput="warnMaxDateToday(this, 'span[id=dob-warning]'); setDependentDisabledState(this, undefined, 'input[id=age]', true, this.value!='');" disabled="true"/>
+                            <input type="date" name="dob" id="dob" disabled="true"/>
                             <br/>
-                            <input type="number" name="age" id="age" min="0" oninput="setDependentDisabledState(this, undefined, 'input[id=dob]', true, this.value!=''); setHiddenCheckbox('input[id=estimated-age-checkbox]', this.value!=''); calculateDOB(this, 'input[id=dob]');" disabled="true"/>
+                            <input type="number" name="age" id="age" min="0" disabled="true"/>
                             <!--Just string "specified age" or "estimated age"?-->
                             <!--<label for="estimated-age-checkbox">Age Estimated</label>
                             <input type="checkbox" id="estimated-age-checkbox" name="estimated-age" class="" disabled="true"/> -->

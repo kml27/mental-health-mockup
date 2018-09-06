@@ -510,7 +510,7 @@ function applyScrollPositionPersistence(){
 
 function getFieldsetsWithRadios(){
     
-    var fieldsets = jQuery.makeArray($('form#mh-form fieldset'));
+    var fieldsets = jQuery.makeArray($('form#htmlform fieldset'));
 
     var fieldsetsWithRadios = fieldsets.filter( (fieldset) => {
         if(fieldset.id=="") {
@@ -535,10 +535,10 @@ function getFieldsetsWithRadios(){
 function initializeInputValuePersistence(reset=false){
     
     var inputs = [];
-    inputs = jQuery.makeArray($('form#mh-form input'));
-    inputs = inputs.concat(jQuery.makeArray($('form#mh-form select')));
+    inputs = jQuery.makeArray($('form#htmlform input'));
+    inputs = inputs.concat(jQuery.makeArray($('form#htmlform select')));
     
-    var textAreas = jQuery.makeArray($('form#mh-form textarea'));
+    var textAreas = jQuery.makeArray($('form#htmlform textarea'));
     inputs = inputs.concat(textAreas);
 
     var fieldsetsWithRadios = getFieldsetsWithRadios();
@@ -723,7 +723,11 @@ $(document).ready(
                 fieldsetsWithRadios.forEach(function(elem){ $(elem).css("background-color", $(elem).attr("data-concept-id")?"green":"red")});
             }
 
+            var form = $("form#htmlform");
 
+            //by setting onreset using attr(), the html will show onreset="setAllDisabledStates();" (in recent chrome at least)
+            form.attr("onreset", "setAllDisabledStates();");
+            
             loadLocalSiteInfo(true);
         }
 

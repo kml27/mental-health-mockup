@@ -18,7 +18,7 @@
 <style>
     /*temporarily put bootstrap.min.css here when testing form in HFE*/
 </style>
-    <form autocomplete="off" onReset="setAllDisabledStates();" class="" id="mh-form">
+    <form autocomplete="off" onreset="setAllDisabledStates();" class="" id="htmlform">
         <div class="sticky-top bg-white d-flex flex-column">
             <h1 class="bg-primary d-flex justify-content-center">Patient's Process - Mental Health - Page 2</h1>
             <div class="d-flex flex-row justify-content-around m-2">
@@ -44,8 +44,8 @@
                         </span>
                         <span class="d-flex flex-fill flex-column">
                             <select name="district-select" id="district-select" class="mb-2" tabindex="2">
-                                    <option value="" id="not-selected">--Not Selected--</option>
-                                    <option value="other" id="other">Other</option>
+                                    <option value="" id="district-select-not-selected">--Not Selected--</option>
+                                    <option value="other" id="district-select-other">Other</option>
                                 </select>
                             <input type="text" id="NID" name="NID" autocomplete="off" class="" tabindex="5"/>
                         </span>
@@ -55,8 +55,8 @@
                         <span class="d-flex flex-column">
                                 <!--<input type="text" id="health-facility" name="health-facility"/>-->
                             <select name="health-facility-select" id="health-facility-select" class="flex-fill" tabindex="3">
-                                <option value="" id="not-selected">--Not-Selected--</option>
-                                <option value="other" id="other">Other</option>
+                                <option value="" id="health-facility-select-not-selected">--Not-Selected--</option>
+                                <option value="other" id="health-facility-select-other">Other</option>
                             </select>
                             <span class="d-flex flex-fill mt-2">
                                 <input type="submit" value="Create record" class="btn btn-primary mr-2"/>
@@ -98,8 +98,8 @@
                 <div>
                     <label for="primary-dx" class="">Primary Diagnosis (ICD10)</label>
                     <select id="primary-dx" name="primary-dx" onchange="setDependentDisabledState(this, undefined, 'input[id=primary-dx-other]', true, this[this.selectedIndex].id!='other');">
-                        <option value="" id="not-selected">--Not-Selected--</option>
-                        <option value="other" id="other">Other</option>
+                        <option value="" id="primary-dx-select-not-selected">--Not-Selected--</option>
+                        <option value="other" id="primary-dx-select-other">Other</option>
                     </select>
                     <label for="primary-dx-other">If other, please specify</label>
                     <input type="text" name="primary-dx-other" id="primary-dx-other" disabled="true"/>
@@ -107,8 +107,8 @@
                 <div>
                     <label for="secondary-dx" class="">Secondary Diagnosis (ICD10)</label>
                     <select id="secondary-dx" name="secondary-dx" onchange="setDependentDisabledState(this, undefined, 'input[id=secondary-dx-other]', true, this[this.selectedIndex].id!='other');">
-                        <option value="" id="not-selected">--Not-Selected--</option>
-                        <option value="other" id="other">Other</option>
+                        <option value="" id="secondary-dx-select-not-selected">--Not-Selected--</option>
+                        <option value="other" id="secondary-dx-select-other">Other</option>
                     </select>
                     <label for="secondary-dx-other">If other, please specify</label>
                     <input type="text" name="secondary-dx-other" id="secondary-dx-other" disabled="true"/>
@@ -145,7 +145,7 @@
                     <input type="radio" name="suicide" id="other-obs-suicide-no"/>
                     
                 </fieldset>
-                <fieldset id="other-obs-other-concerns" onChange="setDependentDisabledState(this, 'fieldset[id=other-obs-other-concerns] input[id=other-obs-other-concerns-yes]', 'fieldset[id=other-obs-other-concerns] input[id=other-obs-other-concerns-specific]');">
+                <fieldset id="other-obs-other-concerns" onchange="setDependentDisabledState(this, 'fieldset[id=other-obs-other-concerns] input[id=other-obs-other-concerns-yes]', 'fieldset[id=other-obs-other-concerns] input[id=other-obs-other-concerns-specific]');">
                     <legend>Are there other concerns?</legend>
                     <label for="other-obs-other-concerns-yes">Yes
                         <input type="radio" name="other-concerns" id="other-obs-other-concerns-yes" value="y"/>
@@ -157,7 +157,7 @@
                         <input type="text" name="other-obs-other-concerns-specific" id="other-obs-other-concerns-specific" disabled="true"/>
                     </label>
                 </fieldset>
-                <fieldset id="other-obs-drugs" onChange="setDependentDisabledState(this, 'fieldset[id=other-obs-drugs] input[id=other-obs-drugs-yes]', 'fieldset[id=other-obs-drugs] input[id=other-obs-drugs-specific]');">
+                <fieldset id="other-obs-drugs" onchange="setDependentDisabledState(this, 'fieldset[id=other-obs-drugs] input[id=other-obs-drugs-yes]', 'fieldset[id=other-obs-drugs] input[id=other-obs-drugs-specific]');">
                     <legend>Concerns with alcohol or drugs?</legend>
                     <label for="other-obs-drugs-yes">Yes
                         <input type="radio" name="drugs" id="other-obs-drugs-yes" value="y"/>
@@ -192,7 +192,7 @@
             <fieldset id="treatment-details" class="tab-pane fade" role="tabpanel">
                 <legend>Treatment Details</legend>
                 <fieldset id="medication-1-fieldset">
-                    <input type="checkbox" name="medication-1" id="medication-1" value="y" onClick="setDependentDisabledState(this, undefined, ['fieldset[id=medication-1-name-quantity-set]', 'fieldset[id=medication-1-dosage-frequency-set]'], true, !this.checked);"/>
+                    <input type="checkbox" name="medication-1" id="medication-1" value="y" onclick="setDependentDisabledState(this, undefined, ['fieldset[id=medication-1-name-quantity-set]', 'fieldset[id=medication-1-dosage-frequency-set]'], true, !this.checked);"/>
                     <label for="medication-1" aria-label="medication #1">Medication #1 (FNM)</label>
                     <fieldset disabled="true" id="medication-1-name-quantity-set">
                         <label for="medication-1-name" aria-label="name">Name
@@ -212,7 +212,7 @@
                     </fieldset>
                 </fieldset>
                 <fieldset id="medication-2-fieldset">
-                    <input type="checkbox" name="medication-2" id="medication-2" value="y" onClick="setDependentDisabledState(this, undefined, ['fieldset[id=medication-2-name-quantity-set]', 'fieldset[id=medication-2-dosage-frequency-set]'], true, !this.checked);"/>
+                    <input type="checkbox" name="medication-2" id="medication-2" value="y" onclick="setDependentDisabledState(this, undefined, ['fieldset[id=medication-2-name-quantity-set]', 'fieldset[id=medication-2-dosage-frequency-set]'], true, !this.checked);"/>
                     <label for="medication-2" aria-label="medication #2">Medication #2 (FNM)</label>
                     <fieldset disabled="true" id="medication-2-name-quantity-set">
                         <label for="medication-2-name" aria-label="name">Name
@@ -232,7 +232,7 @@
                     </fieldset>
                 </fieldset>
                 <fieldset id="medication-3-fieldset">
-                    <input type="checkbox" name="medication-3" id="medication-3" value="y" onClick="setDependentDisabledState(this, undefined, ['fieldset[id=medication-3-name-quantity-set]', 'fieldset[id=medication-3-dosage-frequency-set]'], true, !this.checked);"/>
+                    <input type="checkbox" name="medication-3" id="medication-3" value="y" onclick="setDependentDisabledState(this, undefined, ['fieldset[id=medication-3-name-quantity-set]', 'fieldset[id=medication-3-dosage-frequency-set]'], true, !this.checked);"/>
                     <label for="medication-3" aria-label="medication #3">Medication #3 (FNM)</label>
                     <fieldset disabled="true" id="medication-3-name-quantity-set">
                         <label for="medication-3-name" aria-label="name">Name
@@ -252,7 +252,7 @@
                     </fieldset>
                 </fieldset>
                 <fieldset id="medication-4-fieldset">
-                    <input type="checkbox" name="medication-4" id="medication-4" value="y" onClick="setDependentDisabledState(this, undefined, ['fieldset[id=medication-4-name-quantity-set]', 'fieldset[id=medication-4-dosage-frequency-set]'], true, !this.checked);"/>
+                    <input type="checkbox" name="medication-4" id="medication-4" value="y" onclick="setDependentDisabledState(this, undefined, ['fieldset[id=medication-4-name-quantity-set]', 'fieldset[id=medication-4-dosage-frequency-set]'], true, !this.checked);"/>
                     <label for="medication-4" aria-label="medication #4">Medication #4 (FNM)</label>
                     <fieldset disabled="true" id="medication-4-name-quantity-set">
                         <label for="medication-4-name" aria-label="name">Name
@@ -272,7 +272,7 @@
                     </fieldset>
                 </fieldset>
                 <fieldset id="medication-5-fieldset">
-                    <input type="checkbox" name="medication-5" id="medication-5" value="y" onClick="setDependentDisabledState(this, undefined, ['fieldset[id=medication-5-name-quantity-set]', 'fieldset[id=medication-5-dosage-frequency-set]'], true, !this.checked);"/>
+                    <input type="checkbox" name="medication-5" id="medication-5" value="y" onclick="setDependentDisabledState(this, undefined, ['fieldset[id=medication-5-name-quantity-set]', 'fieldset[id=medication-5-dosage-frequency-set]'], true, !this.checked);"/>
                     <label for="medication-5" aria-label="medication #5">Medication #5 (FNM)</label>
                     <fieldset disabled="true" id="medication-5-name-quantity-set">
                         <label for="medication-5-name" aria-label="name">Name
@@ -294,7 +294,7 @@
                 <label for="number-of-days" class="">Period for medications (days)
                     <input type="number" name="number-of-days" id="number-of-days" min="1" max="1000"/>
                 </label>
-                <fieldset id="same-drug-delivered" onChange="setDependentDisabledState(this, 'fieldset[id=same-drug-delivered] input[id=same-drug-delivered-no]', 'fieldset[id=same-drug-delivered] input[id=same-drug-not-delivered]');">
+                <fieldset id="same-drug-delivered" onchange="setDependentDisabledState(this, 'fieldset[id=same-drug-delivered] input[id=same-drug-delivered-no]', 'fieldset[id=same-drug-delivered] input[id=same-drug-not-delivered]');">
                     <legend>Was the same drug delivered / administered?</legend>
                     <label for="same-drug-delivered-yes">Yes
                         <input type="radio" name="same-drug-delivered" id="same-drug-delivered-yes" value="y"/>

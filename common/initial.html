@@ -21,7 +21,7 @@
         /*temporarily put bootstrap.min.css here when testing form in HFE*/
     </style>
         
-    <form autocomplete="off" class="" id="htmlform">
+    <form autocomplete="off" class="" id="htmlform" onsubmit="submitHtmlForm(); return false;">
         <div class="sticky-top bg-white d-flex flex-column">
             <h1 class="bg-primary d-flex justify-content-center">Patient's Process - Mental Health</h1>
             <div class="d-flex flex-row justify-content-around m-2">
@@ -174,13 +174,12 @@
                 </span>
                 <label for="homeless-status" aria-label="homelessness status" class="d-block">Homeless
                     </label>
-                    <fieldset id="homeless-status">
-                        
+                    <fieldset data-concept-id="23703" id="homeless-status">
                             
-                            <input type="radio" name="homeless" value="homeless-yes" id="homeless-yes"/>
+                            <input data-concept-id="1065" type="radio" name="homeless" value="homeless-yes" id="homeless-yes"/>
                             <label for="homeless-yes" aria-label="homeless">Yes</label>
                             
-                            <input type="radio" name="homeless" value="homeless-no" id="homeless-no"/>
+                            <input data-concept-id="1066" type="radio" name="homeless" value="homeless-no" id="homeless-no"/>
                             <label for="homeless-no" aria-label="has home">No</label>
                     </fieldset>
                 
@@ -352,13 +351,13 @@
                     <input type="radio" name="patient-history-other-chronic-diseases" id="patient-history-other-chronic-diseases-np" value="np" checked="true"/>
 
                     <label for="patient-history-other-chronic-diseases-yes">Yes</label>
-                    <input type="radio" name="other-chronic-diseases" id="patient-history-other-chronic-diseases-yes" value="y"/>
+                    <input type="radio" name="patient-history-other-chronic-diseases" id="patient-history-other-chronic-diseases-yes" value="y"/>
                     
                     <label for="patient-history-other-chronic-diseases-no">No</label>
-                    <input type="radio" name="other-chronic-diseases" id="patient-history-other-chronic-diseases-no" value="n"/>
+                    <input type="radio" name="patient-history-other-chronic-diseases" id="patient-history-other-chronic-diseases-no" value="n"/>
                     
                     <label for="patient-history-other-chronic-diseases-unknown">Unknown</label>
-                    <input type="radio" name="other-chronic-diseases" id="patient-history-other-chronic-diseases-unknown" value="u"/>
+                    <input type="radio" name="patient-history-other-chronic-diseases" id="patient-history-other-chronic-diseases-unknown" value="u"/>
                     
                     <div>
                         <label for="patient-history-other-chronic-diseases-specific">If yes, specify</label>

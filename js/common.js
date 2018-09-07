@@ -406,6 +406,11 @@ function initializeLocalStore(clear){
 
 function setMemberByType(src, dest, control)
 {
+    //don't set disabled controls
+    if(control.disabled){
+        return;
+    }
+
     if(control instanceof HTMLInputElement || control instanceof HTMLTextAreaElement) {
         switch(control.type){
             case "checkbox":
@@ -727,6 +732,18 @@ $(document).ready(
 
             //by setting onreset using attr(), the html will show onreset="setAllDisabledStates();" (in recent chrome at least)
             form.attr("onreset", "setAllDisabledStates();");
+
+            var onsubmitStr = form.attr("onsubmit");
+
+            //inject localStorage reset to onsubmit string
+            
+            //regex for "; return"
+            var endOfExpressionBeforeReturn = onsubmitStr.search("(; return)");
+
+            //substring?
+            //var expressionsSplit = endOfExpressionBeforeReturn.split(" ");
+            
+            //onsubmitStr.replace("(; return)", expressionsSplit[0] + " initializeInputValuePersistence(reset=true); " + expressionsSplit[1]);
             
             loadLocalSiteInfo(true);
         }

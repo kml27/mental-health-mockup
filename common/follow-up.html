@@ -129,8 +129,14 @@
                 <label for="symptom-assessment-audit" class="">AUDIT (Alcohol)
                     <input type="number" name="symptom-assessment-audit" id="symptom-assessment-audit" min="0" max="40"/>
                 </label>
-                <label for="symptom-assessment-gravity" class="">General Gravity (1=Light; 2=Moderate; 3=Serious; 4=Deep)
-                    <input type="number" name="symptom-assessment-gravity" id="symptom-assessment-gravity" min="1" max="4"/>
+                <label for="symptom-assessment-gravity" class="">General Gravity
+                    <select data-concept-id="23772" name="symptom-assessment-gravity" id="symptom-assessment-gravity">
+                        <option data-concept-id="23773" value="light"> 1 - Light </option>
+                        <option data-concept-id="1384" value="moderate"> 2 - Moderate </option>
+                        <option data-concept-id="23774" value="serious"> 3 - Serious </option>
+                        <option data-concept-id="23775" value="deep"> 4 - Deep </option>
+                    </select>
+                    
                 </label>
             </fieldset>
 

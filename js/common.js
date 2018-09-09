@@ -739,12 +739,12 @@ $(document).ready(
                 //should use hfe (why is there no aftersubmit?) beforesubmit
                 beforeSubmit[beforeSubmit.length] = function resetLocalStorageAfterValidation(){initializeInputValuePersistence(reset=true)};
             }*/
-            var originalSubmitFn = form.submit;
+            var originalSubmitFn = form[0].submit;
 
-            form.submit = function(){
+            form[0].submit = function(){
                 $.ajax({ 
                     type: form.attr("method"),
-                    url: form.attr("action") || href.location,
+                    url: form.attr("action") || window.location.href,
                     data: $(this).serialize(),
                     success: function clearLocalStorageOnSuccesfulSubmission(){
                                 initializeInputValuePersistence(reset=true);

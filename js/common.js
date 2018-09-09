@@ -587,6 +587,8 @@ function initializeInputValuePersistence(reset=false){
 
 }
 
+var originalSubmitFn = null;
+
 $(document).ready( 
     function () {
 
@@ -733,18 +735,23 @@ $(document).ready(
             //by setting onreset using attr(), the html will show onreset="setAllDisabledStates();" (in recent chrome at least)
             form.attr("onreset", "setAllDisabledStates();");
 
-            var onsubmitStr = form.attr("onsubmit");
+            /*if(beforeSubmit && Array.isArray(beforeSubmit)){
+                //should use hfe (why is there no aftersubmit?) beforesubmit
+                beforeSubmit[beforeSubmit.length] = function resetLocalStorageAfterValidation(){initializeInputValuePersistence(reset=true)};
+            }*/
+            var originalSubmitFn = form.submit;
 
-            //inject localStorage reset to onsubmit string
-            
-            //regex for "; return"
-            var endOfExpressionBeforeReturn = onsubmitStr.search("(; return)");
+            form.submit = function(){
+                $.ajax({ 
+                    type: form.attr("method"),
+                    url: form.attr("action") || href.location,
+                    data: $(this).serialize(),
+                    success: function clearLocalStorageOnSuccesfulSubmission(){
+                                initializeInputValuePersistence(reset=true);
+                    }
+                });
+            };
 
-            //substring?
-            //var expressionsSplit = endOfExpressionBeforeReturn.split(" ");
-            
-            //onsubmitStr.replace("(; return)", expressionsSplit[0] + " initializeInputValuePersistence(reset=true); " + expressionsSplit[1]);
-            
             loadLocalSiteInfo(true);
         }
 

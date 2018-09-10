@@ -742,35 +742,25 @@ $(document).ready(
             var originalSubmitFn = form[0].submit;
 
             form[0].submit = function(){
+                var xhr = new XMLHttpRequest();
+                xhr.onreadystatechange = function(e) {
+                    if (xhr.status == 302 && xhr.readyState == 4) {
+                        console.log(xhr.responseURL);
+                                                        
+                        if (window.location.href != xhr.responseURL) {
+                            
+                            initializeInputValuePersistence(reset=true);
 
-                if(fetch){
-                    fetch( form.attr("action") || window.location.href, 
-                    {   type: form.attr("method"),
-                        mode: "same-origin",
-                        credentials: "same-origin",
-                        redirect: "follow",
-                        body: new FormData(this),
-                    })
-                    .then(
-                    function clearLocalStorageOnSuccesfulSubmission(data, statusMsg, xhr){
-                        initializeInputValuePersistence(reset=true);
-                    });
-                } else {
-                    /*$.ajax({ 
-                        type: form.attr("method"),
-                        url: form.attr("action") || window.location.href,
-                        data: $(this).serialize(),
-                        success: function clearLocalStorageOnSuccesfulSubmission(data, statusMsg, xhr){
-                                    
-                                    xhr.done()
-                                    initializeInputValuePersistence(reset=true);
-    
-                                    
-                        }
-                    });*/
+                            window.location.href = xhr.responseURL;
+                        } 
+                    }
                 }
+                xhr.open("POST", window.location.href, true);
+                xhr.send($(this).serialize());
+                
             };
 
+                
             loadLocalSiteInfo(true);
         }
 

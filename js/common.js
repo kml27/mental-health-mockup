@@ -746,8 +746,12 @@ $(document).ready(
                     type: form.attr("method"),
                     url: form.attr("action") || window.location.href,
                     data: $(this).serialize(),
-                    success: function clearLocalStorageOnSuccesfulSubmission(){
+                    success: function clearLocalStorageOnSuccesfulSubmission(data, statusMsg, xhr){
+                                
                                 initializeInputValuePersistence(reset=true);
+
+                                var redirectURL = xhr.getResponseHeader("Location");
+                                window.location.href = redirectURL;
                     }
                 });
             };

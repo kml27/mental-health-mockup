@@ -739,27 +739,35 @@ $(document).ready(
                 //should use hfe (why is there no aftersubmit?) beforesubmit
                 beforeSubmit[beforeSubmit.length] = function resetLocalStorageAfterValidation(){initializeInputValuePersistence(reset=true)};
             }*/
-            var originalSubmitFn = form[0].submit;
+            form[0].originalSubmitFn = form[0].submit;
 
             form[0].submit = function(){
                 var xhr = new XMLHttpRequest();
                 xhr.onreadystatechange = function(e) {
-                    if (xhr.status == 302 && xhr.readyState == 4) {
-                        console.log(xhr.responseURL);
-                                                        
+                    console.log(xhr.status, xhr.responseURL);
+                    if (xhr.readyState == 4) {
+
                         if (window.location.href != xhr.responseURL) {
                             
                             initializeInputValuePersistence(reset=true);
 
-                            window.location.href = xhr.responseURL;
-                        } 
+                            //window.location.href = xhr.responseURL;
+                        }
+                        //else {
+                        
+                        form[0].originalSubmitFn();
+                        
+                        //}
+                        
                     }
+
                 }
+                xhr.withCredentials = true;
                 xhr.open("POST", window.location.href, true);
-                xhr.send($(this).serialize());
+                
+                xhr.send(new FormData(form[0]));
                 
             };
-
                 
             loadLocalSiteInfo(true);
         }

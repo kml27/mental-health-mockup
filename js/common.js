@@ -742,18 +742,33 @@ $(document).ready(
             var originalSubmitFn = form[0].submit;
 
             form[0].submit = function(){
-                $.ajax({ 
-                    type: form.attr("method"),
-                    url: form.attr("action") || window.location.href,
-                    data: $(this).serialize(),
-                    success: function clearLocalStorageOnSuccesfulSubmission(data, statusMsg, xhr){
-                                
-                                initializeInputValuePersistence(reset=true);
 
-                                var redirectURL = xhr.getResponseHeader("Location");
-                                window.location.href = redirectURL;
-                    }
-                });
+                if(fetch){
+                    fetch( form.attr("action") || window.location.href, 
+                    {   type: form.attr("method"),
+                        mode: "same-origin",
+                        credentials: "same-origin",
+                        redirect: "follow",
+                        body: new FormData(this),
+                    })
+                    .then(
+                    function clearLocalStorageOnSuccesfulSubmission(data, statusMsg, xhr){
+                        initializeInputValuePersistence(reset=true);
+                    });
+                } else {
+                    /*$.ajax({ 
+                        type: form.attr("method"),
+                        url: form.attr("action") || window.location.href,
+                        data: $(this).serialize(),
+                        success: function clearLocalStorageOnSuccesfulSubmission(data, statusMsg, xhr){
+                                    
+                                    xhr.done()
+                                    initializeInputValuePersistence(reset=true);
+    
+                                    
+                        }
+                    });*/
+                }
             };
 
             loadLocalSiteInfo(true);

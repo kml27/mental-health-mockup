@@ -715,6 +715,15 @@ $(document).ready(
                     datepicker.css("top", position);
             });
 
+            ///$("a[onclick^='handleDeleteButton']").on("click",
+            //function bringDeleteToFront(){
+                var deletePopup = $("[id=confirmDeleteFormPopup]");
+                if(deletePopup) {
+                    deletePopup.css("z-index", 1000000);
+                }
+            //});
+            
+
             if( settings.dev=="true" ) {
 
                 $("input").toArray().forEach(function(elem){ $(elem).css("background-color", $(elem).attr("data-concept-id")?"green":"red")});

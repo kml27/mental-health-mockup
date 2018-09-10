@@ -587,6 +587,8 @@ function initializeInputValuePersistence(reset=false){
 
 }
 
+var originalSubmitFn = null;
+
 $(document).ready( 
     function () {
 
@@ -733,18 +735,45 @@ $(document).ready(
             //by setting onreset using attr(), the html will show onreset="setAllDisabledStates();" (in recent chrome at least)
             form.attr("onreset", "setAllDisabledStates();");
 
-            var onsubmitStr = form.attr("onsubmit");
+            //store original submit function
+            form[0].originalSubmitFn = form[0].submit;
 
-            //inject localStorage reset to onsubmit string
-            
-            //regex for "; return"
-            var endOfExpressionBeforeReturn = onsubmitStr.search("(; return)");
+            //"monkey-patch" submit function
+            form[0].submit = function(){
+                
+                //use xhr to detect redirect
+                var xhr = new XMLHttpRequest();
+                xhr.onreadystatechange = function(e) {
+                    
+                    //wait for DONE state
+                    //console.log(xhr.status, xhr.responseURL);
+                    if (xhr.readyState == 4) {
+                        
+                        //if the final location differs from the current location,
+                        //the submit succeeded and we got a redirect
+                        if (window.location.href != xhr.responseURL) {
+                            
+                            initializeInputValuePersistence(reset=true);
 
-            //substring?
-            //var expressionsSplit = endOfExpressionBeforeReturn.split(" ");
-            
-            //onsubmitStr.replace("(; return)", expressionsSplit[0] + " initializeInputValuePersistence(reset=true); " + expressionsSplit[1]);
-            
+                            //update the window location url
+                            window.location.href = xhr.responseURL;
+                        } else {
+                            //may not be the most effecient impl. (might be... can't set document.documentElement)
+                            //if not, call the old submit to get the error response in a way the user will see
+                            form[0].originalSubmitFn();
+                        }
+                        
+                    }
+
+                }
+
+                xhr.withCredentials = true;
+                xhr.open("POST", window.location.href, true);
+                
+                xhr.send(new FormData(form[0]));
+                
+            };
+                
             loadLocalSiteInfo(true);
         }
 

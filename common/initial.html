@@ -125,8 +125,8 @@
                 <div>
                     <span class="d-flex ">
                         <label for="patient-details-patient-name" class="">mentalhealth.form.initial.patient.names</label>
-                        <input type="text" id="patient-details-patient-name" name="patient-details-patient-name"  class="form-control" disabled="true"/>
-                        <span id="template-rendered-patient-name" data-target-id="patient-details-patient-name" hidden="true"><lookup expression="patient.personName"/></span>
+                        <input type="text" data-lookup-expression="patient.personName" id="patient-details-patient-name" name="patient-details-patient-name"  class="form-control" disabled="true"/>
+                        <!--<span id="template-rendered-patient-name" data-target-id="patient-details-patient-name" hidden="true"><lookup expression="patient.personName"/></span>-->
                     </span>
                     <fieldset id="patient-details-gender" class="" disabled="true">
                         <label class="">mentalhealth.form.initial.patient.sex</label>

@@ -587,6 +587,95 @@ function initializeInputValuePersistence(reset=false){
 
 }
 
+var drugList = {
+            "uuid":"name",
+            "uuid2":"name2",
+            "uuid212":"name212"
+        
+        }
+
+function addDrugsToDrugSelects(){
+    var drugListOptions = [];
+
+    $.each(drugList, function( k,v){
+        drugListOptions.push("<option data-concept-id=\"" + k + "\" value="+k+"\">" + v + "</option>");
+    });
+
+    var drugListOptionsHtml = drugListOptions.join('');
+
+    $("select.drug-list").html(drugListOptionsHtml);
+
+}
+
+function closeTypeAhead(parent){
+    var list = $(`[id=${$(parent).attr("id")}-typeahead]`)[0];
+
+    if(list) {
+        list.parentNode.removeChild(list);
+    }
+}
+
+function addTypeAheadToDrugInput(){
+    var inputRequiresTypeAhead = $("input.drug-list");
+
+    inputRequiresTypeAhead.attr("autocomplete", "off");
+    
+    for(input of inputRequiresTypeAhead){
+       
+        var updatingValue = false;
+
+        inputRequiresTypeAhead.on("input", function() {
+            
+            closeTypeAhead(this);
+
+            //this will only occur on subsequent calls from the click event of one of the items
+            if(updatingValue){
+                updatingValue = false;
+                return;
+            }
+
+            var input = this;
+            typeAheadListDiv = document.createElement("DIV");
+            var typeAheadId = inputRequiresTypeAhead.attr("id")+"-typeahead"
+            typeAheadListDiv.setAttribute("id", typeAheadId);
+            typeAheadListDiv.setAttribute("class", "typeahead-list");
+            var jqTALD = $(typeAheadListDiv);
+
+            var divList = [];
+            for(drugKey of Object.keys(drugList)){
+                var drugValue = drugList[drugKey]
+                if( this.value == drugValue.substr(0, this.value.length) ){
+                    divList.push(`<div class="typeahead-list-item" id="${typeAheadId}-${drugKey} data-uuid="${drugKey}">${drugValue}</div>`);
+                }
+            }
+            var divHtml = divList.join('');
+            
+            jqTALD.html(divHtml)
+            jqTALD.insertAfter(this);
+
+            var items = $(".typeahead-list-item");
+            items.on("click", function(e){
+                //e.preventDefault();
+                input.value = this.textContent;
+                closeTypeAhead(input);
+                var inputEvent = new Event("input");
+                updatingValue = true;
+                input.dispatchEvent(inputEvent);
+            });
+        });
+         
+        inputRequiresTypeAhead.on("keydown", function(){
+
+        });
+
+        inputRequiresTypeAhead.on("blur", function(){
+            //closeTypeAhead(this);
+        })
+    }
+
+
+}
+
 var originalSubmitFn = null;
 
 $(document).ready( 
@@ -782,7 +871,9 @@ $(document).ready(
                 xhr.send(new FormData(form[0]));
                 
             };
-                
+            
+            addTypeAheadToDrugInput();
+
             loadLocalSiteInfo(true);
         }
 

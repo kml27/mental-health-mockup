@@ -849,7 +849,7 @@ $(document).ready(
             //"monkey-patch" submit function
             form[0].submit = function(){
                 
-                var progress = document.createElement("DIV");
+                var progress = $(document.createElement("DIV"));
                 progress.attr("class", "progress-bar progress-bar-striped progress-bar-animated");
                 progress.attr("role", "progressbar");
                 

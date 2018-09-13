@@ -870,7 +870,8 @@ $(document).ready(
                 var xhr = new XMLHttpRequest();
                 xhr.onreadystatechange = function(e) {
                     
-                    progress.attr("aria-valuenow", String(100/Number(xhr.readyState)));
+                    var progressValue = String(100/Number(xhr.readyState))
+                    progress.attr("aria-valuenow", progressValue);
 
                     //wait for DONE state
                     //console.log(xhr.status, xhr.responseURL);

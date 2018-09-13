@@ -772,7 +772,7 @@ $(document).ready(
                 if(targetControl.type == "date"){
                     try {
                         value = new Date(value).toISOString().split("T")[0];
-                    } catch {
+                    } catch (e) {
                         value = "";
                     }
                 } else if( targetControl instanceof HTMLFieldSetElement) {

@@ -863,7 +863,7 @@ $(document).ready(
                 progress.css("transform", "translate(-50%, -50%)");
                 progress.css("width", "75%");
                 
-                $("#htmlform").insertAfter(progress);
+                progress.insertAfter("#section-tabs");
 
                 //use xhr to detect redirect
                 var xhr = new XMLHttpRequest();
@@ -888,7 +888,7 @@ $(document).ready(
                             //if not, call the old submit to get the error response in a way the user will see
                             form[0].originalSubmitFn();
 
-                            $("#htmlform").removeChild(progress);
+                            //$("#htmlform").removeChild(progress);
                         }
                         
                         

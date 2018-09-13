@@ -853,11 +853,15 @@ $(document).ready(
                 progress.attr("class", "progress-bar progress-bar-striped progress-bar-animated");
                 progress.attr("role", "progressbar");
                 
+                progress.attr("aria-valuenow", "0");
+                progress.attr("aria-valuemin", "0");
+                progress.attr("aria-valuemax", "100");
+
                 progress.css("z-index", "1000000");
                 /*progress.css("top", "50%");
                 progress.css("left", "50%");
                 progress.css("transform", "translate(-50%, -50%)");*/
-                progress.css("width", "0%");
+                progress.css("width", "75%");
                 progress.css("height", "50px");
                 
                 progress.insertAfter("#section-tabs");

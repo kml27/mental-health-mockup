@@ -849,10 +849,28 @@ $(document).ready(
             //"monkey-patch" submit function
             form[0].submit = function(){
                 
+                var progress = document.createElement("DIV");
+                progress.attr("class", "progress-bar progress-bar-striped progress-bar-animated");
+                progress.attr("role", "progressbar");
+                
+                progress.attr("aria-valuenow", "0");
+                progress.attr("aria-valuemin", "0");
+                progress.attr("aria-valuemax", "100");
+
+                progress.css("z-index", "1000000");
+                progress.css("top", "50%");
+                progress.css("left", "50%");
+                progress.css("transform", "translate(-50%, -50%)");
+                progress.css("width", "75%");
+                
+                $("#htmlform").insertAfter(progress);
+
                 //use xhr to detect redirect
                 var xhr = new XMLHttpRequest();
                 xhr.onreadystatechange = function(e) {
                     
+                    progress.attr("aria-valuenow", String(100/Number(xhr.readyState)));
+
                     //wait for DONE state
                     //console.log(xhr.status, xhr.responseURL);
                     if (xhr.readyState == 4) {
@@ -869,7 +887,10 @@ $(document).ready(
                             //may not be the most effecient impl. (might be... can't set document.documentElement)
                             //if not, call the old submit to get the error response in a way the user will see
                             form[0].originalSubmitFn();
+
+                            $("#htmlform").removeChild(progress);
                         }
+                        
                         
                     }
 

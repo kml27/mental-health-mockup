@@ -437,6 +437,16 @@ function setMemberByType(src, dest, control)
             dest.value= src[src.selectedIndex].value;
         }
     }
+
+//trigger setDependentDisabledState handlers
+
+    if(String(control.onchange).search("setDependentDisabledState")!=-1 ){
+        control.onchange();
+    }
+
+    if(String(control.onclick).search("setDependentDisabledState")!=-1){
+        control.onclick();
+    }
 }
 
 function versionedDataStore(datastore, control){

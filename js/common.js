@@ -882,6 +882,9 @@ $(document).ready(
                 
             };
             
+            var discardLink = $("[id=discardLinkSpan] a[class=html-form-entry-discard-changes]");
+            discardLink.on("click", function(event) {confirmReset(event);} )
+
             addTypeAheadToDrugInput();
 
             loadLocalSiteInfo(true);

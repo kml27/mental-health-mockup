@@ -858,10 +858,11 @@ $(document).ready(
                 progress.attr("aria-valuemax", "100");
 
                 progress.css("z-index", "1000000");
-                progress.css("top", "50%");
+                /*progress.css("top", "50%");
                 progress.css("left", "50%");
-                progress.css("transform", "translate(-50%, -50%)");
+                progress.css("transform", "translate(-50%, -50%)");*/
                 progress.css("width", "75%");
+                progress.css("height", "50px");
                 
                 progress.insertAfter("#section-tabs");
 

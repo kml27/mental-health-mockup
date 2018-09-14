@@ -407,7 +407,7 @@ function initializeLocalStore(clear){
 function setMemberByType(src, dest, control)
 {
     //don't set disabled controls
-    if(control.disabled){
+    if(control.disabled || dest == undefined){
         return;
     }
 
@@ -436,6 +436,16 @@ function setMemberByType(src, dest, control)
         else {
             dest.value= src[src.selectedIndex].value;
         }
+    }
+
+//trigger setDependentDisabledState handlers
+
+    if(String(control.onchange).search("setDependentDisabledState")!=-1 ){
+        control.onchange();
+    }
+
+    if(String(control.onclick).search("setDependentDisabledState")!=-1){
+        control.onclick();
     }
 }
 
@@ -839,10 +849,30 @@ $(document).ready(
             //"monkey-patch" submit function
             form[0].submit = function(){
                 
+                var progress = $(document.createElement("DIV"));
+                progress.attr("class", "progress-bar progress-bar-striped progress-bar-animated");
+                progress.attr("role", "progressbar");
+                
+                progress.attr("aria-valuenow", "0");
+                progress.attr("aria-valuemin", "0");
+                progress.attr("aria-valuemax", "100");
+
+                progress.css("z-index", "1000000");
+                /*progress.css("top", "50%");
+                progress.css("left", "50%");
+                progress.css("transform", "translate(-50%, -50%)");*/
+                progress.css("width", "75%");
+                progress.css("height", "50px");
+                
+                progress.insertAfter("#section-tabs");
+
                 //use xhr to detect redirect
                 var xhr = new XMLHttpRequest();
                 xhr.onreadystatechange = function(e) {
                     
+                    var progressValue = String(100*Number(xhr.readyState/4))
+                    progress.attr("width", `${progressValue}%`);
+
                     //wait for DONE state
                     //console.log(xhr.status, xhr.responseURL);
                     if (xhr.readyState == 4) {
@@ -859,7 +889,10 @@ $(document).ready(
                             //may not be the most effecient impl. (might be... can't set document.documentElement)
                             //if not, call the old submit to get the error response in a way the user will see
                             form[0].originalSubmitFn();
+
+                            //$("#htmlform").removeChild(progress);
                         }
+                        
                         
                     }
 
@@ -872,6 +905,9 @@ $(document).ready(
                 
             };
             
+            var discardLink = $("[id=discardLinkSpan] a[class=html-form-entry-discard-changes]");
+            discardLink.on("click", function(event) {confirmReset(event);} )
+
             addTypeAheadToDrugInput();
 
             loadLocalSiteInfo(true);

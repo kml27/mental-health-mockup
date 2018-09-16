@@ -828,87 +828,69 @@ function addDxsToDxsSelects(){
 
     var dxsListOptionsHtml = dxsListOptions.join('');
 
-    $("select.dxs-list").html(dxsListOptionsHtml);
+    $("select.primary-dx-list").html(dxsListOptionsHtml);
+    $("select.secondary-dx-list").html(dxsListOptionsHtml);
 
 }
 
 var fnmList = {
-		"7-D-1": { "drug": "CARBAMAZEPINA", "drugUuid": "e1d6bb14-1d5f-11e0-b929-000c29ad1d07", "dosage": "200mg", "dosageUuid": "4c8b32db-acc4-4a59-802a-05d921315260" },
-		"7-D-2": { "drug": "CLONAZEPAM", "drugUuid": "47031dcc-3f84-4711-9b72-359630f53bca", "dosage": "2mg", "dosageUuid": "98fb063d-159d-4236-bc58-4b2b692b2687" },
-		"7-D-4": { "drug": "FENITOINA", "drugUuid": "e1d0616a-1d5f-11e0-b929-000c29ad1d07", "dosage": "100mg", "dosageUuid": "12a7ea29-6824-4098-8350-2113a764b7a0" },
-		"7-D-6": { "drug": "FENOBARBITAL", "drugUuid": "e1d0301e-1d5f-11e0-b929-000c29ad1d07", "dosage": "100mg", "dosageUuid": "12a7ea29-6824-4098-8350-2113a764b7a0" },
-		"7-D-7": { "drug": "FENOBARBITAL", "drugUuid": "e1d0301e-1d5f-11e0-b929-000c29ad1d07", "dosage": "15mg", "dosageUuid": "b99eed61-8e68-4161-b041-c776d0b1652e" },
-		"7-D-11": { "drug": "LAMOTRIGINA", "drugUuid": "60aa53f5-5c00-4655-bba9-595e9e94e307", "dosage": "50mg", "dosageUuid": "431d2f8e-6d78-4bdb-a46d-f790a5d54501" },
-		"7-D-12": { "drug": "TOPIRAMATO", "drugUuid": "12b4e538-3a81-4104-88a3-2d3c9d788f53", "dosage": "100mg", "dosageUuid": "12a7ea29-6824-4098-8350-2113a764b7a0" },
-		"7-D-13": { "drug": "VALPROATO DE SODIO", "drugUuid": "004e305a-7401-4bdb-8460-300e781313f8", "dosage": "200mg", "dosageUuid": "4c8b32db-acc4-4a59-802a-05d921315260" },
-		"7-D-14": { "drug": "VALPROATO DE SODIO", "drugUuid": "004e305a-7401-4bdb-8460-300e781313f8", "dosage": "200mg/5ml", "dosageUuid": "7bc69e34-9cea-434c-a220-1cfb6eb91803" },
-		"7-F-1": { "drug": "BIPERIDENO [NEEDS CLARIFICATION]", "drugUuid": "UNKNOWN", "dosage": "2mg", "dosageUuid": "98fb063d-159d-4236-bc58-4b2b692b2687" },
-		"7-F-2": { "drug": "BIPERIDENO (AKINETON) [NEEDS CLARIFICATION]", "drugUuid": "UNKNOWN", "dosage": "5mg/ml", "dosageUuid": "7c1bcb18-a292-44a6-90a2-532f907c4100" },
-		"13-A-2": { "drug": "CLORFENIRAMINA", "drugUuid": "e1d6b3b2-1d5f-11e0-b929-000c29ad1d07", "dosage": "4mg", "dosageUuid": "d7ccee2b-2b93-4063-a31f-0145608a131d" },
-		"13-A-3": { "drug": "CLORFENIRAMINA", "drugUuid": "e1d6b3b2-1d5f-11e0-b929-000c29ad1d07", "dosage": "2mg/5ml", "dosageUuid": "aa685a66-4978-46e1-910e-c7b78e964231" },
-		"13-A-4": { "drug": "DIFENIDRAMINA", "drugUuid": "e1d6bc22-1d5f-11e0-b929-000c29ad1d07", "dosage": "50mg/ml", "dosageUuid": "71bc504b-63d4-480c-9d2c-660d9b4f6ffc" },
-		"13-A-5": { "drug": "PROMETAZINA", "drugUuid": "e1d4b4a4-1d5f-11e0-b929-000c29ad1d07", "dosage": "10mg", "dosageUuid": "0a79cea9-3fc1-42b3-a247-ebcc746ad003" },
-		"13-A-7": { "drug": "PROMETAZINA", "drugUuid": "e1d4b4a4-1d5f-11e0-b929-000c29ad1d07", "dosage": "50mg/2ml", "dosageUuid": "6edca76e-5657-4e0f-9ad4-b9c4b905bc96" },
-		"7-G-1": { "drug": "AMITRIPTILINA", "drugUuid": "e1d6c6ae-1d5f-11e0-b929-000c29ad1d07", "dosage": "10mg", "dosageUuid": "0a79cea9-3fc1-42b3-a247-ebcc746ad003" },
-		"7-G-2": { "drug": "AMITRIPTILINA", "drugUuid": "e1d6c6ae-1d5f-11e0-b929-000c29ad1d07", "dosage": "25mg", "dosageUuid": "bca695b6-4172-4cf1-8829-72306ac9a1d8" },
-		"7-G-3": { "drug": "FLUOXETINA HCL", "drugUuid": "0841741e-bd0f-4370-8440-66a6bc95c941", "dosage": "20mg", "dosageUuid": "435761ad-a501-4a69-bb64-23f57a8c8fb7" },
-		"7-G-4": { "drug": "IMIPRAMINA", "drugUuid": "696221a6-3405-4b48-ab17-be36c0a2acd2", "dosage": "25mg", "dosageUuid": "bca695b6-4172-4cf1-8829-72306ac9a1d8" },
-		"7-G-6": { "drug": "MAPROTILINA", "drugUuid": "8a3c2ae9-a83a-4dd1-97ba-d66c758f813f", "dosage": "25mg", "dosageUuid": "bca695b6-4172-4cf1-8829-72306ac9a1d8" },
-		"7-G-7": { "drug": "PAROXETINA", "drugUuid": "c24b5049-5a79-4a77-939d-e04e93cb9168", "dosage": "20mg", "dosageUuid": "435761ad-a501-4a69-bb64-23f57a8c8fb7" },
-		"7-I-4": { "drug": "CLORDIAZEPOXIDO", "drugUuid": "5858d9fb-f9f9-45b8-a2c4-26cb8cf478dc", "dosage": "10mg", "dosageUuid": "0a79cea9-3fc1-42b3-a247-ebcc746ad003" },
-		"7-I-5": { "drug": "DIAZEPAM", "drugUuid": "e1d039ba-1d5f-11e0-b929-000c29ad1d07", "dosage": "2mg", "dosageUuid": "98fb063d-159d-4236-bc58-4b2b692b2687" },
-		"7-I-6": { "drug": "DIAZEPAM", "drugUuid": "e1d039ba-1d5f-11e0-b929-000c29ad1d07", "dosage": "10mg", "dosageUuid": "0a79cea9-3fc1-42b3-a247-ebcc746ad003" },
-		"7-I-7": { "drug": "DIAZEPAM", "drugUuid": "e1d039ba-1d5f-11e0-b929-000c29ad1d07", "dosage": "10mg/2ml", "dosageUuid": "07e5dc44-9307-439a-8f4f-ef8c2fccd021" },
-		"7-J-1": { "drug": "CLORPROMAZINA", "drugUuid": "77bf686f-4920-47d9-b448-8b1ef0c8e4c8", "dosage": "25mg", "dosageUuid": "bca695b6-4172-4cf1-8829-72306ac9a1d8" },
-		"7-J-2": { "drug": "CLORPROMAZINA", "drugUuid": "77bf686f-4920-47d9-b448-8b1ef0c8e4c8", "dosage": "100mg", "dosageUuid": "12a7ea29-6824-4098-8350-2113a764b7a0" },
-		"7-J-3": { "drug": "CLORPROMAZINA", "drugUuid": "77bf686f-4920-47d9-b448-8b1ef0c8e4c8", "dosage": "25mg/2ml", "dosageUuid": "0b812064-fca3-4d74-b4fb-aed971b7d971" },
-		"7-J-4": { "drug": "FLUFENAZINA", "drugUuid": "a9529dce-4feb-4463-a1e6-446bccc0651d", "dosage": "2,5mg", "dosageUuid": "ae11b066-9fb8-45bd-8151-9771c53a42de" },
-		"7-J-5": { "drug": "DECANOATO DE FLUFENAZINA (MODECATE) [NEEDS CLARIFICATION]", "drugUuid": "UNKNOWN", "dosage": "25mg/2ml", "dosageUuid": "0b812064-fca3-4d74-b4fb-aed971b7d971" },
-		"7-J-6": { "drug": "HALOPERIDOL", "drugUuid": "d5958d7f-d54a-4046-b448-45db947e4b40", "dosage": "5mg", "dosageUuid": "d3e814d5-df91-4b9e-b7a3-ca46f8c2696e" },
-		"7-J-7": { "drug": "HALOPERIDOL", "drugUuid": "d5958d7f-d54a-4046-b448-45db947e4b40", "dosage": "5mg/1ml", "dosageUuid": "UNKNOWN" },
-		"7-J-9": { "drug": "TIORIDAZINA", "drugUuid": "824bf028-69f5-4663-a489-1817fe6134dd", "dosage": "10mg", "dosageUuid": "0a79cea9-3fc1-42b3-a247-ebcc746ad003" },
-		"7-J-10": { "drug": "TIORIDAZINA", "drugUuid": "824bf028-69f5-4663-a489-1817fe6134dd", "dosage": "100mg", "dosageUuid": "12a7ea29-6824-4098-8350-2113a764b7a0" },
-		"7-J-11": { "drug": "TRIFLUORPERAZINA", "drugUuid": "0bfdf410-2d6d-40a0-b697-13667d0a0c4a", "dosage": "5mg", "dosageUuid": "d3e814d5-df91-4b9e-b7a3-ca46f8c2696e" },
-		"7-J-15": { "drug": "RISPERIDONA", "drugUuid": "2272fd69-d5f3-45e2-bd58-41cd4fc786d9", "dosage": "2mg", "dosageUuid": "98fb063d-159d-4236-bc58-4b2b692b2687" },
-		"7-J-16": { "drug": "RISPERIDONA", "drugUuid": "2272fd69-d5f3-45e2-bd58-41cd4fc786d9", "dosage": "3mg", "dosageUuid": "3be55be3-9f64-4401-8689-b57da6ba6155" }
+		"7-D-1": { "drug": "CARBAMAZEPINA", "drugUuid": "e1d6bb14-1d5f-11e0-b929-000c29ad1d07", "form": "200mg", "formUuid": "4c8b32db-acc4-4a59-802a-05d921315260" },
+		"7-D-2": { "drug": "CLONAZEPAM", "drugUuid": "47031dcc-3f84-4711-9b72-359630f53bca", "form": "2mg", "formUuid": "98fb063d-159d-4236-bc58-4b2b692b2687" },
+		"7-D-4": { "drug": "FENITOINA", "drugUuid": "e1d0616a-1d5f-11e0-b929-000c29ad1d07", "form": "100mg", "formUuid": "12a7ea29-6824-4098-8350-2113a764b7a0" },
+		"7-D-6": { "drug": "FENOBARBITAL", "drugUuid": "e1d0301e-1d5f-11e0-b929-000c29ad1d07", "form": "100mg", "formUuid": "12a7ea29-6824-4098-8350-2113a764b7a0" },
+		"7-D-7": { "drug": "FENOBARBITAL", "drugUuid": "e1d0301e-1d5f-11e0-b929-000c29ad1d07", "form": "15mg", "formUuid": "b99eed61-8e68-4161-b041-c776d0b1652e" },
+		"7-D-11": { "drug": "LAMOTRIGINA", "drugUuid": "60aa53f5-5c00-4655-bba9-595e9e94e307", "form": "50mg", "formUuid": "431d2f8e-6d78-4bdb-a46d-f790a5d54501" },
+		"7-D-12": { "drug": "TOPIRAMATO", "drugUuid": "12b4e538-3a81-4104-88a3-2d3c9d788f53", "form": "100mg", "formUuid": "12a7ea29-6824-4098-8350-2113a764b7a0" },
+		"7-D-13": { "drug": "VALPROATO DE SODIO", "drugUuid": "004e305a-7401-4bdb-8460-300e781313f8", "form": "200mg", "formUuid": "4c8b32db-acc4-4a59-802a-05d921315260" },
+		"7-D-14": { "drug": "VALPROATO DE SODIO", "drugUuid": "004e305a-7401-4bdb-8460-300e781313f8", "form": "200mg/5ml", "formUuid": "7bc69e34-9cea-434c-a220-1cfb6eb91803" },
+		"7-F-1": { "drug": "BIPERIDENO [NEEDS CLARIFICATION]", "drugUuid": "UNKNOWN", "form": "2mg", "formUuid": "98fb063d-159d-4236-bc58-4b2b692b2687" },
+		"7-F-2": { "drug": "BIPERIDENO (AKINETON) [NEEDS CLARIFICATION]", "drugUuid": "UNKNOWN", "form": "5mg/ml", "formUuid": "7c1bcb18-a292-44a6-90a2-532f907c4100" },
+		"13-A-2": { "drug": "CLORFENIRAMINA", "drugUuid": "e1d6b3b2-1d5f-11e0-b929-000c29ad1d07", "form": "4mg", "formUuid": "d7ccee2b-2b93-4063-a31f-0145608a131d" },
+		"13-A-3": { "drug": "CLORFENIRAMINA", "drugUuid": "e1d6b3b2-1d5f-11e0-b929-000c29ad1d07", "form": "2mg/5ml", "formUuid": "aa685a66-4978-46e1-910e-c7b78e964231" },
+		"13-A-4": { "drug": "DIFENIDRAMINA", "drugUuid": "e1d6bc22-1d5f-11e0-b929-000c29ad1d07", "form": "50mg/ml", "formUuid": "71bc504b-63d4-480c-9d2c-660d9b4f6ffc" },
+		"13-A-5": { "drug": "PROMETAZINA", "drugUuid": "e1d4b4a4-1d5f-11e0-b929-000c29ad1d07", "form": "10mg", "formUuid": "0a79cea9-3fc1-42b3-a247-ebcc746ad003" },
+		"13-A-7": { "drug": "PROMETAZINA", "drugUuid": "e1d4b4a4-1d5f-11e0-b929-000c29ad1d07", "form": "50mg/2ml", "formUuid": "6edca76e-5657-4e0f-9ad4-b9c4b905bc96" },
+		"7-G-1": { "drug": "AMITRIPTILINA", "drugUuid": "e1d6c6ae-1d5f-11e0-b929-000c29ad1d07", "form": "10mg", "formUuid": "0a79cea9-3fc1-42b3-a247-ebcc746ad003" },
+		"7-G-2": { "drug": "AMITRIPTILINA", "drugUuid": "e1d6c6ae-1d5f-11e0-b929-000c29ad1d07", "form": "25mg", "formUuid": "bca695b6-4172-4cf1-8829-72306ac9a1d8" },
+		"7-G-3": { "drug": "FLUOXETINA HCL", "drugUuid": "0841741e-bd0f-4370-8440-66a6bc95c941", "form": "20mg", "formUuid": "435761ad-a501-4a69-bb64-23f57a8c8fb7" },
+		"7-G-4": { "drug": "IMIPRAMINA", "drugUuid": "696221a6-3405-4b48-ab17-be36c0a2acd2", "form": "25mg", "formUuid": "bca695b6-4172-4cf1-8829-72306ac9a1d8" },
+		"7-G-6": { "drug": "MAPROTILINA", "drugUuid": "8a3c2ae9-a83a-4dd1-97ba-d66c758f813f", "form": "25mg", "formUuid": "bca695b6-4172-4cf1-8829-72306ac9a1d8" },
+		"7-G-7": { "drug": "PAROXETINA", "drugUuid": "c24b5049-5a79-4a77-939d-e04e93cb9168", "form": "20mg", "formUuid": "435761ad-a501-4a69-bb64-23f57a8c8fb7" },
+		"7-I-4": { "drug": "CLORDIAZEPOXIDO", "drugUuid": "5858d9fb-f9f9-45b8-a2c4-26cb8cf478dc", "form": "10mg", "formUuid": "0a79cea9-3fc1-42b3-a247-ebcc746ad003" },
+		"7-I-5": { "drug": "DIAZEPAM", "drugUuid": "e1d039ba-1d5f-11e0-b929-000c29ad1d07", "form": "2mg", "formUuid": "98fb063d-159d-4236-bc58-4b2b692b2687" },
+		"7-I-6": { "drug": "DIAZEPAM", "drugUuid": "e1d039ba-1d5f-11e0-b929-000c29ad1d07", "form": "10mg", "formUuid": "0a79cea9-3fc1-42b3-a247-ebcc746ad003" },
+		"7-I-7": { "drug": "DIAZEPAM", "drugUuid": "e1d039ba-1d5f-11e0-b929-000c29ad1d07", "form": "10mg/2ml", "formUuid": "07e5dc44-9307-439a-8f4f-ef8c2fccd021" },
+		"7-J-1": { "drug": "CLORPROMAZINA", "drugUuid": "77bf686f-4920-47d9-b448-8b1ef0c8e4c8", "form": "25mg", "formUuid": "bca695b6-4172-4cf1-8829-72306ac9a1d8" },
+		"7-J-2": { "drug": "CLORPROMAZINA", "drugUuid": "77bf686f-4920-47d9-b448-8b1ef0c8e4c8", "form": "100mg", "formUuid": "12a7ea29-6824-4098-8350-2113a764b7a0" },
+		"7-J-3": { "drug": "CLORPROMAZINA", "drugUuid": "77bf686f-4920-47d9-b448-8b1ef0c8e4c8", "form": "25mg/2ml", "formUuid": "0b812064-fca3-4d74-b4fb-aed971b7d971" },
+		"7-J-4": { "drug": "FLUFENAZINA", "drugUuid": "a9529dce-4feb-4463-a1e6-446bccc0651d", "form": "2,5mg", "formUuid": "ae11b066-9fb8-45bd-8151-9771c53a42de" },
+		"7-J-5": { "drug": "DECANOATO DE FLUFENAZINA (MODECATE) [NEEDS CLARIFICATION]", "drugUuid": "UNKNOWN", "form": "25mg/2ml", "formUuid": "0b812064-fca3-4d74-b4fb-aed971b7d971" },
+		"7-J-6": { "drug": "HALOPERIDOL", "drugUuid": "d5958d7f-d54a-4046-b448-45db947e4b40", "form": "5mg", "formUuid": "d3e814d5-df91-4b9e-b7a3-ca46f8c2696e" },
+		"7-J-7": { "drug": "HALOPERIDOL", "drugUuid": "d5958d7f-d54a-4046-b448-45db947e4b40", "form": "5mg/1ml", "formUuid": "UNKNOWN" },
+		"7-J-9": { "drug": "TIORIDAZINA", "drugUuid": "824bf028-69f5-4663-a489-1817fe6134dd", "form": "10mg", "formUuid": "0a79cea9-3fc1-42b3-a247-ebcc746ad003" },
+		"7-J-10": { "drug": "TIORIDAZINA", "drugUuid": "824bf028-69f5-4663-a489-1817fe6134dd", "form": "100mg", "formUuid": "12a7ea29-6824-4098-8350-2113a764b7a0" },
+		"7-J-11": { "drug": "TRIFLUORPERAZINA", "drugUuid": "0bfdf410-2d6d-40a0-b697-13667d0a0c4a", "form": "5mg", "formUuid": "d3e814d5-df91-4b9e-b7a3-ca46f8c2696e" },
+		"7-J-15": { "drug": "RISPERIDONA", "drugUuid": "2272fd69-d5f3-45e2-bd58-41cd4fc786d9", "form": "2mg", "formUuid": "98fb063d-159d-4236-bc58-4b2b692b2687" },
+		"7-J-16": { "drug": "RISPERIDONA", "drugUuid": "2272fd69-d5f3-45e2-bd58-41cd4fc786d9", "form": "3mg", "formUuid": "3be55be3-9f64-4401-8689-b57da6ba6155" }
 	}
 
-var drugList = {
-		"Amitriptilina":"e1d6c6ae-1d5f-11e0-b929-000c29ad1d07",
-		"Carbamazepina":"e1d6bb14-1d5f-11e0-b929-000c29ad1d07",
-		"Clonazepam":"47031dcc-3f84-4711-9b72-359630f53bca",
-		"Clordiazepoxido":"5858d9fb-f9f9-45b8-a2c4-26cb8cf478dc",
-		"Clorfeniramina":"e1d6b3b2-1d5f-11e0-b929-000c29ad1d07",
-		"Clorpromazina":"77bf686f-4920-47d9-b448-8b1ef0c8e4c8",
-		"Diazepam":"e1d039ba-1d5f-11e0-b929-000c29ad1d07",
-		"Difenidramina":"e1d6bc22-1d5f-11e0-b929-000c29ad1d07",
-		"Fenitoina":"e1d0616a-1d5f-11e0-b929-000c29ad1d07",
-		"Fenobarbital":"e1d0301e-1d5f-11e0-b929-000c29ad1d07",
-		"Flufenazina":"a9529dce-4feb-4463-a1e6-446bccc0651d",
-		"Flunitrazepam":"eb703969-9921-409f-be0d-5c289d159593",
-		"Haloperidol":"d5958d7f-d54a-4046-b448-45db947e4b40",
-		"Imipramina":"696221a6-3405-4b48-ab17-be36c0a2acd2",
-		"Lamotrigina":"60aa53f5-5c00-4655-bba9-595e9e94e307",
-		"Maprotilina":"8a3c2ae9-a83a-4dd1-97ba-d66c758f813f",
-		"Paroxetina":"c24b5049-5a79-4a77-939d-e04e93cb9168",
-		"Prometazina":"e1d4b4a4-1d5f-11e0-b929-000c29ad1d07",
-		"Risperidona":"2272fd69-d5f3-45e2-bd58-41cd4fc786d9",
-		"Tioridazina":"824bf028-69f5-4663-a489-1817fe6134dd",
-		"Topiramato":"12b4e538-3a81-4104-88a3-2d3c9d788f53",
-		"Trifluorperazina":"0bfdf410-2d6d-40a0-b697-13667d0a0c4a",
-		"Valproato de Sodio":"004e305a-7401-4bdb-8460-300e781313f8"
-    }
+function setHiddenMedicationValues (key, medName, medForm) {
+    var drugUuid = fnmList[key]["drugUuid"];
+    var formUuid = fnmList[key]["formUuid"];
+    $("#" + medName).val(drugUuid);
+    $("#" + medForm).val(formUuid);
+}
 
 function addDrugsToDrugSelects(){
     var drugListOptions = [];
 
-    $.each(drugList, function( k,v){
-        drugListOptions.push("<option data-concept-id=\"" + k + "\" value="+k+"\">" + v + "</option>");
+    $.each(fnmList, function( k,v){
+        drugListOptions.push("<option value=\"\">" + k + "</option>");
     });
 
     var drugListOptionsHtml = drugListOptions.join('');
 
-    $("select.drug-list").html(drugListOptionsHtml);
+    $("select.medication-1-fnm").html(drugListOptionsHtml);
 
 }
 

@@ -881,6 +881,17 @@ function setHiddenMedicationValues (key, medName, medForm) {
     $("#" + medForm).val(formUuid);
 }
 
+function addOptionsToSelect(select, optionArr, blankVals=false) {
+    var $select = $("#" + select);
+    $.each(optionArr, function(k, v) {
+        if (blankVals) {
+            $select.append($("<option />").val("").text(k));
+        } else {
+            $select.append($("<option />").val(v).text(k));
+        }
+    });
+}
+
 function addDrugsToDrugSelects(){
     var drugListOptions = [];
 
@@ -1188,9 +1199,15 @@ $(document).ready(
             }
 
             //addTypeAheadToDrugInput();
-            addDrugsToDrugSelects();
-            
-            addDxsToDxsSelects();
+            //addDrugsToDrugSelects();
+            //addDxsToDxsSelects();
+            addOptionsToSelect("primary-dx-list", dxsList);
+            addOptionsToSelect("secondary-dx-list", dxsList);
+            addOptionsToSelect("medication-1-fnm", fnmList, true);
+            addOptionsToSelect("medication-2-fnm", fnmList, true);
+            addOptionsToSelect("medication-3-fnm", fnmList, true);
+            addOptionsToSelect("medication-4-fnm", fnmList, true);
+            addOptionsToSelect("medication-5-fnm", fnmList, true);
             
             loadLocalSiteInfo(true);
         }

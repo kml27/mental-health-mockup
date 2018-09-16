@@ -819,20 +819,6 @@ var dxsList = {
 		"F99":"0aae621c-f0c0-4c1f-9c4e-408ff1167d66"
 	}
 
-function addDxsToDxsSelects(){
-    var dxsListOptions = [];
-
-    $.each(dxsList, function( k,v){
-        dxsListOptions.push("<option data-concept-id=\"" + v + "\" value="+v+"\">" + k + "</option>");
-    });
-
-    var dxsListOptionsHtml = dxsListOptions.join('');
-
-    $("select.primary-dx-list").html(dxsListOptionsHtml);
-    $("select.secondary-dx-list").html(dxsListOptionsHtml);
-
-}
-
 var fnmList = {
 		"7-D-1": { "drug": "CARBAMAZEPINA", "drugUuid": "e1d6bb14-1d5f-11e0-b929-000c29ad1d07", "form": "200mg", "formUuid": "4c8b32db-acc4-4a59-802a-05d921315260" },
 		"7-D-2": { "drug": "CLONAZEPAM", "drugUuid": "47031dcc-3f84-4711-9b72-359630f53bca", "form": "2mg", "formUuid": "98fb063d-159d-4236-bc58-4b2b692b2687" },
@@ -883,6 +869,7 @@ function setHiddenMedicationValues (key, medName, medForm) {
 
 function addOptionsToSelect(select, optionArr, blankVals=false) {
     var $select = $("#" + select);
+    $select.append($("<option />");
     $.each(optionArr, function(k, v) {
         if (blankVals) {
             $select.append($("<option />").val("").text(k));
@@ -890,19 +877,6 @@ function addOptionsToSelect(select, optionArr, blankVals=false) {
             $select.append($("<option />").val(v).text(k));
         }
     });
-}
-
-function addDrugsToDrugSelects(){
-    var drugListOptions = [];
-
-    $.each(fnmList, function( k,v){
-        drugListOptions.push("<option value=\"\">" + k + "</option>");
-    });
-
-    var drugListOptionsHtml = drugListOptions.join('');
-
-    $("select.medication-1-fnm").html(drugListOptionsHtml);
-
 }
 
 function closeTypeAhead(parent){
@@ -1199,8 +1173,6 @@ $(document).ready(
             }
 
             //addTypeAheadToDrugInput();
-            //addDrugsToDrugSelects();
-            //addDxsToDxsSelects();
             addOptionsToSelect("primary-dx-list", dxsList);
             addOptionsToSelect("secondary-dx-list", dxsList);
             addOptionsToSelect("medication-1-fnm", fnmList, true);

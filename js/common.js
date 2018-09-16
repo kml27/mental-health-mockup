@@ -869,7 +869,7 @@ function setHiddenMedicationValues (key, medName, medForm) {
 
 function addOptionsToSelect(select, optionArr, blankVals=false) {
     var $select = $("#" + select);
-    $select.append($("<option />");
+    $select.append($("<option />"));
     $.each(optionArr, function(k, v) {
         if (blankVals) {
             $select.append($("<option />").val("").text(k));

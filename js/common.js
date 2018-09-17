@@ -7,7 +7,7 @@ function initializeDefaultSrc(control) {
         //emulate a HTMLInputElement, type "checkbox", "radio"
         "checked": control.defaultChecked,
         //emulate a HTMLInputElement type "date", "number", "tel", "text", "textarea"
-        "value": control.defaultValue,
+        "value": control.defaultValue == undefined ? "" : control.defaultValue,
         //emulate a HTMLSelectElement
         0: { "value": ""},
         selectedIndex: 0,
@@ -91,6 +91,11 @@ function setDependentDisabledState(clickedElement, specificRadio, specificTarget
             
             for(target of specificTarget) {
                 var targetEl = document.querySelector(target);
+
+                if(targetEl==null){
+                    continue;
+                }
+
                 targetEl.disabled = targetState;
                 
                 if($(`fieldset[id=${targetEl.id}] input[type=radio]`).length){
@@ -292,7 +297,7 @@ function setAllDisabledStates(){
     }
 }
 
-function confirmReset(evt){
+function confirmReset(evt, reinitialize=true){
     var result = confirm('Are you sure you want to reset *ALL* patient inputs to defaults?');
     
     if(result==false)
@@ -302,7 +307,11 @@ function confirmReset(evt){
 
     }else{
         //go through clearing and re-initilization of localdatastore without re-attaching inputs' event listeners
-        initializeInputValuePersistence(reset=true);
+        if(reinitialize){
+            initializeInputValuePersistence(reset=true);
+        } else {
+            initializeLocalStore(clear=true, initializeEmptyStore=false);
+        }
 
         //the default behavior of form input type="reset" will be applied after this handler returns
     }
@@ -393,13 +402,13 @@ function setMaxDateToToday(){
 
 const dataStoreProto = JSON.stringify({"storageVersion": "0.1"})
 
-function initializeLocalStore(clear){
+function initializeLocalStore(clear, initializeEmptyStore=true){
 
     if(clear){
         delete localStorage[dataStoreNS];
     }
 
-    if(!localStorage[dataStoreNS]){
+    if(initializeEmptyStore && !localStorage[dataStoreNS]){
         localStorage[dataStoreNS] = dataStoreProto;
     }
 }
@@ -1143,7 +1152,8 @@ $(document).ready(
                         //the submit succeeded and we got a redirect
                         if (window.location.href != xhr.responseURL) {
                             
-                            initializeInputValuePersistence(reset=true);
+                            //initializeInputValuePersistence(reset=true);
+                            initializeLocalStore(clear=true, initializeEmptyStore=false);
 
                             //update the window location url
                             window.location.href = xhr.responseURL;
@@ -1168,9 +1178,10 @@ $(document).ready(
             };
             
             var discardLink = $("[id=discardLinkSpan] a[class=html-form-entry-discard-changes]");
-            if (discardLink.text() === 'Discard changes') {
-            	discardLink.on("click", function(event) {confirmReset(event);} )
-            }
+            discardLink.on("click", function(event) {confirmReset(event, reinitialize=false);} )
+
+            var editLink = $("a[href*='mode=EDIT']");
+            editLink.on("click", function(event) {initializeLocalStore(clear=true, initializeEmptyStore=false);} )
 
             //addTypeAheadToDrugInput();
             addOptionsToSelect("primary-dx-list", dxsList);

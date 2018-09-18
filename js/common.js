@@ -1185,7 +1185,7 @@ $(document).ready(
                     //wait for DONE state
                     //console.log(xhr.status, xhr.responseURL);
                     if (xhr.readyState == 4) {
-                        $('.overlay').hide();
+
                         //if the final location differs from the current location,
                         //the submit succeeded and we got a redirect
                         if (window.location.href != xhr.responseURL) {
@@ -1203,7 +1203,7 @@ $(document).ready(
                             //$("#htmlform").removeChild(progress);
                         }
 
-
+                        $('.overlay').hide();
                     }
 
                 }

@@ -71,7 +71,7 @@ function setDependentDisabledState(clickedElement, specificRadio, specificTarget
         targetState = multiSourceState;
     }
 
-    
+
     if(!specificTarget){
         //console.log('toggling state', clickedElement);
         while(el.nextElementSibling) {
@@ -86,9 +86,9 @@ function setDependentDisabledState(clickedElement, specificRadio, specificTarget
 
         }
     } else {
-        
+
         if(Array.isArray(specificTarget)) {
-            
+
             for(target of specificTarget) {
                 var targetEl = document.querySelector(target);
 
@@ -97,7 +97,7 @@ function setDependentDisabledState(clickedElement, specificRadio, specificTarget
                 }
 
                 targetEl.disabled = targetState;
-                
+
                 if($(`fieldset[id=${targetEl.id}] input[type=radio]`).length){
                     fnForFieldsetRadios(targetEl, function(radio){clearDisabledInputByType(radio, true)});
                 }
@@ -109,7 +109,7 @@ function setDependentDisabledState(clickedElement, specificRadio, specificTarget
         } else {
             var targetEl = document.querySelector(specificTarget)
             targetEl.disabled = targetState;
-            
+
             clearDisabledInputByType(targetEl);
         }
     }
@@ -118,23 +118,23 @@ function setDependentDisabledState(clickedElement, specificRadio, specificTarget
 function getIndexFromOptionValue(control, optionValue){
 
     var optionIndex = -1;
-    
+
     var iteratedOption = 0;
 
     for(var iteratedOption=0; optionIndex==-1 && control[iteratedOption]; iteratedOption++){
-        
+
         var curOption = control[iteratedOption];
         //console.log(iteratedOption, curOption);
 
         if(curOption.value == optionValue){
             //console.log(curOption);
             optionIndex = iteratedOption;
-            
+
             //When the form is reset, the select will return to its default selection for this select input
             //console.log("setting as default selection");
             curOption.defaultSelected=true;
         }
-            
+
     }
 
     return optionIndex;
@@ -160,9 +160,9 @@ function loadLocalSiteInfo(attach=false){
         var storageName = dataStoreNS+"mhf-"+selectID;
 
         if(DOMSelect && localStorage[storageName]){
-            
+
             var optionIndex = getIndexFromOptionValue(DOMSelect, localStorage[storageName]);
-            
+
             if(optionIndex) {
                 DOMSelect.selectedIndex = optionIndex;
             }
@@ -190,9 +190,9 @@ function loadLocalSiteInfo(attach=false){
                     //Remove default on previously stored option
                     prevOptionSelected.defaultSelected = false;
                 }
-                
+
                 var newOptionSelected = this[this.selectedIndex];
-                                        
+
                 localStorage[storageName] = newOptionSelected.value;
                 //Set this as the new default to return to when resetting the form
                 newOptionSelected.defaultSelected = true;
@@ -205,14 +205,14 @@ function setAllDisabledStates(){
     //onclick*='setDependentDisabledState'
     /*for(inputSetsDisabled of )){
         //console.log(inputSetsDisabled, inputSetsDisabled.checked, inputSetsDisabled.onclick);
-        
+
         var onclick=String(inputSetsDisabled.onclick);
-        
+
         var param = [];
         var argsStr = onclick.slice(onclick.indexOf("setDependentDisabledState(")+"setDependentDisabledState(".length, onclick.lastIndexOf(");"));
 
         param = argsStr.split(",");
-        
+
         setDependentDisabledState(param[0]=="this"?clickedElement=inputSetsDisabled:param[0],specificRadio=param[1], specificTarget=param[2], stateOverride=true, disabledOverrideValue=true);
     }*/
 
@@ -231,9 +231,9 @@ function setAllDisabledStates(){
         //onchange*='setDependentDisabledState'
         for(inputSetsDisabled of ontype.set){
             //console.log(inputSetsDisabled, inputSetsDisabled.checked, inputSetsDisabled.onchange);
-            
+
             var onchange=String(inputSetsDisabled[ontype.handler]);
-            
+
             var allParams = [];
             var argsStr = onchange.slice(onchange.indexOf("setDependentDisabledState(")+"setDependentDisabledState(".length, onchange.lastIndexOf(");"));
 
@@ -241,7 +241,7 @@ function setAllDisabledStates(){
             allParams = argsStr.split(",");
 
             var paramArrayRanges=[];
-            
+
             //console.log("allParams", allParams)
 
             //doesnt support nested arrays, neither does the function that is being called
@@ -254,7 +254,7 @@ function setAllDisabledStates(){
                     //var segmentsAfterOpenBracket = param.split("[").length;
 
                     if(param.search(/\[ *('|"|`)/) != -1 ){
-                        
+
                         paramArrayRanges[paramArrayRanges.length] = {
                             "beginArrayIndex": i,
                             "paramIndex": paramArrayRanges.length?paramArrayRanges[paramArrayRanges.length-1].paramIndex+1:i,
@@ -299,7 +299,7 @@ function setAllDisabledStates(){
 
 function confirmReset(evt, reinitialize=true){
     var result = confirm('Are you sure you want to reset *ALL* patient inputs to defaults?');
-    
+
     if(result==false)
     {
         //the user cancelled the reset, prevent the default form reset behavior
@@ -322,9 +322,9 @@ function warnMaxDateToday(dateInput, alertSelector){
     var todayDate = new Date();
     var todayStr = todayDate.toISOString().split('T')[0];
     console.log(todayStr, dateInput.value);
-    
+
     var specifiedDay = new Date(dateInput.value);
-    
+
     var alertjQuery = $(alertSelector);
     var alert = alertjQuery[0];
 
@@ -337,7 +337,7 @@ function warnMaxDateToday(dateInput, alertSelector){
     } else{
         alertjQuery.removeClass("bg-warning");
     }
-    
+
     console.log(alertText);
 
     alert.textContent = alertText;
@@ -346,7 +346,7 @@ function warnMaxDateToday(dateInput, alertSelector){
 
 function watchRange(control, alertSelector){
     var alert = $(alertSelector);
-    
+
     if(control.value && (Number(control.value) < Number(control.min) || Number(control.value) > Number(control.max))){
         alert.removeAttr("hidden");
         alert[0].textContent = `Value is outside of range of ${control.min} to ${control.max}`;
@@ -357,19 +357,19 @@ function watchRange(control, alertSelector){
 }
 
 function calculateAge(dobDateInput, targetSelector){
-    
+
     var specifiedDay = new Date(dobDateInput.value);
-    
+
     if(isNaN(specifiedDay)) {
         return;
     }
-    
+
     var todayDate = new Date();
-    
+
 
     var ageDate = new Date(todayDate - specifiedDay);
     var age = ageDate.getFullYear() - new Date("1/1/1970").getFullYear()
-    
+
     $(targetSelector)[0].value=age;
 }
 
@@ -394,7 +394,7 @@ function setHiddenCheckbox(checkboxSelector, value){
 function setMaxDateToToday(){
     var today =new Date().toISOString().split('T')[0];
     console.log(today);
-    
+
     for(dateInput of $("input[type=date]")){
         dateInput.max=today;
     }
@@ -435,7 +435,7 @@ function setMemberByType(src, dest, control)
                 break;
         }
     } else if (control instanceof HTMLSelectElement) {
-        
+
         if(dest instanceof HTMLSelectElement) {
             var optionIndex = getIndexFromOptionValue(control, src.value);
 
@@ -459,7 +459,7 @@ function setMemberByType(src, dest, control)
     //for radios, the onchange event is on the parent fieldset
     if(control.type!=undefined && control.type=="radio"){
         var parentFieldset = getFieldsetsWithRadios(control)[0];
-        
+
         if(parentFieldset.onchange){
             parentFieldset.onchange();
         }
@@ -481,15 +481,15 @@ function versionedDataStore(datastore, control){
 }
 
 function localDataStore(control, load){
-    
+
     var src = control;
     var dest = {};
     var dataStore = {};
 
     try{
-        
+
         dataStore = JSON.parse(localStorage[dataStoreNS]);
-        
+
         dest = versionedDataStore(dataStore, control);
 
     } catch (e){
@@ -521,7 +521,7 @@ function localDataStore(control, load){
     }
 
     setMemberByType(src, dest, control);
-    
+
     //store entire JSON object back into localStorage
     localStorage[dataStoreNS]=JSON.stringify(dataStore);
 }
@@ -534,7 +534,7 @@ function applyScrollPositionPersistence(){
         //"pick up where you left off"
         //store current page scroll (though it is set to 0 when selecting a new tab)
         //when reloading the page to view changes, this value will be used to scroll back to scroll position before page refresh
-        
+
         //console.log(document.documentElement.scrollTop);
         //document.body.scrollTop remains 0 with sticky position on common header
         localStorage[dataStoreNS+"currentScroll"]=document.documentElement.scrollTop;
@@ -542,7 +542,7 @@ function applyScrollPositionPersistence(){
 }
 
 function getFieldsetsWithRadios(specificChildRadio=undefined){
-    
+
     var fieldsets = jQuery.makeArray($('form#htmlform fieldset'));
 
     var fieldsetsWithRadios = fieldsets.filter( (fieldset) => {
@@ -572,7 +572,7 @@ function getFieldsetsWithRadios(specificChildRadio=undefined){
             var isImmediateParent = $(`fieldset[id=${fieldset.id}] fieldset`).length==0;
 
             //if this is not a parent of fieldset and it has radio children, keep it
-            return fieldsetHasRadios && isImmediateParent; 
+            return fieldsetHasRadios && isImmediateParent;
 
         });
 
@@ -580,11 +580,11 @@ function getFieldsetsWithRadios(specificChildRadio=undefined){
 }
 
 function initializeInputValuePersistence(reset=false){
-    
+
     var inputs = [];
     inputs = jQuery.makeArray($('form#htmlform input'));
     inputs = inputs.concat(jQuery.makeArray($('form#htmlform select')));
-    
+
     var textAreas = jQuery.makeArray($('form#htmlform textarea'));
     inputs = inputs.concat(textAreas);
 
@@ -603,7 +603,7 @@ function initializeInputValuePersistence(reset=false){
             if(!reset){
                 input.addEventListener("input", function oninputInputStore(event){localDataStore(this, load=false)});
             }
-    
+
             //load locally stored data, if it exists, otherwise initialize data storage object
             localDataStore(input, load=true);
     }
@@ -611,18 +611,18 @@ function initializeInputValuePersistence(reset=false){
     for(fieldset of fieldsetsWithRadios){
 
         //console.log(fieldset)
-        
+
         //if not resetting, attach event listeners (this only need to be done on document.ready())
         //if resetting local data store, don't re-attach input event listeners
         if(!reset){
-            
+
             //attach event listener to the radios parent fieldset
             fieldset.addEventListener("input", function oninputFieldsetStore(event){
-                
+
                 fnForFieldsetRadios(this, function storeRadioState(radio){ localDataStore(radio, load=false); });
             });
         }
-        
+
         fnForFieldsetRadios(fieldset, function loadRadioState(radio){ localDataStore(radio, load=true); });
 
     }
@@ -938,13 +938,13 @@ function addTypeAheadToDrugInput(){
     var inputRequiresTypeAhead = $("input.drug-list");
 
     inputRequiresTypeAhead.attr("autocomplete", "off");
-    
+
     for(input of inputRequiresTypeAhead){
-       
+
         var updatingValue = false;
 
         inputRequiresTypeAhead.on("input", function() {
-            
+
             closeTypeAhead(this);
 
             //this will only occur on subsequent calls from the click event of one of the items
@@ -968,7 +968,7 @@ function addTypeAheadToDrugInput(){
                 }
             }
             var divHtml = divList.join('');
-            
+
             jqTALD.html(divHtml)
             jqTALD.insertAfter(this);
 
@@ -982,7 +982,7 @@ function addTypeAheadToDrugInput(){
                 input.dispatchEvent(inputEvent);
             });
         });
-         
+
         inputRequiresTypeAhead.on("keydown", function(){
 
         });
@@ -997,7 +997,7 @@ function addTypeAheadToDrugInput(){
 
 var originalSubmitFn = null;
 
-$(document).ready( 
+$(document).ready(
     function () {
 
             //setMaxDateToToday();
@@ -1020,9 +1020,9 @@ $(document).ready(
             //console.log(settings);
 
             if(settings.tabbed=="false"){
-                
+
                 //console.log("monolithic");
-                
+
                 //todo: make this default in html and apply these in tabbed, rather than remove, so browser w/o js will still see a usable form
 
                 var tabContent = $("#tab-content-sections");
@@ -1034,14 +1034,14 @@ $(document).ready(
 
                 //console.log(panes);
 
-                for(pane of panes) { 
+                for(pane of panes) {
                     //console.log(pane);
                     $(pane).addClass("show");
                 }
 
             }else{
                 //console.log("tabbed version");
-                
+
                 var tabs = $("#section-tabs");
 
                 //remove hidden attribute from tabs
@@ -1049,8 +1049,8 @@ $(document).ready(
 
                 $("#"+sessionStorage[dataStoreNS+"visibleTab"]).tab('show');
 
-                $('#section-tabs a').on('click', 
-                    
+                $('#section-tabs a').on('click',
+
                     function (event) {
 
                         event.preventDefault();
@@ -1064,7 +1064,7 @@ $(document).ready(
                     });
 
                 //this is supposed to be handled for us already... but doesnt seem to be (previously selected tabs continue to show selected state without manually removing active)
-                $('a[data-toggle="tab"]').on('shown.bs.tab', 
+                $('a[data-toggle="tab"]').on('shown.bs.tab',
                     function (e) {
                         //e.target // newly activated tab
                         $(e.relatedTarget).removeClass("active");
@@ -1112,7 +1112,7 @@ $(document).ready(
 
                 targetControl.dispatchEvent(inputEvent);
             }
-            
+
             $("[id=encounterDate] input[type=text]").on("focus",
                 function bringDatePickerToFrontAndFixPosition(){
                     var datepicker = $("div[id=ui-datepicker-div]");
@@ -1130,7 +1130,7 @@ $(document).ready(
                     deletePopup.css("z-index", 1000000);
                 }
             //});
-            
+
 
             if( settings.dev=="true" ) {
 
@@ -1157,11 +1157,11 @@ $(document).ready(
 
             //"monkey-patch" submit function
             form[0].submit = function(){
-                
-                var progress = $(document.createElement("DIV"));
+
+                /*var progress = $(document.createElement("DIV"));
                 progress.attr("class", "progress-bar progress-bar-striped progress-bar-animated");
                 progress.attr("role", "progressbar");
-                
+
                 progress.attr("aria-valuenow", "0");
                 progress.attr("aria-valuemin", "0");
                 progress.attr("aria-valuemax", "100");
@@ -1169,27 +1169,27 @@ $(document).ready(
                 progress.css("z-index", "1000000");
                 /*progress.css("top", "50%");
                 progress.css("left", "50%");
-                progress.css("transform", "translate(-50%, -50%)");*/
+                progress.css("transform", "translate(-50%, -50%)");
                 progress.css("width", "75%");
                 progress.css("height", "50px");
-                
-                progress.insertAfter("#section-tabs");
+
+                progress.insertAfter("#section-tabs"); */
 
                 //use xhr to detect redirect
                 var xhr = new XMLHttpRequest();
                 xhr.onreadystatechange = function(e) {
-                    
-                    var progressValue = String(100*Number(xhr.readyState/4))
-                    progress.attr("width", `${progressValue}%`);
+                    $('.overlay').show();
+                    /*var progressValue = String(100*Number(xhr.readyState/4))
+                    progress.attr("width", `${progressValue}%`);*/
 
                     //wait for DONE state
                     //console.log(xhr.status, xhr.responseURL);
                     if (xhr.readyState == 4) {
-                        
+                        $('.overlay').hide();
                         //if the final location differs from the current location,
                         //the submit succeeded and we got a redirect
                         if (window.location.href != xhr.responseURL) {
-                            
+
                             //initializeInputValuePersistence(reset=true);
                             initializeLocalStore(clear=true, initializeEmptyStore=false);
 
@@ -1202,19 +1202,19 @@ $(document).ready(
 
                             //$("#htmlform").removeChild(progress);
                         }
-                        
-                        
+
+
                     }
 
                 }
 
                 xhr.withCredentials = true;
                 xhr.open("POST", window.location.href, true);
-                
+
                 xhr.send(new FormData(form[0]));
-                
+
             };
-            
+
             var discardLink = $("[id=discardLinkSpan] a[class=html-form-entry-discard-changes]");
             discardLink.on("click", function(event) {confirmReset(event, reinitialize=false);} )
 
@@ -1229,7 +1229,7 @@ $(document).ready(
             addOptionsToSelect("medication-3-fnm", fnmList, true);
             addOptionsToSelect("medication-4-fnm", fnmList, true);
             addOptionsToSelect("medication-5-fnm", fnmList, true);
-            
+
             computeBmi();
 
             loadLocalSiteInfo(true);

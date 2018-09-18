@@ -907,8 +907,9 @@ var fnmList = {
 	}
 
 function setHiddenMedicationValues (key, medName, medForm) {
-    var drugUuid = fnmList[key]["drugUuid"];
-    var formUuid = fnmList[key]["formUuid"];
+    var keyClipped = substring(key, 0, key.indexOf(" -");
+    var drugUuid = fnmList[keyClipped]["drugUuid"];
+    var formUuid = fnmList[keyClipped]["formUuid"];
     $("#" + medName).val(drugUuid);
     $("#" + medForm).val(formUuid);
 }

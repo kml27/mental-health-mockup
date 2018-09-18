@@ -1229,6 +1229,8 @@ $(document).ready(
             addOptionsToSelect("medication-4-fnm", fnmList, true);
             addOptionsToSelect("medication-5-fnm", fnmList, true);
             
+            computeBmi();
+
             loadLocalSiteInfo(true);
         }
 

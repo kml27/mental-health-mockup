@@ -456,6 +456,16 @@ function setMemberByType(src, dest, control)
     if(String(control.onclick).search("setDependentDisabledState")!=-1){
         control.onclick();
     }
+
+    //for radios, the onchange event is on the parent fieldset
+    if(control.type!=undefined && control.type=="radio"){
+        var parentFieldset = getFieldsetsWithRadios(control)[0];
+        
+        if(parentFieldset.onchange){
+            parentFieldset.onchange();
+        }
+    }
+
 }
 
 function versionedDataStore(datastore, control){
@@ -532,24 +542,38 @@ function applyScrollPositionPersistence(){
     });
 }
 
-function getFieldsetsWithRadios(){
+function getFieldsetsWithRadios(specificChildRadio=undefined){
     
     var fieldsets = jQuery.makeArray($('form#htmlform fieldset'));
 
     var fieldsetsWithRadios = fieldsets.filter( (fieldset) => {
-        if(fieldset.id=="") {
-            //console.log("Skipping", fieldset);
-            return false;
-        }
+            if(fieldset.id=="") {
+                //console.log("Skipping", fieldset);
+                return false;
+            }
 
-        //see if there are any child radios for the given fieldset
-        var fieldsetHasRadios = $(`fieldset[id=${fieldset.id}] input[type=radio]`).length>0;
-        
-        //check if this fieldset has any children fieldsets (which may account for the radios we see)
-        var isImmediateParent = $(`fieldset[id=${fieldset.id}] fieldset`).length==0;
+            var fieldsetHasRadios = false;
+            //if only looking for a specific parent, check for that specific child first
+            if(specificChildRadio!=undefined){
+                var specificRadio = $(`fieldset[id=${fieldset.id}] input[type=radio][id=${specificChildRadio.id}]`);
 
-        //if this is not a parent of fieldset and it has radio children, keep it
-        return fieldsetHasRadios && isImmediateParent; 
+                //if the specific radio was not selected, then reject this parent now
+                if(specificRadio[0]==undefined){
+                    return false;
+                }
+
+                fieldsetHasRadios = true;
+                //else check that it is not a parent fieldset of the specific fieldset we want
+            } else {
+                //see if there are any child radios for the given fieldset
+                fieldsetHasRadios = $(`fieldset[id=${fieldset.id}] input[type=radio]`).length>0;
+            }
+
+            //check if this fieldset has any children fieldsets (which may account for the radios we see)
+            var isImmediateParent = $(`fieldset[id=${fieldset.id}] fieldset`).length==0;
+
+            //if this is not a parent of fieldset and it has radio children, keep it
+            return fieldsetHasRadios && isImmediateParent; 
 
         });
 

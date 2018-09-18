@@ -630,6 +630,10 @@ function initializeInputValuePersistence(reset=false){
 
 }
 
+function computeBmi () {
+
+}
+
 var dxsList = {
 		"F00":"deb48fc2-9083-11e6-a98e-000c29db4475",
 		"F01":"dff79134-9083-11e6-a98e-000c29db4475",
@@ -714,8 +718,8 @@ var dxsList = {
 		"F44.3":"636d06d5-e2dc-464b-ba95-954c134cab9b",
 		"F44.4":"792554df-fbae-4980-adcd-f87bd441635f",
 		"F44.5":"54ea5096-bc34-4cd1-aeb9-860d89d450c6",
-		"F44.6":"77aba2df-b17c-45c6-8be0-91d4b0c98531",
 		"F44.6":"4aa74026-88d5-44a5-96ca-b8775e1d9457",
+		"F44.7":"77aba2df-b17c-45c6-8be0-91d4b0c98531",
 		"F45":"02b58ce4-9084-11e6-a98e-000c29db4475",
 		"F45.0":"0288e2c0-9084-11e6-a98e-000c29db4475",
 		"F48":"ae531291-9455-4196-a3c2-25e697dd1961",
@@ -820,7 +824,7 @@ var dxsList = {
 		"F90.0":"7a77a507-698c-4a77-b3c8-febbeffdcfdb",
 		"F90.1":"1c1b6040-a796-43cc-a404-1c88800b6234",
 		"F91":"0ec884b3-a612-44f5-8933-878c8ecbdcf2",
-		"F91.0":"7a77a507-698c-4a77-b3c8-febbeffdcfdb",
+		"F91.0":"7707c45c-d539-453f-b6e0-84f20246eb4e",
 		"F91.1":"1b17dc11-9084-11e6-a98e-000c29db4475",
 		"F91.2":"89239464-c8c2-4d9b-a19f-bc2f7dd4af1e",
 		"F91.3":"a56ae00c-5ec7-474d-920e-e024bb01de08",
@@ -862,8 +866,8 @@ var fnmList = {
 		"7-D-12": { "drug": "TOPIRAMATO", "drugUuid": "12b4e538-3a81-4104-88a3-2d3c9d788f53", "form": "100mg", "formUuid": "12a7ea29-6824-4098-8350-2113a764b7a0" },
 		"7-D-13": { "drug": "VALPROATO DE SODIO", "drugUuid": "004e305a-7401-4bdb-8460-300e781313f8", "form": "200mg", "formUuid": "4c8b32db-acc4-4a59-802a-05d921315260" },
 		"7-D-14": { "drug": "VALPROATO DE SODIO", "drugUuid": "004e305a-7401-4bdb-8460-300e781313f8", "form": "200mg/5ml", "formUuid": "7bc69e34-9cea-434c-a220-1cfb6eb91803" },
-		"7-F-1": { "drug": "BIPERIDENO [NEEDS CLARIFICATION]", "drugUuid": "UNKNOWN", "form": "2mg", "formUuid": "98fb063d-159d-4236-bc58-4b2b692b2687" },
-		"7-F-2": { "drug": "BIPERIDENO (AKINETON) [NEEDS CLARIFICATION]", "drugUuid": "UNKNOWN", "form": "5mg/ml", "formUuid": "7c1bcb18-a292-44a6-90a2-532f907c4100" },
+		"7-F-1": { "drug": "BIPERIDENO", "drugUuid": "d9b7bd1e-f743-4a36-8bc6-afc24dabf816", "form": "2mg", "formUuid": "98fb063d-159d-4236-bc58-4b2b692b2687" },
+		"7-F-2": { "drug": "BIPERIDENO (AKINETON)", "drugUuid": "d9b7bd1e-f743-4a36-8bc6-afc24dabf816", "form": "5mg/ml", "formUuid": "7c1bcb18-a292-44a6-90a2-532f907c4100" },
 		"13-A-2": { "drug": "CLORFENIRAMINA", "drugUuid": "e1d6b3b2-1d5f-11e0-b929-000c29ad1d07", "form": "4mg", "formUuid": "d7ccee2b-2b93-4063-a31f-0145608a131d" },
 		"13-A-3": { "drug": "CLORFENIRAMINA", "drugUuid": "e1d6b3b2-1d5f-11e0-b929-000c29ad1d07", "form": "2mg/5ml", "formUuid": "aa685a66-4978-46e1-910e-c7b78e964231" },
 		"13-A-4": { "drug": "DIFENIDRAMINA", "drugUuid": "e1d6bc22-1d5f-11e0-b929-000c29ad1d07", "form": "50mg/ml", "formUuid": "71bc504b-63d4-480c-9d2c-660d9b4f6ffc" },
@@ -883,9 +887,9 @@ var fnmList = {
 		"7-J-2": { "drug": "CLORPROMAZINA", "drugUuid": "77bf686f-4920-47d9-b448-8b1ef0c8e4c8", "form": "100mg", "formUuid": "12a7ea29-6824-4098-8350-2113a764b7a0" },
 		"7-J-3": { "drug": "CLORPROMAZINA", "drugUuid": "77bf686f-4920-47d9-b448-8b1ef0c8e4c8", "form": "25mg/2ml", "formUuid": "0b812064-fca3-4d74-b4fb-aed971b7d971" },
 		"7-J-4": { "drug": "FLUFENAZINA", "drugUuid": "a9529dce-4feb-4463-a1e6-446bccc0651d", "form": "2,5mg", "formUuid": "ae11b066-9fb8-45bd-8151-9771c53a42de" },
-		"7-J-5": { "drug": "DECANOATO DE FLUFENAZINA (MODECATE) [NEEDS CLARIFICATION]", "drugUuid": "UNKNOWN", "form": "25mg/2ml", "formUuid": "0b812064-fca3-4d74-b4fb-aed971b7d971" },
+		"7-J-5": { "drug": "DECANOATO DE FLUFENAZINA (MODECATE)", "drugUuid": "a9529dce-4feb-4463-a1e6-446bccc0651d", "form": "25mg/2ml", "formUuid": "0b812064-fca3-4d74-b4fb-aed971b7d971" },
 		"7-J-6": { "drug": "HALOPERIDOL", "drugUuid": "d5958d7f-d54a-4046-b448-45db947e4b40", "form": "5mg", "formUuid": "d3e814d5-df91-4b9e-b7a3-ca46f8c2696e" },
-		"7-J-7": { "drug": "HALOPERIDOL", "drugUuid": "d5958d7f-d54a-4046-b448-45db947e4b40", "form": "5mg/1ml", "formUuid": "UNKNOWN" },
+		"7-J-7": { "drug": "HALOPERIDOL", "drugUuid": "d5958d7f-d54a-4046-b448-45db947e4b40", "form": "5mg/1ml", "formUuid": "bfe03d17-5d61-4c84-a847-43fca3050ef4" },
 		"7-J-9": { "drug": "TIORIDAZINA", "drugUuid": "824bf028-69f5-4663-a489-1817fe6134dd", "form": "10mg", "formUuid": "0a79cea9-3fc1-42b3-a247-ebcc746ad003" },
 		"7-J-10": { "drug": "TIORIDAZINA", "drugUuid": "824bf028-69f5-4663-a489-1817fe6134dd", "form": "100mg", "formUuid": "12a7ea29-6824-4098-8350-2113a764b7a0" },
 		"7-J-11": { "drug": "TRIFLUORPERAZINA", "drugUuid": "0bfdf410-2d6d-40a0-b697-13667d0a0c4a", "form": "5mg", "formUuid": "d3e814d5-df91-4b9e-b7a3-ca46f8c2696e" },

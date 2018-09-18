@@ -555,7 +555,7 @@ function getFieldsetsWithRadios(specificChildRadio=undefined){
                 var specificRadio = $(`fieldset[id=${fieldset.id}] input[type=radio][id=${specificChildRadio.id}]`);
 
                 //if the specific radio was not selected, then reject this parent now
-                if(specificRadio[0]){
+                if(specificRadio[0]==undefined){
                     return false;
                 }
 

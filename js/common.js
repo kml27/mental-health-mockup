@@ -459,8 +459,11 @@ function setMemberByType(src, dest, control)
 
     //for radios, the onchange event is on the parent fieldset
     if(control.type!=undefined && control.type=="radio"){
-        var parentFieldset = getFieldsetsWithRadios(control);
-        parentFieldset.onchange();
+        var parentFieldset = getFieldsetsWithRadios(control)[0];
+        
+        if(parentFieldset.onchange){
+            parentFieldset.onchange();
+        }
     }
 
 }

@@ -630,7 +630,17 @@ function initializeInputValuePersistence(reset=false){
 }
 
 function computeBmi () {
+    if ($('#vital-signs-weight').val() == '' ||
+        $('#vital-signs-height').val() == '' ||
+        $('#vital-signs-height').val() == 0) {
+        return;
+    }
 
+    if (!isNaN($('#vital-signs-weight').val()) &&
+        !isNaN($('#vital-signs-height').val())) {
+        var bmi = Math.round($('#vital-signs-weight').val() / Math.pow($('#vital-signs-height').val(), 2) * 10000);
+        $('#vital-signs-bmi').val(bmi);
+    }
 }
 
 var dxsList = {

@@ -1203,7 +1203,7 @@ $(document).ready(
                             //$("#htmlform").removeChild(progress);
                         }
 
-                        $('.overlay').hide();
+                      
                     }
 
                 }

@@ -876,12 +876,12 @@ function setHiddenMedicationValues (key, medName, medForm) {
     $("#" + medForm).val(formUuid);
 }
 
-function addOptionsToSelect(select, optionArr, blankVals=false) {
+function addOptionsToSelect(select, optionArr, isDrugArr=false) {
     var $select = $("#" + select);
     $select.append($("<option />"));
     $.each(optionArr, function(k, v) {
-        if (blankVals) {
-            $select.append($("<option />").val("").text(k));
+        if (isDrugArr) {
+            $select.append($("<option />").val("").text(k + " - " + v.drug + " - " + v.form));
         } else {
             $select.append($("<option />").val(v).text(k));
         }

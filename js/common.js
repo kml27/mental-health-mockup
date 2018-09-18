@@ -919,9 +919,9 @@ function addOptionsToSelect(select, optionArr, isDrugArr=false) {
     $select.append($("<option />"));
     $.each(optionArr, function(k, v) {
         if (isDrugArr) {
-            $select.append($("<option />").val("").text(k + " - " + v.drug + " - " + v.form).attr("data-concept-id",v));
+            $select.append($("<option />").val("").text(k + " - " + v.drug + " - " + v.form));
         } else {
-            $select.append($("<option />").val(v).text(k).attr("data-concept-id", v));
+            $select.append($("<option />").val(v).text(k));
         }
     });
 }

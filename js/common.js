@@ -415,8 +415,7 @@ function initializeLocalStore(clear, initializeEmptyStore=true){
 
 function setMemberByType(src, dest, control)
 {
-    //don't set disabled controls
-    if(control.disabled || dest == undefined){
+    if( dest == undefined ){
         return;
     }
 

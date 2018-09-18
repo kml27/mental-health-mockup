@@ -1,13 +1,15 @@
 //namespace datastore by page path, internally localStorage uses only host (dns:port)
 var dataStoreNS = window.location.pathname;
 
-function initializeDefaultSrc(control) {
+function initializeDefaultSrc(control, clear=false) {
+
+    //if clear, set to false or empty string (""), regardless of what was set by default when loading the page
 
     const defaultSrc = {
         //emulate a HTMLInputElement, type "checkbox", "radio"
-        "checked": control.defaultChecked,
+        "checked": clear ? false : control.defaultChecked,
         //emulate a HTMLInputElement type "date", "number", "tel", "text", "textarea"
-        "value": control.defaultValue == undefined ? "" : control.defaultValue,
+        "value": clear ? "" : (control.defaultValue == undefined ? "" : control.defaultValue),
         //emulate a HTMLSelectElement
         0: { "value": ""},
         selectedIndex: 0,
@@ -27,7 +29,7 @@ function fnForFieldsetRadios(control, fn=function(radio){}){
 function clearDisabledInputByType(control, alwaysClear=false){
 
     if(control.disabled || alwaysClear){
-        setMemberByType(initializeDefaultSrc(control), control, control);
+        setMemberByType(initializeDefaultSrc(control, true), control, control);
     }
 
     var inputEvent = new Event("input");

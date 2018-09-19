@@ -960,7 +960,7 @@ function setFnmSelectedOption(med) {
     if (medName != '' && medForm != '') {
         $.each(fnmList, function(k, v) {
             if (medName === v.drugUuid && medForm === v.formUuid) {
-                $(med + '-fnm').val(k);
+                $("#" + med + '-fnm').val(k);
                 return false;
             }
         });

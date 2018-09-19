@@ -65,7 +65,8 @@ function setDependentDisabledState(clickedElement, specificRadio, specificTarget
 
     var el = clickedElement.parentElement;
 
-    var targetState = !clickedElement.checked || clickedElement.selected;
+    //convert indeterminate weakly typed object to boolean
+    var targetState = !Boolean(clickedElement.checked) || Boolean(clickedElement.selected);
 
     if(stateOverride){
         targetState = disabledOverrideValue;
@@ -201,6 +202,18 @@ function loadLocalSiteInfo(attach=false){
             });
         }
     }
+}
+
+function deleteLocalSiteInfo(){
+    var storedSelectOptions = ["province", "district", "health-facility"];
+
+    for(selectID of storedSelectOptions) {
+        
+        var storageName = dataStoreNS+"mhf-"+selectID;
+
+        delete localStorage[storageName];
+    }
+
 }
 
 function setAllDisabledStates(){
@@ -528,6 +541,10 @@ function applyScrollPositionPersistence(){
         //document.body.scrollTop remains 0 with sticky position on common header
         localStorage[dataStoreNS+"currentScroll"]=document.documentElement.scrollTop;
     });
+}
+
+function deleteScrollPositionPersistence(){
+    delete localStorage[dataStoreNS+"currentScroll"];
 }
 
 function getFieldsetsWithRadios(specificChildRadio=undefined){
@@ -1002,6 +1019,9 @@ function applyTabSelectionPersistence(){
         });
 }
 
+function deleteTabSelectionPersistence(){
+    delete sessionStorage[dataStoreNS+"visibleTab"];
+}
 
 var originalSubmitFn = null;
 
@@ -1054,8 +1074,6 @@ $(document).ready(
 
                 //remove hidden attribute from tabs
                 tabs.removeAttr("hidden");
-
-                applyTabSelectionPersistence();
 
                 //this is supposed to be handled for us already... but doesnt seem to be (previously selected tabs continue to show selected state without manually removing active)
                 $('a[data-toggle="tab"]').on('shown.bs.tab',
@@ -1126,6 +1144,8 @@ $(document).ready(
             
                 applyScrollPositionPersistence();
 
+                applyTabSelectionPersistence();
+
                 //initialize value persistence
                 initializeInputValuePersistence(reset=false);
 
@@ -1156,6 +1176,12 @@ $(document).ready(
                                 //initializeInputValuePersistence(reset=true);
                                 initializeLocalStore(clear=true, initializeEmptyStore=false);
 
+                                //deleteLocalSiteInfo();
+
+                                deleteTabSelectionPersistence();
+
+                                deleteScrollPositionPersistence();
+
                                 //update the window location url
                                 window.location.href = xhr.responseURL;
                             } else {
@@ -1179,7 +1205,8 @@ $(document).ready(
                 var discardLink = $("[id=discardLinkSpan] a[class=html-form-entry-discard-changes]");
                 discardLink.on("click", function(event) {confirmReset(event, reinitialize=false);} )
 
-                loadLocalSiteInfo(true);
+                //location and provider are currently hfe element tags
+                //loadLocalSiteInfo(true);
             }
         }
 

@@ -954,8 +954,8 @@ function setDxsSelectedOption(list, answer) {
 }
 
 function setFnmSelectedOption(med) {
-    var medName = $('#' + med + '-name').val();
-    var medForm = $('#' + med + '-form').val();
+    var medName = $('#' + med + '-name-select').attr('data-answered-concept-id');
+    var medForm = $('#' + med + '-form-select').attr('data-answered-concept-id');
 
     if (medName != '' && medForm != '') {
         $.each(fnmList, function(k, v) {

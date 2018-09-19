@@ -1069,7 +1069,7 @@ $(document).ready(
             applyScrollPositionPersistence();
 
             //if there's no encounter id value in the delete json object
-            if(Number.isInteger($("body").html()[$("body").html().search("(?<=encounterId: \")\d*?(?=\")")])){
+            if(Number.isInteger($("body").html()[$("body").html().search("(?<=encounterId: \")[0-9]*?(?=\")")])){
                 //initialize value persistence
                 initializeInputValuePersistence(reset=false);
             }

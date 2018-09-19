@@ -957,7 +957,6 @@ function setFnmSelectedOption(med) {
     var medName = $('#' + med + '-name').val();
     var medForm = $('#' + med + '-form').val();
 
-    alert(medName + ':' + medForm);
     if (medName != '' && medForm != '') {
         $.each(fnmList, function(k, v) {
             if (medName === v.drugUuid && medForm === v.formUuid) {

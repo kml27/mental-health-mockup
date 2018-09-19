@@ -1158,14 +1158,14 @@ $(document).ready(
                 var $this = $(this);
                 $this.prev().append($this.html(dxsListOptionsHtml));
                 if (this.hasAttribute('data-answered-concept-id')) {
-                   setDxsSelectedOption(this, this.attr('data-answered-concept-id'));
+                   setDxsSelectedOption(this, $this.attr('data-answered-concept-id'));
                 }
             });
 
             $("select.fnm-list").each(function() {
                 var $this = $(this);
                 $this.prev().append($this.html(fnmListOptionsHtml));
-                setFnmSelectedOption(this.attr('id').substring(0, 12)); 
+                setFnmSelectedOption($this.attr('id').substring(0, 12)); 
             });
 
             //in enter mode, the delete button script encounter id in the post json object is ""

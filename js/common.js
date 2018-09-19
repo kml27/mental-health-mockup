@@ -204,19 +204,6 @@ function loadLocalSiteInfo(attach=false){
 }
 
 function setAllDisabledStates(){
-    //onclick*='setDependentDisabledState'
-    /*for(inputSetsDisabled of )){
-        //console.log(inputSetsDisabled, inputSetsDisabled.checked, inputSetsDisabled.onclick);
-
-        var onclick=String(inputSetsDisabled.onclick);
-
-        var param = [];
-        var argsStr = onclick.slice(onclick.indexOf("setDependentDisabledState(")+"setDependentDisabledState(".length, onclick.lastIndexOf(");"));
-
-        param = argsStr.split(",");
-
-        setDependentDisabledState(param[0]=="this"?clickedElement=inputSetsDisabled:param[0],specificRadio=param[1], specificTarget=param[2], stateOverride=true, disabledOverrideValue=true);
-    }*/
 
     var disableDependencies = [
             {
@@ -997,6 +984,25 @@ function addTypeAheadToDrugInput(){
 
 }
 
+function applyTabSelectionPersistence(){
+    $("#"+sessionStorage[dataStoreNS+"visibleTab"]).tab('show');
+
+    $('#section-tabs a').on('click',
+
+        function (event) {
+
+            event.preventDefault();
+
+            $(this).tab('show');
+
+            sessionStorage[dataStoreNS+"visibleTab"]=this.id;
+
+            document.body.scrollTop = document.documentElement.scrollTop = 0;
+
+        });
+}
+
+
 var originalSubmitFn = null;
 
 $(document).ready(
@@ -1027,7 +1033,7 @@ $(document).ready(
 
                 //todo: make this default in html and apply these in tabbed, rather than remove, so browser w/o js will still see a usable form
 
-                var tabContent = $("#tab-content-sections");
+                var tabContent = $(".tab-content");
 
                 //console.log(tabContent);
                 tabContent.removeClass("tab-content");
@@ -1049,21 +1055,7 @@ $(document).ready(
                 //remove hidden attribute from tabs
                 tabs.removeAttr("hidden");
 
-                $("#"+sessionStorage[dataStoreNS+"visibleTab"]).tab('show');
-
-                $('#section-tabs a').on('click',
-
-                    function (event) {
-
-                        event.preventDefault();
-
-                        $(this).tab('show');
-
-                        sessionStorage[dataStoreNS+"visibleTab"]=this.id;
-
-                        document.body.scrollTop = document.documentElement.scrollTop = 0;
-
-                    });
+                applyTabSelectionPersistence();
 
                 //this is supposed to be handled for us already... but doesnt seem to be (previously selected tabs continue to show selected state without manually removing active)
                 $('a[data-toggle="tab"]').on('shown.bs.tab',
@@ -1077,11 +1069,7 @@ $(document).ready(
             applyScrollPositionPersistence();
 
             initializeInputValuePersistence(reset=false);
-/*
-            for(textarea of textAreas){
-                textarea.addEventListener("input", function(event){localDataStore(this, load=false)});
-            }
-*/
+            
             var templateProvidedValues = $("[id^=template-rendered]");
 
             for(value of templateProvidedValues){
@@ -1106,8 +1094,6 @@ $(document).ready(
                     }
                 }
 
-
-
                 targetControl.value = value;
 
                 var inputEvent = new Event("input");
@@ -1115,38 +1101,9 @@ $(document).ready(
                 targetControl.dispatchEvent(inputEvent);
             }
 
-            $("[id=encounterDate] input[type=text]").on("focus",
-                function bringDatePickerToFrontAndFixPosition(){
-                    var datepicker = $("div[id=ui-datepicker-div]");
-                    datepicker.css("z-index", 1000000);
-                    datepicker.css("position", "fixed");
-                    var parentInput = $(this);
-                    var position = parentInput.position().top+/*parentInput.offset().top-$(window).scrollTop+*/parentInput.outerHeight(true);
-                    datepicker.css("top", position);
-            });
-
-            ///$("a[onclick^='handleDeleteButton']").on("click",
-            //function bringDeleteToFront(){
-                var deletePopup = $("[id=confirmDeleteFormPopup]");
-                if(deletePopup) {
-                    deletePopup.css("z-index", 1000000);
-                }
-            //});
-
-
-            if( settings.dev=="true" ) {
-
-                $("input").toArray().forEach(function(elem){ $(elem).css("background-color", $(elem).attr("data-concept-id")?"green":"red")});
-
-                $("textarea").toArray().forEach(function(elem){ $(elem).css("background-color", $(elem).attr("data-concept-id")?"green":"red")});
-
-                $("select").toArray().forEach(function(elem){ $(elem).css("background-color", $(elem).attr("data-concept-id")?"green":"red")});
-
-                $("option").toArray().forEach(function(elem){ $(elem).css("background-color", $(elem).attr("data-concept-id")?"green":"red")});
-
-                var fieldsetsWithRadios = getFieldsetsWithRadios();
-
-                fieldsetsWithRadios.forEach(function(elem){ $(elem).css("background-color", $(elem).attr("data-concept-id")?"green":"red")});
+            var deletePopup = $("[id=confirmDeleteFormPopup]");
+            if(deletePopup) {
+                deletePopup.css("z-index", 1000000);
             }
 
             var form = $("form#htmlform");
@@ -1160,30 +1117,11 @@ $(document).ready(
             //"monkey-patch" submit function
             form[0].submit = function(){
 
-                /*var progress = $(document.createElement("DIV"));
-                progress.attr("class", "progress-bar progress-bar-striped progress-bar-animated");
-                progress.attr("role", "progressbar");
-
-                progress.attr("aria-valuenow", "0");
-                progress.attr("aria-valuemin", "0");
-                progress.attr("aria-valuemax", "100");
-
-                progress.css("z-index", "1000000");
-                /*progress.css("top", "50%");
-                progress.css("left", "50%");
-                progress.css("transform", "translate(-50%, -50%)");
-                progress.css("width", "75%");
-                progress.css("height", "50px");
-
-                progress.insertAfter("#section-tabs"); */
-
                 //use xhr to detect redirect
                 var xhr = new XMLHttpRequest();
                 xhr.onreadystatechange = function(e) {
                     $('.overlay').show();
-                    /*var progressValue = String(100*Number(xhr.readyState/4))
-                    progress.attr("width", `${progressValue}%`);*/
-
+                    
                     //wait for DONE state
                     //console.log(xhr.status, xhr.responseURL);
                     if (xhr.readyState == 4) {
@@ -1202,10 +1140,8 @@ $(document).ready(
                             //if not, call the old submit to get the error response in a way the user will see
                             form[0].originalSubmitFn();
 
-                            //$("#htmlform").removeChild(progress);
                         }
 
-                      
                     }
 
                 }

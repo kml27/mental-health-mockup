@@ -954,9 +954,13 @@ function setDxsSelectedOption(list, answer) {
 }
 
 function setFnmSelectedOption(med) {
-    if ($(med + '-name').val() != '' && $(med + '-form').val() != '') {
+    var medName = $(med + '-name').val();
+    var medForm = $(med + '-form').val();
+
+    alert(medName + ':' + medForm);
+    if (medName != '' && medForm != '') {
         $.each(fnmList, function(k, v) {
-            if ($(med + '-name').val() === v.drugUuid && $(med + '-form').val() === v.formUuid) {
+            if (medName === v.drugUuid && medForm === v.formUuid) {
                 $(med + '-fnm').val(k);
                 return false;
             }

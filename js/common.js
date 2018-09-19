@@ -1106,8 +1106,23 @@ $(document).ready(
             var editLink = $("a[href*='mode=EDIT']");
                 editLink.on("click", function(event) {initializeLocalStore(clear=true, initializeEmptyStore=false);} );
 
-            //if there's no encounter id value in the delete json object
-            if(Number.isInteger($("body").html()[$("body").html().search("(?<=encounterId: \")[0-9]*?(?=\")")])){
+            //addTypeAheadToDrugInput();
+            addOptionsToSelect("primary-dx-list", dxsList);
+            addOptionsToSelect("secondary-dx-list", dxsList);
+            addOptionsToSelect("medication-1-fnm", fnmList, true);
+            addOptionsToSelect("medication-2-fnm", fnmList, true);
+            addOptionsToSelect("medication-3-fnm", fnmList, true);
+            addOptionsToSelect("medication-4-fnm", fnmList, true);
+            addOptionsToSelect("medication-5-fnm", fnmList, true);
+
+            //in enter mode, the delete button script encounter id in the post json object is ""
+            var enterMode = Number.isInteger($("body").html()[$("body").html().search("(?<=encounterId: \")[0-9]*?(?=\")")]);
+
+            //in edit mode, the get parameters include mode=EDIT
+            var editMode = settings.mode == "EDIT";
+
+            //if in enter or edit mode, apply persistence, submit busy indicator, and other js functionality
+            if(enterMode || editMode){
             
                 applyScrollPositionPersistence();
 
@@ -1163,15 +1178,6 @@ $(document).ready(
 
                 var discardLink = $("[id=discardLinkSpan] a[class=html-form-entry-discard-changes]");
                 discardLink.on("click", function(event) {confirmReset(event, reinitialize=false);} )
-
-                //addTypeAheadToDrugInput();
-                addOptionsToSelect("primary-dx-list", dxsList);
-                addOptionsToSelect("secondary-dx-list", dxsList);
-                addOptionsToSelect("medication-1-fnm", fnmList, true);
-                addOptionsToSelect("medication-2-fnm", fnmList, true);
-                addOptionsToSelect("medication-3-fnm", fnmList, true);
-                addOptionsToSelect("medication-4-fnm", fnmList, true);
-                addOptionsToSelect("medication-5-fnm", fnmList, true);
 
                 loadLocalSiteInfo(true);
             }

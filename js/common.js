@@ -1068,7 +1068,11 @@ $(document).ready(
 
             applyScrollPositionPersistence();
 
-            initializeInputValuePersistence(reset=false);
+            //if there's no encounter id value in the delete json object
+            if(Number.isInteger($("body").html()[$("body").html().search("(?<=encounterId: \")\d*?(?=\")")])){
+                //initialize value persistence
+                initializeInputValuePersistence(reset=false);
+            }
             
             var templateProvidedValues = $("[id^=template-rendered]");
 

@@ -1155,14 +1155,16 @@ $(document).ready(
             populateListOptions();
 
             $("select.dx-list").each(function() {
-                this.html(dxsListOptionsHtml);
+                var $this = $(this);
+                $this.prev().append($this.html(dxsListOptionsHtml));
                 if (this.hasAttribute('data-answered-concept-id')) {
                    setDxsSelectedOption(this, this.attr('data-answered-concept-id'));
                 }
             });
 
             $("select.fnm-list").each(function() {
-                this.html(fnmListOptionsHtml);
+                var $this = $(this);
+                $this.prev().append($this.html(fnmListOptionsHtml));
                 setFnmSelectedOption(this.attr('id').substring(0, 12)); 
             });
 

@@ -1116,7 +1116,7 @@ $(document).ready(
             addOptionsToSelect("medication-5-fnm", fnmList, true);
 
             //in enter mode, the delete button script encounter id in the post json object is ""
-            var enterMode = !Number.isInteger($("body").html()[$("body").html().search("(?<=encounterId: \")[0-9]*?(?=\")")]);
+            var enterMode = settings.encounterId == undefined;//!Number.isInteger($("body").html()[$("body").html().search("(?<=encounterId: \")[0-9]*?(?=\")")]);
 
             //in edit mode, the get parameters include mode=EDIT
             var editMode = settings.mode == "EDIT";

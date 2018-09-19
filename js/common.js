@@ -854,6 +854,9 @@ var dxsList = {
 		"F99":"0aae621c-f0c0-4c1f-9c4e-408ff1167d66"
 	}
 
+var dxsListOptions = new Array(dxsList.length + 1);
+var dxsListOptionsHtml = "";
+
 var fnmList = {
 		"7-D-1": { "drug": "CARBAMAZEPINA", "drugUuid": "e1d6bb14-1d5f-11e0-b929-000c29ad1d07", "form": "200mg", "formUuid": "4c8b32db-acc4-4a59-802a-05d921315260" },
 		"7-D-2": { "drug": "CLONAZEPAM", "drugUuid": "47031dcc-3f84-4711-9b72-359630f53bca", "form": "2mg", "formUuid": "98fb063d-159d-4236-bc58-4b2b692b2687" },
@@ -895,12 +898,53 @@ var fnmList = {
 		"7-J-16": { "drug": "RISPERIDONA", "drugUuid": "2272fd69-d5f3-45e2-bd58-41cd4fc786d9", "form": "3mg", "formUuid": "3be55be3-9f64-4401-8689-b57da6ba6155" }
 	}
 
+var fnmListOptions = new Array(fnmList.length + 1);
+var fnmListOptionsHtml = "";
+
 function setHiddenMedicationValues (key, medName, medForm) {
     var keyClipped = key.substring(0, key.indexOf(" -"));
     var drugUuid = fnmList[keyClipped]["drugUuid"];
     var formUuid = fnmList[keyClipped]["formUuid"];
     $("#" + medName).val(drugUuid);
     $("#" + medForm).val(formUuid);
+}
+
+function populateListOptions() {
+    dxsListOptions.push("<option />");
+    $.each(dxsList, function(k, v) {
+        dxsListOptions.push("<option value=\"" + v + "\">" + k + "</option>");
+    });
+
+    dxsListOptionsHtml = dxsListOptions.join('');
+
+    fnmListOptions.push("<option />");
+    $.each(fnmList, function(k, v) {
+        fnmListOptions.push("<option value=\"" + k + "\">" + k + " - " + v.drug + " - " + v.form + "</option>");
+    });
+
+    fnmListOptionsHtml = fnmListOptions.join('');
+}
+
+function setDxsSelectedOption(list, answer) {
+    $(list).val(answer);
+
+//    $(list + " > option").each(function() {
+//        if (this.value === answer) {
+//            this.prop('selected', true);
+//            return false;
+//        }
+//    });
+}
+
+function setFnmSelectedOption(med) {
+    if ($(med + '-name').val() != '' && $(med + '-form').val() != '') {
+        $.each(fnmList, function(k, v) {
+            if ($(med + '-name').val() === v.drugUuid && $(med + '-form').val() === v.formUuid) {
+                $(med + '-fnm').val(k);
+                return false;
+            }
+        });
+    }
 }
 
 function addOptionsToSelect(select, optionArr, isDrugArr=false) {
@@ -1107,13 +1151,20 @@ $(document).ready(
                 editLink.on("click", function(event) {initializeLocalStore(clear=true, initializeEmptyStore=false);} );
 
             //addTypeAheadToDrugInput();
-            addOptionsToSelect("primary-dx-list", dxsList);
-            addOptionsToSelect("secondary-dx-list", dxsList);
-            addOptionsToSelect("medication-1-fnm", fnmList, true);
-            addOptionsToSelect("medication-2-fnm", fnmList, true);
-            addOptionsToSelect("medication-3-fnm", fnmList, true);
-            addOptionsToSelect("medication-4-fnm", fnmList, true);
-            addOptionsToSelect("medication-5-fnm", fnmList, true);
+ 
+            populateListOptions();
+
+            $("select.dx-list").each(function() {
+                this.html(dxsListOptionsHtml);
+                if (this.hasAttribute('data-answered-concept-id')) {
+                   setDxsSelectedOption(this, this.attr('data-answered-concept-id'));
+                }
+            });
+
+            $("select.fnm-list").each(function() {
+                this.html(fnmListOptionsHtml);
+                setFnmSelectedOption(this.attr('id').substring(0, 12)); 
+            });
 
             //in enter mode, the delete button script encounter id in the post json object is ""
             var enterMode = settings.encounterId == undefined;//!Number.isInteger($("body").html()[$("body").html().search("(?<=encounterId: \")[0-9]*?(?=\")")]);

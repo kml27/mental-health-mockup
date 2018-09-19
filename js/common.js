@@ -1065,15 +1065,11 @@ $(document).ready(
                     });
             }
 
-
-            applyScrollPositionPersistence();
-
-            //if there's no encounter id value in the delete json object
-            if(Number.isInteger($("body").html()[$("body").html().search("(?<=encounterId: \")[0-9]*?(?=\")")])){
-                //initialize value persistence
-                initializeInputValuePersistence(reset=false);
+            var deletePopup = $("[id=confirmDeleteFormPopup]");
+            if(deletePopup) {
+                deletePopup.css("z-index", 1000000);
             }
-            
+
             var templateProvidedValues = $("[id^=template-rendered]");
 
             for(value of templateProvidedValues){
@@ -1105,76 +1101,80 @@ $(document).ready(
                 targetControl.dispatchEvent(inputEvent);
             }
 
-            var deletePopup = $("[id=confirmDeleteFormPopup]");
-            if(deletePopup) {
-                deletePopup.css("z-index", 1000000);
-            }
+            computeBmi();
 
-            var form = $("form#htmlform");
+            var editLink = $("a[href*='mode=EDIT']");
+                editLink.on("click", function(event) {initializeLocalStore(clear=true, initializeEmptyStore=false);} );
 
-            //by setting onreset using attr(), the html will show onreset="setAllDisabledStates();" (in recent chrome at least)
-            form.attr("onreset", "setAllDisabledStates();");
+            //if there's no encounter id value in the delete json object
+            if(Number.isInteger($("body").html()[$("body").html().search("(?<=encounterId: \")[0-9]*?(?=\")")])){
+            
+                applyScrollPositionPersistence();
 
-            //store original submit function
-            form[0].originalSubmitFn = form[0].submit;
+                //initialize value persistence
+                initializeInputValuePersistence(reset=false);
 
-            //"monkey-patch" submit function
-            form[0].submit = function(){
+                var form = $("form#htmlform");
 
-                //use xhr to detect redirect
-                var xhr = new XMLHttpRequest();
-                xhr.onreadystatechange = function(e) {
-                    $('.overlay').show();
-                    
-                    //wait for DONE state
-                    //console.log(xhr.status, xhr.responseURL);
-                    if (xhr.readyState == 4) {
+                //by setting onreset using attr(), the html will show onreset="setAllDisabledStates();" (in recent chrome at least)
+                form.attr("onreset", "setAllDisabledStates();");
 
-                        //if the final location differs from the current location,
-                        //the submit succeeded and we got a redirect
-                        if (window.location.href != xhr.responseURL) {
+                //store original submit function
+                form[0].originalSubmitFn = form[0].submit;
 
-                            //initializeInputValuePersistence(reset=true);
-                            initializeLocalStore(clear=true, initializeEmptyStore=false);
+                //"monkey-patch" submit function
+                form[0].submit = function(){
 
-                            //update the window location url
-                            window.location.href = xhr.responseURL;
-                        } else {
-                            //may not be the most effecient impl. (might be... can't set document.documentElement)
-                            //if not, call the old submit to get the error response in a way the user will see
-                            form[0].originalSubmitFn();
+                    //use xhr to detect redirect
+                    var xhr = new XMLHttpRequest();
+                    xhr.onreadystatechange = function(e) {
+                        $('.overlay').show();
+                        
+                        //wait for DONE state
+                        //console.log(xhr.status, xhr.responseURL);
+                        if (xhr.readyState == 4) {
+
+                            //if the final location differs from the current location,
+                            //the submit succeeded and we got a redirect
+                            if (window.location.href != xhr.responseURL) {
+
+                                //initializeInputValuePersistence(reset=true);
+                                initializeLocalStore(clear=true, initializeEmptyStore=false);
+
+                                //update the window location url
+                                window.location.href = xhr.responseURL;
+                            } else {
+                                //may not be the most effecient impl. (might be... can't set document.documentElement)
+                                //if not, call the old submit to get the error response in a way the user will see
+                                form[0].originalSubmitFn();
+
+                            }
 
                         }
 
                     }
 
-                }
+                    xhr.withCredentials = true;
+                    xhr.open("POST", window.location.href, true);
 
-                xhr.withCredentials = true;
-                xhr.open("POST", window.location.href, true);
+                    xhr.send(new FormData(form[0]));
 
-                xhr.send(new FormData(form[0]));
+                };
 
-            };
+                var discardLink = $("[id=discardLinkSpan] a[class=html-form-entry-discard-changes]");
+                discardLink.on("click", function(event) {confirmReset(event, reinitialize=false);} )
 
-            var discardLink = $("[id=discardLinkSpan] a[class=html-form-entry-discard-changes]");
-            discardLink.on("click", function(event) {confirmReset(event, reinitialize=false);} )
+                //addTypeAheadToDrugInput();
+                addOptionsToSelect("primary-dx-list", dxsList);
+                addOptionsToSelect("secondary-dx-list", dxsList);
+                addOptionsToSelect("medication-1-fnm", fnmList, true);
+                addOptionsToSelect("medication-2-fnm", fnmList, true);
+                addOptionsToSelect("medication-3-fnm", fnmList, true);
+                addOptionsToSelect("medication-4-fnm", fnmList, true);
+                addOptionsToSelect("medication-5-fnm", fnmList, true);
 
-            var editLink = $("a[href*='mode=EDIT']");
-            editLink.on("click", function(event) {initializeLocalStore(clear=true, initializeEmptyStore=false);} )
-
-            //addTypeAheadToDrugInput();
-            addOptionsToSelect("primary-dx-list", dxsList);
-            addOptionsToSelect("secondary-dx-list", dxsList);
-            addOptionsToSelect("medication-1-fnm", fnmList, true);
-            addOptionsToSelect("medication-2-fnm", fnmList, true);
-            addOptionsToSelect("medication-3-fnm", fnmList, true);
-            addOptionsToSelect("medication-4-fnm", fnmList, true);
-            addOptionsToSelect("medication-5-fnm", fnmList, true);
-
-            computeBmi();
-
-            loadLocalSiteInfo(true);
+                loadLocalSiteInfo(true);
+            }
         }
 
 );

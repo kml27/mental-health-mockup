@@ -854,7 +854,7 @@ var dxsList = {
 		"F99":"0aae621c-f0c0-4c1f-9c4e-408ff1167d66"
 	}
 
-var dxsListOptions = new Array(dxsList.length + 1);
+var dxsListOptions = [];
 var dxsListOptionsHtml = "";
 
 var fnmList = {
@@ -898,7 +898,7 @@ var fnmList = {
 		"7-J-16": { "drug": "RISPERIDONA", "drugUuid": "2272fd69-d5f3-45e2-bd58-41cd4fc786d9", "form": "3mg", "formUuid": "3be55be3-9f64-4401-8689-b57da6ba6155" }
 	}
 
-var fnmListOptions = new Array(fnmList.length + 1);
+var fnmListOptions = [];
 var fnmListOptionsHtml = "";
 
 function setHiddenMedicationValues (key, medName, medForm) {

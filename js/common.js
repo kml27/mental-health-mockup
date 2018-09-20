@@ -1052,11 +1052,17 @@ function addTypeAheadToDrugInput(){
 function applyTabSelectionPersistence(){
     $("#"+sessionStorage[dataStoreNS+"visibleTab"]).tab('show');
 
+    var form = $("form")[0];
+
     $('#section-tabs a').on('click',
 
         function (event) {
 
             event.preventDefault();
+
+            if(!form.reportValidity()){
+                return;
+            }
 
             $(this).tab('show');
 
@@ -1125,12 +1131,6 @@ $(document).ready(
                 //remove hidden attribute from tabs
                 tabs.removeAttr("hidden");
 
-                $('a[data-toggle="tab"]').on('hide.bs.tab',
-                    function (e) {
-                        if(!$("form")[0].reportValidity()){
-                            e.preventDefault();
-                        }
-                    });
                 //this is supposed to be handled for us already... but doesnt seem to be (previously selected tabs continue to show selected state without manually removing active)
                 $('a[data-toggle="tab"]').on('shown.bs.tab',
                     function (e) {

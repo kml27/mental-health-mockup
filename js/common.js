@@ -101,7 +101,7 @@ function setDependentDisabledState(clickedElement, specificRadio, specificTarget
 
                 targetEl.disabled = targetState;
 
-                if($(`fieldset[id=${targetEl.id}] input[type=radio]`).length){
+                if(targetEl.disabled && $(`fieldset[id=${targetEl.id}] input[type=radio]`).length){
                     fnForFieldsetRadios(targetEl, function(radio){clearDisabledInputByType(radio, true)});
                 }
                 else{

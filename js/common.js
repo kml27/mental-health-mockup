@@ -1060,9 +1060,11 @@ function applyTabSelectionPersistence(){
 
             $(this).tab('show');
 
-            sessionStorage[dataStoreNS+"visibleTab"]=this.id;
+            if(sessionStorage[dataStoreNS+"visibleTab"]!=this.id) {
+                sessionStorage[dataStoreNS+"visibleTab"]=this.id;
 
-            document.body.scrollTop = document.documentElement.scrollTop = 0;
+                document.body.scrollTop = document.documentElement.scrollTop = 0;
+            }
 
         });
 }
@@ -1123,6 +1125,12 @@ $(document).ready(
                 //remove hidden attribute from tabs
                 tabs.removeAttr("hidden");
 
+                $('a[data-toggle="tab"]').on('hide.bs.tab',
+                    function (e) {
+                        if(!$("form")[0].reportValidity()){
+                            e.preventDefault();
+                        }
+                    });
                 //this is supposed to be handled for us already... but doesnt seem to be (previously selected tabs continue to show selected state without manually removing active)
                 $('a[data-toggle="tab"]').on('shown.bs.tab',
                     function (e) {

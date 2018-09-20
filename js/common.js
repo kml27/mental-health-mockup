@@ -961,7 +961,7 @@ function setFnmSelectedOption(med) {
         $.each(fnmList, function(k, v) {
             if (medName === v.drugUuid && medForm === v.formUuid) {
                 $("#" + med + '-fnm').val(k);
-                setHiddenMedicationValues(k + " - " + v.drug + " - " + v.form, med + '-name', med + 'form');
+                setHiddenMedicationValues(k + " - " + v.drug + " - " + v.form, med + '-name', med + '-form');
                 return false;
             }
         });
